@@ -5,7 +5,7 @@
 </div>
 
 <div align="center">
-  <img src="https://img.shields.io/badge/Release-v1.6.0-green?style=flat-square" alt="Release v1.6.0">
+  <img src="https://img.shields.io/badge/Version-v1.0.0-green?style=flat-square" alt="Version v1.0.0">
   <img src="https://img.shields.io/badge/Frontend-React%2019-61DAFB?style=flat-square&logo=react" alt="React 19">
   <img src="https://img.shields.io/badge/Frontend-TypeScript%207-blue?style=flat-square&logo=typescript" alt="TypeScript 7">
   <img src="https://img.shields.io/badge/Frontend-Vite%208-blue?style=flat-square&logo=vite" alt="Vite 8">
@@ -35,18 +35,10 @@ The page is **GPU ops** at `/gpu`. Settings live under `gpu` in `configs/config.
 
 We appreciate your interest in KoreCube. If you find this project valuable for your Kubernetes management needs, please consider starring the repository ⭐. Community support drives continuous development and improvement.
 
-## 🏢 Sponsorship
-
-This project's CDN acceleration and security protection services are generously sponsored by Tencent EdgeOne.
-
-<a href="https://edgeone.ai/zh?from=github">
-  <img src="https://edgeone.ai/media/34fe3a45-492d-4ea4-ae5d-ea1087ca7b4b.png" alt="EdgeOne" width="350" height="50">
-</a>
-
 ## 📖 Overview
 
 KoreCube is an open-source Kubernetes multi-cluster management platform built with React, TypeScript, Go, and Gin.  
-**From v1.0, login lands on the AI workspace first; the resource console is still there — just no longer the only door.**
+**After signing in, the AI workspace opens first. The resource console is available from the top navigation.**
 
 In one line:
 
@@ -54,7 +46,7 @@ In one line:
 
 Ask “how is it now / what’s broken,” follow resource clues into detail, logs, or a terminal — AI stays read-only by default and does not mutate the cluster for you.
 
-### v1.6.0 (current)
+### v1.0.0 (current)
 
 - **Cluster shell**: admins can open a local `kubectl` (stored cluster credential) or a temporary privileged pod on a node; the pod is deleted on disconnect
 - **Open Service in browser**: editors and admins can open a Service HTTP port through the API proxy
@@ -62,37 +54,6 @@ Ask “how is it now / what’s broken,” follow resource clues into detail, lo
 - **Plugins**: each `plugins/<id>/plugin.json` adds a sidebar entry, and named resources link to it from the detail page
 - **Theme studio**: save a custom palette in the browser, on top of the built-in themes
 - **Public exhibit**: the demo fleet stays simulated. kubectl and node shells answer a small read-only set and never run on the API host; opening a Service shows an exhibit page; a directory account signs in without contacting an external directory
-
-### v1.5.0
-
-- **Marketplace**: a Helm chart catalog you can search, read (chart README and default values), and install from — promoted to a three-way top switcher (AI / Console / Marketplace) rather than buried in the console; repositories and installed releases are managed in the same place
-- **Resource coverage**: 15 more kinds — ReplicaSets, ReplicationControllers, PodTemplates, Endpoints, EndpointSlices, IngressClasses, ServiceCIDRs, PriorityClasses, RuntimeClasses, Leases, Mutating/ValidatingWebhooks, VolumeAttachments, CSIDrivers, CSINodes
-- **Node operations**: cordon / uncordon / drain with eviction progress, taint and label editing
-- **Environments / Applications**: app-group surfaces and access-scope management
-- **Configurable navigation**: admins hide sidebar groups per role (a blocklist, so new features stay visible by default); each user can then reorder or hide what remains in their own browser
-- **Scoped context bar**: cluster and namespace pickers left the crowded topbar and now appear only on routes that are actually scoped
-- **UI overhaul**: reworked typography and spacing, denser tables, and two neutral themes (graphite, carbon) joining the existing eight
-- **Login**: redesigned lattice / particle field that reacts to the page layout
-- Fonts simplified to browser default + Maple Mono (`Maple Mono CN` applies one face to every surface)
-- License moved to AGPL-3.0-only
-
-### v1.0.1
-
-- **Topology** (Observe): Ingress → Service → Workload → Pod graph, Traffic mode with RPS flow (incl. fan-out to pods)
-- **Timeline** (Observe): status segments + live Event markers; Showcase backfills demo history
-- Nav UX: collapsible sidebar groups; reliable detail Back / browser history with Logs console
-- Showcase: kube-dns ↔ coredns wiring so Topology Traffic demos cleanly
-
-### v1.0.0
-
-Highlights vs earlier releases:
-
-- **AI workspace**: home after login, Skills (Featured / Inspect / Troubleshoot / Navigate + `/` menu + custom prompts), **Investigate with AI** from resources
-- **Fleet overview**: multi-cluster health cards, per-card / fleet inspect
-- **Resource console**: workloads / networking (incl. Gateway API) / config / storage / RBAC, logs & web terminal
-- **Monitoring**: metrics-server snapshots + Prometheus series (Showcase curves on the public demo)
-- **Desktop apps**: Windows / macOS / Linux with embedded backend reading local kubeconfig
-- **Themes**: tron / paper / matrix / amber / nord / sakura / midnight-violet / solarized
 
 <div align="center">
   <img src="docs/v1.5.0/02-marketplace.png" alt="Marketplace" width="100%">
@@ -178,7 +139,7 @@ Highlights vs earlier releases:
 ## 💡 Project Genesis
 
 KoreCube started as a full-stack learning project that grew into a product you can actually open.  
-v1.0 adds an entry that matches how people troubleshoot — ask first, then change.
+The AI workspace follows a common troubleshooting sequence. Ask first, then make changes in the console.
 
 ## 🚀 Technology Stack
 
@@ -288,12 +249,15 @@ go build -o bin/korecube cmd/server/main.go
 ## 🐳 Docker Deployment
 
 ### Using Official Images
+
+Set `KORECUBE_IMAGE_TAG` to a published tag shared by the backend and frontend images.
+
 ```bash
 # Backend
-docker run -d --name korecube -p 8080:8080 -v ~/.kube:/root/.kube:ro ghcr.io/korecube/korecube:v1.6.0
+docker run -d --name korecube -p 8080:8080 -v ~/.kube:/root/.kube:ro "ghcr.io/korecube/korecube:${KORECUBE_IMAGE_TAG:?Set a published image tag}"
 
 # Frontend
-docker run -d --name korecube-web -p 80:80 ghcr.io/korecube/korecube-web:v1.6.0
+docker run -d --name korecube-web -p 80:80 "ghcr.io/korecube/korecube-web:${KORECUBE_IMAGE_TAG:?Set a published image tag}"
 ```
 
 ### Using Docker Compose
@@ -315,8 +279,8 @@ Visit http://localhost to access the interface.
 # Install KoreCube from the OCI chart published to GHCR on every release tag
 helm install korecube oci://ghcr.io/korecube/charts/korecube -n korecube --create-namespace
 
-# Pin a version / upgrade later
-helm upgrade korecube oci://ghcr.io/korecube/charts/korecube --version 1.6.0 -n korecube
+# Upgrade to the latest published chart
+helm upgrade korecube oci://ghcr.io/korecube/charts/korecube -n korecube
 
 # Check service status
 kubectl get svc korecube -n korecube

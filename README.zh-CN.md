@@ -5,7 +5,7 @@
 </div>
 
 <div align="center">
-  <img src="https://img.shields.io/badge/Release-v1.6.0-green?style=flat-square" alt="Release v1.6.0">
+  <img src="https://img.shields.io/badge/Version-v1.0.0-green?style=flat-square" alt="Version v1.0.0">
   <img src="https://img.shields.io/badge/Frontend-React%2019-61DAFB?style=flat-square&logo=react" alt="React 19">
   <img src="https://img.shields.io/badge/Frontend-TypeScript%207-blue?style=flat-square&logo=typescript" alt="TypeScript 7">
   <img src="https://img.shields.io/badge/Frontend-Vite%208-blue?style=flat-square&logo=vite" alt="Vite 8">
@@ -37,18 +37,10 @@ KoreCube 是 CiliKube（`4b3a1ee`）的分支，采用 AGPL-3.0-only 许可证�
 
 感谢您对 KoreCube 的关注。如果您认为本项目对您的 Kubernetes 管理工作具有价值，请考虑为仓库点亮星标 ⭐。社区支持是推动项目持续发展和改进的重要动力。
 
-## 🏢 赞助支持
-
-本项目的 CDN 加速和安全防护服务由腾讯 EdgeOne 慷慨赞助。
-
-<a href="https://edgeone.ai/zh?from=github">
-  <img src="https://edgeone.ai/media/34fe3a45-492d-4ea4-ae5d-ea1087ca7b4b.png" alt="EdgeOne" width="350" height="50">
-</a>
-
 ## 📖 产品概述
 
 KoreCube 是开源的 Kubernetes 多集群管理平台，技术栈为 React + TypeScript + Go / Gin。  
-**v1.0 起，登录后先进 AI 工作台；资源控制台仍在，但不再是唯一入口。**
+**登录后进入 AI 工作台，也可以通过顶栏打开资源控制台。**
 
 定位一句话：
 
@@ -56,7 +48,7 @@ KoreCube 是开源的 Kubernetes 多集群管理平台，技术栈为 React + Ty
 
 问清楚「现在怎么样、哪儿挂了」，再顺着线索进详情、日志或终端动手；AI 默认只读查证，不替你在集群里乱改。
 
-### v1.6.0（当前）
+### v1.0.0（当前）
 
 - **集群终端**：管理员可在控制台打开本机 `kubectl`（使用已保存的集群凭据），或对某个节点拉起临时特权 Pod 进入主机，断开后删除该 Pod
 - **浏览器打开 Service**：editor / admin 可把 Service 的 HTTP 端口经 API 代理在新标签页打开
@@ -64,37 +56,6 @@ KoreCube 是开源的 Kubernetes 多集群管理平台，技术栈为 React + Ty
 - **插件**：`plugins/<id>/plugin.json` 会在侧栏增加入口；`resources` 里点名的资源详情页也会链到该插件
 - **主题工作室**：在内置主题之外，把一套自定义配色保存在浏览器里
 - **公网演示**：舰队仍是模拟数据。kubectl 和节点终端只回答一小段只读命令，不会在 API 主机上执行；在浏览器里打开 Service 看到的是演示页；目录账号登录不会去连外部目录
-
-### v1.5.0
-
-- **应用市场**：可搜索的 Helm Chart 目录，装之前先看 Chart README 与默认 values，仓库管理和已安装 Release 也在同一处；入口提到顶栏三段切换（AI / Console / Marketplace），不再藏在控制台里
-- **资源覆盖**：新增 15 种资源 —— ReplicaSet、ReplicationController、PodTemplate、Endpoints、EndpointSlice、IngressClass、ServiceCIDR、PriorityClass、RuntimeClass、Lease、Mutating/ValidatingWebhook、VolumeAttachment、CSIDriver、CSINode
-- **节点运维**：cordon / uncordon / drain（含驱逐进度）、污点与标签编辑
-- **环境 / 应用**：应用分组视图与访问范围管理
-- **导航可配置**：管理员按角色隐藏侧栏分组（黑名单式，新功能默认可见）；用户再在自己浏览器里排序或隐藏剩下的菜单
-- **上下文栏**：集群与命名空间选择器从拥挤的顶栏挪出来，只在真正按其取值的页面出现
-- **UI 重构**：排版与间距重做、表格更紧凑；新增 graphite、carbon 两套中性主题，连同原有八套共十套
-- **登录页**：重新设计的网格 / 粒子光场，会跟随页面布局避让
-- 字体精简为浏览器默认 + Maple Mono（选 `Maple Mono CN` 时全站统一一种字形）
-- 许可证变更为 AGPL-3.0-only
-
-### v1.0.1
-
-- **拓扑图**（Observe）：Ingress → Service → 工作负载 → Pod，Traffic 模式 RPS 流动（含分摊到 Pod）
-- **时间线**（Observe）：状态色带 + 实时 Event 标记；Showcase 预置演示历史
-- 导航：侧栏分组可折叠；详情页 Back / 浏览器返回与 Logs 控制台历史更合理
-- Showcase：kube-dns ↔ coredns 连线，拓扑 Traffic 演示更完整
-
-### v1.0.0
-
-相对此前版本的主要变化：
-
-- **AI 工作台**：登录首页、Skill（精选 / 巡检 / 排障 / 导航 + `/` 菜单 + 自定义 Prompt）、资源页「用 AI 调查」
-- **集群总览**：多集群健康卡片、单卡 / 舰队巡检
-- **资源控制台**：工作负载 / 网络（含 Gateway API）/ 配置 / 存储 / RBAC、日志与 Web 终端
-- **Monitoring**：metrics-server 快照 + Prometheus 时序（Demo 为 Showcase 曲线）
-- **桌面客户端**：Windows / macOS / Linux，内嵌后端读本机 kubeconfig
-- **多主题**：tron / paper / matrix / amber / nord / sakura / midnight-violet / solarized
 
 <div align="center">
   <img src="docs/v1.5.0/02-marketplace.png" alt="应用市场" width="100%">
@@ -180,7 +141,7 @@ KoreCube 是开源的 Kubernetes 多集群管理平台，技术栈为 React + Ty
 ## 💡 项目起源
 
 KoreCube 源于全栈学习与云原生实践：把想法做成能点开的产品。  
-v1.0 在资源控制台之上，补了一层更接近真实排障顺序的入口——先问清楚，再动手改。
+AI 工作台贴合日常排障顺序。先问清楚，再到控制台处理。
 
 ## 🚀 技术架构
 
@@ -290,12 +251,15 @@ go build -o bin/korecube cmd/server/main.go
 ## 🐳 Docker 部署
 
 ### 使用官方镜像
+
+将 `KORECUBE_IMAGE_TAG` 设为前后端镜像都已发布的标签。
+
 ```bash
 # 后端
-docker run -d --name korecube -p 8080:8080 -v ~/.kube:/root/.kube:ro ghcr.io/korecube/korecube:v1.6.0
+docker run -d --name korecube -p 8080:8080 -v ~/.kube:/root/.kube:ro "ghcr.io/korecube/korecube:${KORECUBE_IMAGE_TAG:?Set a published image tag}"
 
 # 前端
-docker run -d --name korecube-web -p 80:80 ghcr.io/korecube/korecube-web:v1.6.0
+docker run -d --name korecube-web -p 80:80 "ghcr.io/korecube/korecube-web:${KORECUBE_IMAGE_TAG:?Set a published image tag}"
 ```
 
 ### 使用 Docker Compose
@@ -317,8 +281,8 @@ docker-compose up -d
 # 安装 KoreCube（每次发版 tag 都会把 OCI Chart 推到 GHCR）
 helm install korecube oci://ghcr.io/korecube/charts/korecube -n korecube --create-namespace
 
-# 指定版本 / 后续升级
-helm upgrade korecube oci://ghcr.io/korecube/charts/korecube --version 1.6.0 -n korecube
+# 升级到最新发布的 Chart
+helm upgrade korecube oci://ghcr.io/korecube/charts/korecube -n korecube
 
 # 查看服务状态
 kubectl get svc korecube -n korecube
