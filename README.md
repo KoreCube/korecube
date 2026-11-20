@@ -14,9 +14,18 @@
   <img src="https://img.shields.io/badge/Backend-Gin-blue?style=flat-square&logo=gin" alt="Gin">
   <img src="https://img.shields.io/badge/Kubernetes-1.36.2-blue?style=flat-square&logo=kubernetes" alt="Kubernetes 1.36.2">
   <img src="https://img.shields.io/badge/License-AGPL--3.0-red?style=flat-square" alt="License: AGPL-3.0">
-  <img src="https://img.shields.io/github/stars/korecube/korecube?style=social" alt="GitHub Stars">
-  <img src="https://img.shields.io/github/forks/korecube/korecube?style=social" alt="GitHub Forks">
 </div>
+
+## GPU operations added on top of upstream
+
+KoreCube is a fork of [CiliKube](https://github.com/ciliverse/cilikube) at `4b3a1ee`, still AGPL-3.0-only. The Go module path is `github.com/korecube/korecube`. Upstream demo and release notes stay with the original author. This fork does not publish a prebuilt image.
+
+- **GPU health and tiered drain.** Node conditions, Xid / ECC / NVLink events, plus optional DCGM metrics from Prometheus. Unrecoverable Xids recommend cordon and drain. Recoverable warnings must outlive `gpu.persistence` (default 2 minutes) before they escalate.
+- **Three heal levels.** `suggest` writes a runbook only. `approve` (default) cordons or drains after a confirm on the GPU ops page. `auto` skips the second confirm only when every pod that would be evicted sits in `gpu.auto_namespaces` (DaemonSets do not count). Every attempt is kept in a decision trail. Showcase mode refuses the write.
+- **Utilization.** Namespace `nvidia.com/gpu` requests versus `DCGM_FI_DEV_GPU_UTIL`. An exclusive card under 40% is suggested for MIG or time-slicing. Missing utilization is not reported as waste.
+- **Alert storms.** Owner references (Pod to ReplicaSet to Deployment or Job) plus follower events on the same GPU node collapse into one group. The investigator gains read-only tools `get_gpu_health`, `get_gpu_waste`, `get_gpu_placement`, and `get_event_storm`.
+
+The page is **GPU ops** at `/gpu`. Settings live under `gpu` in `configs/config.yaml`.
 
 ## 🌟 Project Support
 

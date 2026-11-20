@@ -14,15 +14,26 @@
   <img src="https://img.shields.io/badge/Backend-Gin-blue?style=flat-square&logo=gin" alt="Gin">
   <img src="https://img.shields.io/badge/Kubernetes-1.36.2-blue?style=flat-square&logo=kubernetes" alt="Kubernetes 1.36.2">
   <img src="https://img.shields.io/badge/License-AGPL--3.0-red?style=flat-square" alt="License: AGPL-3.0">
-  <img src="https://img.shields.io/github/stars/korecube/korecube?style=social" alt="GitHub Stars">
-  <img src="https://img.shields.io/github/forks/korecube/korecube?style=social" alt="GitHub Forks">
 </div>
+
+## 相对上游新增的 GPU 运维
+
+KoreCube 是 [CiliKube](https://github.com/ciliverse/cilikube)（`4b3a1ee`，AGPL-3.0-only）的分支，模块路径是 `github.com/korecube/korecube`。许可证不变。上游演示站和发行说明仍属于原作者；本分支不发布现成镜像，请在本地构建。
+
+这一版补了 AI 集群里最容易空转的一块，并且把执行权留在控制台：
+
+1. **GPU 健康与分级排水。** 后端读节点条件、事件里的 Xid / ECC / NVLink，Prometheus 可用时再叠加 DCGM（`DCGM_FI_DEV_XID_ERRORS`、`DCGM_FI_DEV_ECC_DBE_VOL_TOTAL`、`DCGM_FI_DEV_NVLINK_CRC_FLIT_ERROR_COUNT_TOTAL`）。不可恢复的 Xid（例如 79、48、95）建议 `cordon` + `drain`。可恢复告警要持续超过 `gpu.persistence`（默认 2 分钟）才升级，瞬时尖峰丢掉。
+2. **三级自愈。** `suggest` 只生成 Runbook；`approve`（默认）在 GPU 运维页确认后才封锁或排水；`auto` 仅当节点上会被驱逐的 Pod 都落在 `gpu.auto_namespaces` 里才允许不再二次确认，DaemonSet 不计入这个范围。每次尝试都留下决策轨迹。演示集群直接拒绝写操作。
+3. **利用率画像。** 按命名空间汇总 `nvidia.com/gpu` 申请量，并和 `DCGM_FI_DEV_GPU_UTIL`（带 namespace/pod 标签）对比。独占整卡且利用率低于 40% 时建议 MIG 或 time-slicing。没有利用率数据时不会把卡判成浪费。
+4. **告警风暴合并。** 用 OwnerReference（Pod → ReplicaSet → Deployment / Job）把同一条故障链收成一组，并把同一块故障 GPU 节点上的 NotReady、驱逐、调度失败折进去。AI 工作台增加只读工具 `get_gpu_health`、`get_gpu_waste`、`get_gpu_placement`、`get_event_storm`，用来回答「这张卡为什么比同模型的其他副本慢」。
+
+侧栏入口是 **GPU 运维**（`/gpu`）。配置在 `configs/config.yaml` 的 `gpu` 段。Isolation Forest、KEDA、Karpenter 没有放进这一版。
 
 ## 🌟 项目支持
 
 感谢您对 KoreCube 的关注。如果您认为本项目对您的 Kubernetes 管理工作具有价值，请考虑为仓库点亮星标 ⭐。社区支持是推动项目持续发展和改进的重要动力。
 
-关注微信公众号**希里安**，获取最新版本发布信息和技术洞察。
+上游 CiliKube 的发布说明见原作者微信公众号**希里安**。本分支的改动写在上面的 GPU 运维一节。
 
 ## 🤝 贡献者
 
