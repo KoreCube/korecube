@@ -10,7 +10,7 @@ Mainstream React control plane for the KoreCube monorepo.
 - Framer Motion + Recharts + Lucide
 - Oxlint + pnpm (`packageManager` pinned)
 
-Visual language is aligned with [CiliTerm](https://github.com/cillianxtech/ciliterm) (TRON / HUD), adapted for a Kubernetes admin shell.
+The interface adapts a TRON / HUD visual style for Kubernetes administration.
 
 ## Develop
 
@@ -36,6 +36,6 @@ pnpm --dir web lint
 
 ## Note on Vue
 
-The previous Vue UI lives in the separate [`korecube-web`](https://github.com/cillianxtech/korecube-web) repository.
+The previous Vue UI lives in the separate [`korecube-web`](https://github.com/korecube/korecube-web) repository.
 This monorepo’s frontend source of truth is `web/` (React).
 A sync patch for recent Vue pages is under `../patches/`.

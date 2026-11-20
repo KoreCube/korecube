@@ -2,12 +2,10 @@
 
 ## korecube-web-monitoring-rbac-storage.patch
 
-Cloud agent token has **read-only** access to `cillianxtech/korecube-web` (push returns 403).
-
 Apply the Vue frontend updates locally:
 
 ```bash
-git clone https://github.com/cillianxtech/korecube-web.git
+git clone https://github.com/korecube/korecube-web.git
 cd korecube-web
 git checkout -b cursor/sync-monitoring-rbac-storage-b44a
 git apply ../korecube/patches/korecube-web-monitoring-rbac-storage.patch

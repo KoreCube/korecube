@@ -18,7 +18,7 @@
 
 ## GPU operations added on top of upstream
 
-KoreCube is a fork of [CiliKube](https://github.com/ciliverse/cilikube) at `4b3a1ee`, still AGPL-3.0-only. The Go module path is `github.com/korecube/korecube`. Upstream demo and release notes stay with the original author. Release tags (`v*`) publish the images and the Helm chart (`oci://ghcr.io/korecube/charts/korecube`) to GHCR.
+KoreCube is a fork of CiliKube at `4b3a1ee` under AGPL-3.0-only. See [NOTICE](./NOTICE) for upstream attribution. The Go module path is `github.com/korecube/korecube`. Release tags (`v*`) publish the images and the Helm chart (`oci://ghcr.io/korecube/charts/korecube`) to GHCR.
 
 - **GPU health and tiered drain.** Node conditions, Xid / ECC / NVLink events, plus optional DCGM metrics from Prometheus. Unrecoverable Xids recommend cordon and drain. Recoverable warnings must outlive `gpu.persistence` (default 2 minutes) before they escalate.
 - **Three heal levels.** `suggest` writes a runbook only. `approve` (default) cordons or drains after a confirm on the GPU ops page. `auto` skips the second confirm only when every pod that would be evicted sits in `gpu.auto_namespaces` (DaemonSets do not count). Every attempt is kept in a decision trail. Showcase mode refuses the write.
@@ -34,8 +34,6 @@ The page is **GPU ops** at `/gpu`. Settings live under `gpu` in `configs/config.
 ## 🌟 Project Support
 
 We appreciate your interest in KoreCube. If you find this project valuable for your Kubernetes management needs, please consider starring the repository ⭐. Community support drives continuous development and improvement.
-
-Stay updated with the latest releases and technical insights by following our WeChat Official Account **希里安**.
 
 ## 🤝 Contributors
 
@@ -189,16 +187,6 @@ Highlights vs earlier releases:
 
 KoreCube started as a full-stack learning project that grew into a product you can actually open.  
 v1.0 adds an entry that matches how people troubleshoot — ask first, then change.
-
-## 🌐 Online Demo
-
-- Upstream CiliKube demo: https://cilikube.cillian.website  
-  (Public demo is a Showcase **fake fleet**; login can fill demo accounts in one click — not a production ops console. It runs upstream CiliKube, without the KoreCube GPU operations.)
-
-## 📚 Documentation
-
-- Upstream demo / product site: [cilikube.cillian.website](https://cilikube.cillian.website)
-- Upstream intro post: [CiliKube 1.0.0](https://www.cillian.website/en/post/20260730/)
 
 ## 🚀 Technology Stack
 
@@ -409,14 +397,6 @@ Please follow the Conventional Commits specification:
 - `ci`: CICD related changes
 - `types`: Type definition changes
 - `wip`: Work in progress (should generally not be merged)
-
-## 📞 Contact
-
-- Email: cilliantech@gmail.com
-- Website: https://www.cillian.website
-- WeChat: 希里安
-
-<img src="docs/wechat400x400.png" width="100" height="100" />
 
 ## 📜 License
 

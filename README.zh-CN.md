@@ -18,7 +18,7 @@
 
 ## 相对上游新增的 GPU 运维
 
-KoreCube 是 [CiliKube](https://github.com/ciliverse/cilikube)（`4b3a1ee`，AGPL-3.0-only）的分支，模块路径是 `github.com/korecube/korecube`。许可证不变。上游演示站和发行说明仍属于原作者。推送 `v*` 发版 tag 时，镜像和 Helm Chart（`oci://ghcr.io/korecube/charts/korecube`）会发布到 GHCR。
+KoreCube 是 CiliKube（`4b3a1ee`）的分支，采用 AGPL-3.0-only 许可证。上游署名见 [NOTICE](./NOTICE)。模块路径是 `github.com/korecube/korecube`。推送 `v*` 发版 tag 时，镜像和 Helm Chart（`oci://ghcr.io/korecube/charts/korecube`）会发布到 GHCR。
 
 这一版补了 AI 集群里最容易空转的一块，并且把执行权留在控制台：
 
@@ -36,8 +36,6 @@ KoreCube 是 [CiliKube](https://github.com/ciliverse/cilikube)（`4b3a1ee`，AGP
 ## 🌟 项目支持
 
 感谢您对 KoreCube 的关注。如果您认为本项目对您的 Kubernetes 管理工作具有价值，请考虑为仓库点亮星标 ⭐。社区支持是推动项目持续发展和改进的重要动力。
-
-上游 CiliKube 的发布说明见原作者微信公众号**希里安**。本分支的改动写在上面的 GPU 运维一节。
 
 ## 🤝 贡献者
 
@@ -191,16 +189,6 @@ KoreCube 是开源的 Kubernetes 多集群管理平台，技术栈为 React + Ty
 
 KoreCube 源于全栈学习与云原生实践：把想法做成能点开的产品。  
 v1.0 在资源控制台之上，补了一层更接近真实排障顺序的入口——先问清楚，再动手改。
-
-## 🌐 在线预览
-
-- 上游 CiliKube 在线演示: https://cilikube.cillian.website  
-  （公网 Demo 为 Showcase **模拟舰队**，登录页可一键填演示账号；勿当生产运维台。运行的是上游 CiliKube，不含 KoreCube 的 GPU 运维功能）
-
-## 📚 文档
-
-- 上游演示 / 产品站: [cilikube.cillian.website](https://cilikube.cillian.website)
-- 上游介绍文: [CiliKube 1.0.0 博客](https://www.cillian.website/post/20260730/)
 
 ## 🚀 技术架构
 
@@ -411,14 +399,6 @@ kubectl get svc korecube -n korecube
 - `ci`: CI/CD 配置相关
 - `types`: 类型定义修改
 - `wip`: 开发中的提交（不建议合入主分支）
-
-## 📞 联系方式
-
-- Email: cilliantech@gmail.com
-- Website: https://www.cillian.website
-- 公众号: 希里安
-
-<img src="docs/wechat400x400.png" width="100" height="100" />
 
 ## 📜 许可证
 
