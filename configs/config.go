@@ -24,9 +24,20 @@ type Config struct {
 	Preferences PreferencesConfig `yaml:"preferences" json:"preferences"`
 	Prometheus  PrometheusConfig  `yaml:"prometheus" json:"prometheus"`
 	AI          AIConfig          `yaml:"ai" json:"ai"`
+	GPU         GPUConfig         `yaml:"gpu" json:"gpu"`
 	LDAP        LDAPConfig        `yaml:"ldap" json:"ldap"`
 	WebAuthn    WebAuthnConfig    `yaml:"webauthn" json:"webauthn"`
 	Clusters    []ClusterInfo     `yaml:"clusters" json:"clusters"`
+}
+
+// GPUConfig is the AI/GPU operations boundary.
+// HealLevel: suggest (runbook only), approve (confirm in the console), auto
+// (cordon/drain without a second confirm, and only for AutoNamespaces).
+type GPUConfig struct {
+	HealLevel        string        `yaml:"heal_level" json:"heal_level"`
+	AutoNamespaces   []string      `yaml:"auto_namespaces" json:"auto_namespaces"`
+	WasteUtilPercent float64       `yaml:"waste_util_percent" json:"waste_util_percent"`
+	Persistence      time.Duration `yaml:"persistence" json:"persistence"`
 }
 
 // AIConfig configures the cluster chat assistant (OpenAI-compatible or mock).
@@ -409,6 +420,15 @@ func setDefaults() {
 	}
 	if GlobalConfig.JWT.Issuer == "" {
 		GlobalConfig.JWT.Issuer = "korecube"
+	}
+	if GlobalConfig.GPU.HealLevel == "" {
+		GlobalConfig.GPU.HealLevel = "approve"
+	}
+	if GlobalConfig.GPU.WasteUtilPercent <= 0 {
+		GlobalConfig.GPU.WasteUtilPercent = 40
+	}
+	if GlobalConfig.GPU.Persistence <= 0 {
+		GlobalConfig.GPU.Persistence = 2 * time.Minute
 	}
 	if GlobalConfig.Installer.MinikubeDriver == "" {
 		GlobalConfig.Installer.MinikubeDriver = "docker"

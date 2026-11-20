@@ -5,6 +5,7 @@ import (
 
 	"github.com/casbin/casbin/v2"
 	"github.com/korecube/korecube/configs"
+	"github.com/korecube/korecube/internal/ai"
 	"github.com/korecube/korecube/internal/handlers"
 	"github.com/korecube/korecube/internal/routes"
 	"github.com/korecube/korecube/internal/service"
@@ -148,6 +149,9 @@ func InitializeHandlers(router *gin.RouterGroup, services *service.AppServices, 
 
 	// --- Register monitoring / prometheus / informer routes ---
 	routes.RegisterMonitoringRoutes(router, services.MonitoringService, services.PrometheusService, k8sManager)
+	gpuOps := service.NewGPUOpsService(cfg, services.PrometheusService, services.NodeOpsService, services.AuditService)
+	ai.SetGPUReporter(gpuOps)
+	routes.RegisterGPUOpsRoutes(router, handlers.NewGPUOpsHandler(gpuOps, k8sManager))
 
 	// --- Topology (Radar-style resource + traffic graph) ---
 	if services.TopologyService != nil {

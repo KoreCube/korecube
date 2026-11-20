@@ -27,6 +27,7 @@ const EventsPage = lazy(() => import('@/pages/EventsPage').then((m) => ({ defaul
 const MonitoringPage = lazy(() =>
   import('@/pages/MonitoringPage').then((m) => ({ default: m.MonitoringPage })),
 )
+const GpuOpsPage = lazy(() => import('@/pages/GpuOpsPage').then((m) => ({ default: m.GpuOpsPage })))
 const TopologyPage = lazy(() =>
   import('@/pages/TopologyPage').then((m) => ({ default: m.TopologyPage })),
 )
@@ -434,6 +435,7 @@ export default function App() {
                     element={<Detail resource="csinodes" namespaced={false} />}
                   />
                   <Route path="monitoring" element={<MonitoringPage />} />
+                  <Route path="gpu" element={<GpuOpsPage />} />
                   <Route path="clusters" element={<ClustersPage />} />
                   <Route path="environments" element={<EnvironmentsPage />} />
                   <Route path="applications" element={<ApplicationsPage />} />

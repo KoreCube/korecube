@@ -81,6 +81,33 @@ const REPLY_ZH = '请用简洁中文回答。'
 
 const SKILL_SEEDS: SkillSeed[] = [
   {
+    id: 'skill_gpu_ops',
+    code: 'G1',
+    label: { en: 'GPU health', zh: 'GPU 健康' },
+    blurb: { en: 'Xid, waste, and slow replicas', zh: '看故障、浪费和慢副本' },
+    prompt: {
+      en:
+        'Check GPU health (Xid, ECC, NVLink), GPU waste versus allocation, and explain why llm-inference/llm-inf-7f-c may be slower than the other replicas of the same model. Recommend cordon or drain, but do not perform it.' +
+        REPLY_EN,
+      zh: '检查 GPU 健康（Xid、ECC、NVLink）和显卡利用率浪费，并解释 llm-inference/llm-inf-7f-c 为什么可能比同模型其他副本慢。可以建议 cordon 或 drain，但不要执行。' +
+        REPLY_ZH,
+    },
+    group: 'inspect',
+    toolsHint: ['get_gpu_health', 'get_gpu_waste', 'get_gpu_placement'],
+  },
+  {
+    id: 'skill_event_storm',
+    code: 'G2',
+    label: { en: 'Alert storm', zh: '告警合并' },
+    blurb: { en: 'Collapse one fault tree', zh: '把同一故障树收成一条' },
+    prompt: {
+      en: 'Aggregate the current warning storm by owner chain and GPU node, and tell me which single event a human should handle.' + REPLY_EN,
+      zh: '按所有者链路和 GPU 节点合并当前告警风暴，告诉我真正需要人处理的是哪一条。' + REPLY_ZH,
+    },
+    group: 'incident',
+    toolsHint: ['get_event_storm'],
+  },
+  {
     id: 'skill_inspect_combo',
     code: 'S1',
     label: { en: 'Smart inspect', zh: '智能点检' },

@@ -97,6 +97,12 @@ prometheus:
     enabled: false
     url: http://prometheus:9090
     timeout: 15s
+gpu:
+    # suggest = runbook only, approve = confirm then execute, auto = limited unattended cordon/drain
+    heal_level: approve
+    auto_namespaces: []
+    waste_util_percent: 40
+    persistence: 2m
 ai:
     enabled: true
     provider: mock

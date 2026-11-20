@@ -70,6 +70,42 @@ func toolDefinitions() []toolDef {
 				"required": []string{"namespace", "name"},
 			},
 		},
+		{
+			Name:        "get_gpu_health",
+			Description: "Read GPU hardware signals (Xid, ECC, NVLink, node conditions) and the recommended cordon/drain tier. Does not change the cluster.",
+			Parameters: map[string]interface{}{
+				"type":       "object",
+				"properties": map[string]interface{}{},
+			},
+		},
+		{
+			Name:        "get_gpu_waste",
+			Description: "Compare nvidia.com/gpu requests with DCGM utilization and suggest MIG or time-slicing for exclusive low-utilization cards.",
+			Parameters: map[string]interface{}{
+				"type":       "object",
+				"properties": map[string]interface{}{},
+			},
+		},
+		{
+			Name:        "get_gpu_placement",
+			Description: "Explain whether a GPU pod may be slow because it crosses NUMA or a PCIe switch, or shares the node with other GPU pods.",
+			Parameters: map[string]interface{}{
+				"type": "object",
+				"properties": map[string]interface{}{
+					"namespace": map[string]interface{}{"type": "string"},
+					"name":      map[string]interface{}{"type": "string"},
+				},
+				"required": []string{"namespace", "name"},
+			},
+		},
+		{
+			Name:        "get_event_storm",
+			Description: "Collapse warning events that share an owner chain or the same GPU node fault into one incident.",
+			Parameters: map[string]interface{}{
+				"type":       "object",
+				"properties": map[string]interface{}{},
+			},
+		},
 	}
 }
 
@@ -89,6 +125,14 @@ func executeTool(ctx context.Context, client *k8s.Client, name string, args map[
 		return toolGetResource(ctx, client, args, zh)
 	case "get_pod_logs":
 		return toolPodLogs(ctx, client, args, zh)
+	case "get_gpu_health":
+		return toolGPUHealth(ctx, client, zh)
+	case "get_gpu_waste":
+		return toolGPUWaste(ctx, client, zh)
+	case "get_gpu_placement":
+		return toolGPUPlacement(ctx, client, args, zh)
+	case "get_event_storm":
+		return toolEventStorm(ctx, client, zh)
 	default:
 		if zh {
 			return toolResult{}, fmt.Errorf("未知工具 %q", name)

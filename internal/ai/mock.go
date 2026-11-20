@@ -94,6 +94,11 @@ func processMock(ctx context.Context, client *k8s.Client, req *ChatRequest, send
 		skill == "skill_events"
 	wantNS := strings.Contains(q, "namespace") || strings.Contains(q, "命名空间") ||
 		skill == "skill_namespaces"
+	wantGPU := skill == "skill_gpu_ops" ||
+		strings.Contains(q, "gpu") || strings.Contains(q, "xid") || strings.Contains(q, "nvlink") ||
+		strings.Contains(raw, "显卡") || strings.Contains(raw, "利用率") || strings.Contains(raw, "浪费")
+	wantStorm := skill == "skill_event_storm" || strings.Contains(raw, "告警风暴") || strings.Contains(q, "event storm")
+	wantPlacement := strings.Contains(q, "为什么") && (strings.Contains(q, "慢") || strings.Contains(q, "slow"))
 
 	clusterWidePods := comboInspect || comboTriage ||
 		strings.Contains(q, "failed") || strings.Contains(raw, "Failed") ||
@@ -104,7 +109,7 @@ func processMock(ctx context.Context, client *k8s.Client, req *ChatRequest, send
 		strings.Contains(q, "warning") || strings.Contains(raw, "Warning") ||
 		strings.Contains(q, "error") || strings.Contains(raw, "Error")
 
-	if wantOverview || (!wantPods && !wantDeploy && !wantSvc && !wantNode && !wantLogs && !wantEvents && !wantNS) {
+	if wantOverview || (!wantPods && !wantDeploy && !wantSvc && !wantNode && !wantLogs && !wantEvents && !wantNS && !wantGPU && !wantStorm && !wantPlacement) {
 		call("get_cluster_overview", map[string]interface{}{})
 	}
 	if wantPods || wantLogs {
@@ -148,6 +153,29 @@ func processMock(ctx context.Context, client *k8s.Client, req *ChatRequest, send
 	}
 	if wantNS {
 		listKind("namespaces", 40, "*", nil)
+	}
+	if wantGPU {
+		call("get_gpu_health", map[string]interface{}{})
+		call("get_gpu_waste", map[string]interface{}{})
+	}
+	if wantStorm {
+		call("get_event_storm", map[string]interface{}{})
+	}
+	if wantPlacement {
+		podNS, podName := ns, ""
+		if podNS == "" {
+			podNS = "llm-inference"
+		}
+		for _, field := range strings.Fields(raw) {
+			if i := strings.Index(field, "/"); i > 0 && i < len(field)-1 {
+				podNS, podName = field[:i], field[i+1:]
+				break
+			}
+		}
+		if podName == "" {
+			podName = "llm-inf-7f-c"
+		}
+		call("get_gpu_placement", map[string]interface{}{"namespace": podNS, "name": podName})
 	}
 
 	if wantLogs {

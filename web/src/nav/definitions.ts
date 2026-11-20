@@ -6,6 +6,7 @@ import {
   Cloud,
   Database,
   FileCode2,
+  Cpu,
   Gauge,
   HardDrive,
   History,
@@ -241,6 +242,7 @@ export const consoleNavGroups: NavGroup[] = [
     icon: Activity,
     items: [
       { to: '/monitoring', labelKey: 'nav.monitoring', icon: Activity },
+      { to: '/gpu', labelKey: 'nav.gpuops', icon: Cpu },
       { to: '/topology', labelKey: 'nav.topology', icon: Waypoints, namespaced: true },
       { to: '/timeline', labelKey: 'nav.timeline', icon: History, namespaced: true },
       { to: '/audit', labelKey: 'nav.audit', icon: ScrollText, clusterScoped: false },
