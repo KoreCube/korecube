@@ -4,7 +4,8 @@ app:
 backend:
   image:
     repository: ghcr.io/korecube/korecube
-    tag: v1.6.0
+    # empty = the chart's appVersion
+    tag: ""
     pullPolicy: IfNotPresent
   replicas: 1
   service:
@@ -20,7 +21,7 @@ backend:
 frontend:
   image:
     repository: ghcr.io/korecube/korecube-web
-    tag: v1.6.0
+    tag: ""
     pullPolicy: IfNotPresent
   replicas: 1
   service:

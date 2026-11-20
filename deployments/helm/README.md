@@ -7,15 +7,11 @@ This directory contains Helm charts for deploying KoreCube in Kubernetes cluster
 ### Using Helm Repository (Recommended)
 
 ```bash
-# Add KoreCube Helm repository
-helm repo add korecube https://charts.cillian.website
-helm repo update
-
-# Install KoreCube
-helm install korecube korecube/korecube -n korecube --create-namespace
+# Install KoreCube (OCI chart, pushed to GHCR by .github/workflows/release-helm.yml on v* tags)
+helm install korecube oci://ghcr.io/korecube/charts/korecube -n korecube --create-namespace
 
 # Upgrade KoreCube
-helm upgrade korecube korecube/korecube -n korecube
+helm upgrade korecube oci://ghcr.io/korecube/charts/korecube -n korecube
 ```
 
 ### Using Local Charts
@@ -229,7 +225,7 @@ security:
 ### Minimal Installation
 
 ```bash
-helm install korecube korecube/korecube \
+helm install korecube oci://ghcr.io/korecube/charts/korecube \
   --set backend.replicas=1 \
   --set frontend.replicas=1 \
   --set monitoring.prometheus.enabled=false \
@@ -239,7 +235,7 @@ helm install korecube korecube/korecube \
 ### Production Installation
 
 ```bash
-helm install korecube korecube/korecube \
+helm install korecube oci://ghcr.io/korecube/charts/korecube \
   --set backend.replicas=3 \
   --set frontend.replicas=2 \
   --set autoscaling.enabled=true \
@@ -253,7 +249,7 @@ helm install korecube korecube/korecube \
 ### High Availability Installation
 
 ```bash
-helm install korecube korecube/korecube \
+helm install korecube oci://ghcr.io/korecube/charts/korecube \
   --set backend.replicas=5 \
   --set frontend.replicas=3 \
   --set autoscaling.enabled=true \
@@ -270,18 +266,15 @@ helm install korecube korecube/korecube \
 ### Standard Upgrade
 
 ```bash
-# Update repository
-helm repo update
-
 # Upgrade to latest version
-helm upgrade korecube korecube/korecube -n korecube
+helm upgrade korecube oci://ghcr.io/korecube/charts/korecube -n korecube
 ```
 
 ### Upgrade with New Values
 
 ```bash
 # Upgrade with custom values
-helm upgrade korecube korecube/korecube \
+helm upgrade korecube oci://ghcr.io/korecube/charts/korecube \
   -f new-values.yaml \
   -n korecube
 ```

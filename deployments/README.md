@@ -60,11 +60,8 @@ helm install korecube deployments/helm/korecube
 
 **Quick Start:**
 ```bash
-# Add Helm repository
-helm repo add korecube https://charts.cillian.website
-
-# Install KoreCube
-helm install korecube korecube/korecube
+# Install KoreCube from the OCI chart on GHCR
+helm install korecube oci://ghcr.io/korecube/charts/korecube
 ```
 
 **Features:**

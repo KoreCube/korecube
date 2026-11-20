@@ -18,14 +18,18 @@
 
 ## GPU operations added on top of upstream
 
-KoreCube is a fork of [CiliKube](https://github.com/ciliverse/cilikube) at `4b3a1ee`, still AGPL-3.0-only. The Go module path is `github.com/korecube/korecube`. Upstream demo and release notes stay with the original author. This fork does not publish a prebuilt image.
+KoreCube is a fork of [CiliKube](https://github.com/ciliverse/cilikube) at `4b3a1ee`, still AGPL-3.0-only. The Go module path is `github.com/korecube/korecube`. Upstream demo and release notes stay with the original author. Release tags (`v*`) publish the images and the Helm chart (`oci://ghcr.io/korecube/charts/korecube`) to GHCR.
 
 - **GPU health and tiered drain.** Node conditions, Xid / ECC / NVLink events, plus optional DCGM metrics from Prometheus. Unrecoverable Xids recommend cordon and drain. Recoverable warnings must outlive `gpu.persistence` (default 2 minutes) before they escalate.
 - **Three heal levels.** `suggest` writes a runbook only. `approve` (default) cordons or drains after a confirm on the GPU ops page. `auto` skips the second confirm only when every pod that would be evicted sits in `gpu.auto_namespaces` (DaemonSets do not count). Every attempt is kept in a decision trail. Showcase mode refuses the write.
 - **Utilization.** Namespace `nvidia.com/gpu` requests versus `DCGM_FI_DEV_GPU_UTIL`. An exclusive card under 40% is suggested for MIG or time-slicing. Missing utilization is not reported as waste.
 - **Alert storms.** Owner references (Pod to ReplicaSet to Deployment or Job) plus follower events on the same GPU node collapse into one group. The investigator gains read-only tools `get_gpu_health`, `get_gpu_waste`, `get_gpu_placement`, and `get_event_storm`.
+- **Anomaly detection.** Every minute an Isolation Forest scores each GPU, pod, and node on DCGM util, framebuffer, power, and temperature over the last `gpu.anomaly_window` (default 1h). Each recent point is scored by a forest fitted on history plus that point, so a run of bad minutes cannot mask itself. Only runs of at least `gpu.anomaly_persist` minutes (default 3) above `gpu.anomaly_threshold` (default 0.7) are reported; shorter spikes are counted and dropped. Tool: `get_gpu_anomalies`.
+- **Capacity and risk inspection.** Allocatable versus requested GPUs per node, capacity stranded on nodes with a critical incident, unscheduled GPU pods that cannot fit (shortage versus fragmentation), saturation above 85%, and nodes whose loss would leave nowhere to reschedule (N-1). Tool: `get_gpu_capacity`, also run by Smart inspect.
+- **Autoscaling as a skill.** Ask the investigator in plain language, e.g. "scale llm-inference on queue length, at most 8 replicas". `plan_autoscaling` drafts a KEDA `ScaledObject` (Prometheus vLLM queue by default; Kafka, RabbitMQ, Redis triggers) or a Karpenter `NodePool` (new pool, or limits and disruption on an existing one). Drafts only; a human approves on the GPU ops page, which creates or updates the object. Missing CRDs and HPA conflicts show up as warnings.
+- **Runbook to Skill.** Any incident runbook can be saved into the AI Skill library with one click, so the L1 response is reusable from the investigator.
 
-The page is **GPU ops** at `/gpu`. Settings live under `gpu` in `configs/config.yaml`.
+The page is **GPU ops** at `/gpu`. Settings live under `gpu` in `configs/config.yaml`. The Helm chart's RBAC already grants read on HPAs and create/update on `keda.sh` ScaledObjects and `karpenter.sh` NodePools.
 
 ## 🌟 Project Support
 
@@ -328,14 +332,11 @@ Visit http://localhost to access the interface.
 
 ### Deployment Steps
 ```bash
-# Add Helm repository
-helm repo add korecube https://charts.cillian.website
+# Install KoreCube from the OCI chart published to GHCR on every release tag
+helm install korecube oci://ghcr.io/korecube/charts/korecube -n korecube --create-namespace
 
-# Update Helm repository
-helm repo update
-
-# Install KoreCube
-helm install korecube korecube/korecube -n korecube --create-namespace
+# Pin a version / upgrade later
+helm upgrade korecube oci://ghcr.io/korecube/charts/korecube --version 1.6.0 -n korecube
 
 # Check service status
 kubectl get svc korecube -n korecube

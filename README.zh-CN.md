@@ -18,7 +18,7 @@
 
 ## 相对上游新增的 GPU 运维
 
-KoreCube 是 [CiliKube](https://github.com/ciliverse/cilikube)（`4b3a1ee`，AGPL-3.0-only）的分支，模块路径是 `github.com/korecube/korecube`。许可证不变。上游演示站和发行说明仍属于原作者；本分支不发布现成镜像，请在本地构建。
+KoreCube 是 [CiliKube](https://github.com/ciliverse/cilikube)（`4b3a1ee`，AGPL-3.0-only）的分支，模块路径是 `github.com/korecube/korecube`。许可证不变。上游演示站和发行说明仍属于原作者。推送 `v*` 发版 tag 时，镜像和 Helm Chart（`oci://ghcr.io/korecube/charts/korecube`）会发布到 GHCR。
 
 这一版补了 AI 集群里最容易空转的一块，并且把执行权留在控制台：
 
@@ -26,8 +26,12 @@ KoreCube 是 [CiliKube](https://github.com/ciliverse/cilikube)（`4b3a1ee`，AGP
 2. **三级自愈。** `suggest` 只生成 Runbook；`approve`（默认）在 GPU 运维页确认后才封锁或排水；`auto` 仅当节点上会被驱逐的 Pod 都落在 `gpu.auto_namespaces` 里才允许不再二次确认，DaemonSet 不计入这个范围。每次尝试都留下决策轨迹。演示集群直接拒绝写操作。
 3. **利用率画像。** 按命名空间汇总 `nvidia.com/gpu` 申请量，并和 `DCGM_FI_DEV_GPU_UTIL`（带 namespace/pod 标签）对比。独占整卡且利用率低于 40% 时建议 MIG 或 time-slicing。没有利用率数据时不会把卡判成浪费。
 4. **告警风暴合并。** 用 OwnerReference（Pod → ReplicaSet → Deployment / Job）把同一条故障链收成一组，并把同一块故障 GPU 节点上的 NotReady、驱逐、调度失败折进去。AI 工作台增加只读工具 `get_gpu_health`、`get_gpu_waste`、`get_gpu_placement`、`get_event_storm`，用来回答「这张卡为什么比同模型的其他副本慢」。
+5. **异常检测。** 每分钟用 Isolation Forest 给每块 GPU、每个 Pod、每个节点打分，特征是 DCGM 的利用率、显存、功耗、温度，窗口 `gpu.anomaly_window`（默认 1 小时）。每个近期点都用「历史 + 该点」单独拟合的森林评分，连续几分钟的异常不会互相掩盖。分数超过 `gpu.anomaly_threshold`（默认 0.7）且连续 `gpu.anomaly_persist` 分钟（默认 3）才上报，更短的尖峰只计数后丢弃。工具：`get_gpu_anomalies`。
+6. **容量与风险巡检。** 按节点对比可分配和已申请的卡数，算出严重故障节点上被困住的容量；检查等待调度的 GPU Pod 是真缺卡还是碎片化，分配率是否超过 85%，以及坏掉一台节点后负载还有没有地方挪（N-1）。工具：`get_gpu_capacity`，「智能点检」也会调用。
+7. **弹性伸缩做成 Skill。** 直接用自然语言问调查员，例如「帮我把 llm-inference 按队列长度伸缩，最多 8 个副本」。`plan_autoscaling` 生成 KEDA `ScaledObject`（默认用 Prometheus 的 vLLM 排队指标，也支持 Kafka、RabbitMQ、Redis）或 Karpenter `NodePool`（新建，或只改已有池的 limits 和 disruption）。它只生成方案；在 GPU 运维页人工审批后才创建或更新对象。缺 CRD、和现有 HPA 冲突都会作为警告列出。
+8. **Runbook 存为 Skill。** 故障卡片上的 Runbook 一键存入 AI Skill 库，L1 处置可以在调查员里直接复用。
 
-侧栏入口是 **GPU 运维**（`/gpu`）。配置在 `configs/config.yaml` 的 `gpu` 段。Isolation Forest、KEDA、Karpenter 没有放进这一版。
+侧栏入口是 **GPU 运维**（`/gpu`）。配置在 `configs/config.yaml` 的 `gpu` 段。Helm Chart 的 RBAC 已包含 HPA 只读，以及 `keda.sh` ScaledObject、`karpenter.sh` NodePool 的创建和更新权限。
 
 ## 🌟 项目支持
 
@@ -330,14 +334,11 @@ docker-compose up -d
 
 ### 部署步骤
 ```bash
-# 添加 Helm 仓库
-helm repo add korecube https://charts.cillian.website
+# 安装 KoreCube（每次发版 tag 都会把 OCI Chart 推到 GHCR）
+helm install korecube oci://ghcr.io/korecube/charts/korecube -n korecube --create-namespace
 
-# 更新 Helm 仓库
-helm repo update
-
-# 安装 KoreCube
-helm install korecube korecube/korecube -n korecube --create-namespace
+# 指定版本 / 后续升级
+helm upgrade korecube oci://ghcr.io/korecube/charts/korecube --version 1.6.0 -n korecube
 
 # 查看服务状态
 kubectl get svc korecube -n korecube
