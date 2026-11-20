@@ -4,7 +4,7 @@ import { APP_VERSION, formatAppVersion } from '@/lib/version'
 
 type Props = {
   className?: string
-  /** Compact "CK" for narrow headers */
+  /** Compact "KC" for narrow headers */
   compact?: boolean
   /** When set, wraps brand in a router Link */
   to?: string
@@ -25,11 +25,11 @@ export function BrandMark({
       <span className={cn('hud-brand', brandClassName)}>
         {compact ? (
           <>
-            C<span className="accent">K</span>
+            K<span className="accent">C</span>
           </>
         ) : (
           <>
-            Cili<span className="accent">Kube</span>
+            Kore<span className="accent">Cube</span>
           </>
         )}
       </span>

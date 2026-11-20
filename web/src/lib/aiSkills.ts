@@ -108,6 +108,42 @@ const SKILL_SEEDS: SkillSeed[] = [
     toolsHint: ['get_event_storm'],
   },
   {
+    id: 'skill_gpu_anomaly',
+    code: 'G3',
+    label: { en: 'GPU anomalies', zh: 'GPU 异常检测' },
+    blurb: { en: 'Isolation Forest, persistent only', zh: 'Isolation Forest，只看持续异常' },
+    prompt: {
+      en: 'Run anomaly detection on GPUs, pods and nodes. Report only anomalies that persist, compare them with the baseline, and say what to check next.' + REPLY_EN,
+      zh: '对 GPU、Pod 和节点做异常检测，只报告持续存在的异常，和基线对比，并说明下一步该查什么。' + REPLY_ZH,
+    },
+    group: 'inspect',
+    toolsHint: ['get_gpu_anomalies'],
+  },
+  {
+    id: 'skill_gpu_capacity',
+    code: 'G5',
+    label: { en: 'GPU capacity check', zh: 'GPU 容量巡检' },
+    blurb: { en: 'Shortage, fragmentation, N-1', zh: '缺卡、碎片、N-1 余量' },
+    prompt: {
+      en: 'Inspect GPU capacity: free GPUs on healthy nodes, pending GPU pods, fragmentation, and whether losing one node leaves room to reschedule. Rank the risks and say what to do.' + REPLY_EN,
+      zh: '巡检 GPU 容量：健康节点还剩多少卡、有没有排队的 GPU Pod、是否碎片化、坏一台节点后负载还有没有地方挪。按风险排序并给出处理建议。' + REPLY_ZH,
+    },
+    group: 'inspect',
+    toolsHint: ['get_gpu_capacity'],
+  },
+  {
+    id: 'skill_autoscale',
+    code: 'G4',
+    label: { en: 'Queue autoscaling', zh: '队列弹性伸缩' },
+    blurb: { en: 'KEDA / Karpenter proposal', zh: '生成 KEDA / Karpenter 方案' },
+    prompt: {
+      en: 'Scale the llm-inference namespace replicas on queue length, minimum 1 and maximum 8. Draft the KEDA ScaledObject for my approval.' + REPLY_EN,
+      zh: '帮我把 llm-inference 命名空间的副本数根据队列长度伸缩一下，最少 1 个、最多 8 个，生成 KEDA 方案等我审批。' + REPLY_ZH,
+    },
+    group: 'combo',
+    toolsHint: ['plan_autoscaling'],
+  },
+  {
     id: 'skill_inspect_combo',
     code: 'S1',
     label: { en: 'Smart inspect', zh: '智能点检' },

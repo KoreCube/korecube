@@ -2,6 +2,10 @@ import { useState } from 'react'
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
 import { useTranslation } from 'react-i18next'
 import { Badge, Button, Card, EmptyState, Modal, PageHeader, StatCard } from '@/components/ui'
+import { GpuAnomalyCard } from '@/components/gpu/GpuAnomalyCard'
+import { GpuCapacityCard } from '@/components/gpu/GpuCapacityCard'
+import { GpuScalingCard } from '@/components/gpu/GpuScalingCard'
+import { upsertCustomSkill } from '@/lib/aiSkills'
 import { useCluster } from '@/store/cluster'
 import {
   getGPUDecisions,
@@ -56,6 +60,16 @@ export function GpuOpsPage() {
   })
 
   const [pending, setPending] = useState<{ inc: GPUIncident; action: 'cordon' | 'drain' } | null>(null)
+  const [savedSkills, setSavedSkills] = useState<Record<string, boolean>>({})
+
+  const saveRunbook = (inc: GPUIncident) => {
+    const signals = inc.signals.map((s) => `${s.kind}${s.code ? ` ${s.code}` : ''}`).join(', ')
+    const prompt = zh
+      ? `节点 ${inc.node} 出现 GPU 故障（${signals}）。先调用 get_gpu_health 和 get_gpu_anomalies 确认现状，再按下面的 Runbook 逐步排查；只给建议，不要执行变更。\nRunbook：${inc.runbook}`
+      : `GPU fault on node ${inc.node} (${signals}). Call get_gpu_health and get_gpu_anomalies to confirm the current state, then walk through this runbook. Recommend only; do not change the cluster.\nRunbook: ${inc.runbook}`
+    const saved = upsertCustomSkill({ label: `GPU ${inc.node}`, blurb: inc.summary, prompt }, lang)
+    if (saved) setSavedSkills((m) => ({ ...m, [inc.node]: true }))
+  }
 
   const act = useMutation({
     mutationFn: (vars: { node: string; action: 'cordon' | 'drain'; confirm: boolean }) =>
@@ -110,6 +124,9 @@ export function GpuOpsPage() {
               busy={act.isPending}
               cordonLabel={t('gpuops.cordon')}
               drainLabel={t('gpuops.drain')}
+              skillLabel={savedSkills[inc.node] ? t('gpuops.skillSaved') : t('gpuops.saveSkill')}
+              skillSaved={Boolean(savedSkills[inc.node])}
+              onSaveSkill={() => saveRunbook(inc)}
               onRun={(action) =>
                 inc.needsConfirm
                   ? setPending({ inc, action })
@@ -119,6 +136,9 @@ export function GpuOpsPage() {
           ))
         )}
       </Card>
+
+      <GpuAnomalyCard />
+      <GpuCapacityCard />
 
       <Modal
         open={pending !== null}
@@ -209,6 +229,8 @@ export function GpuOpsPage() {
         )}
       </Card>
 
+      <GpuScalingCard readOnly={Boolean(health?.readOnly)} />
+
       <Card className="flex min-w-0 flex-col gap-2 p-5">
         <h2 className="text-sm font-medium">{t('gpuops.decisions')}</h2>
         {decisions.length === 0 ? (
@@ -231,12 +253,18 @@ function IncidentRow({
   busy,
   cordonLabel,
   drainLabel,
+  skillLabel,
+  skillSaved,
+  onSaveSkill,
   onRun,
 }: {
   inc: GPUIncident
   busy: boolean
   cordonLabel: string
   drainLabel: string
+  skillLabel: string
+  skillSaved: boolean
+  onSaveSkill: () => void
   onRun: (action: 'cordon' | 'drain') => void
 }) {
   const tone = inc.severity === 'critical' ? 'danger' : 'warn'
@@ -249,18 +277,23 @@ function IncidentRow({
         <span className="text-xs opacity-70">{Math.round(inc.confidence * 100)}%</span>
       </div>
       <p className="text-sm opacity-80">{inc.runbook}</p>
-      {inc.executable && (
-        <div className="flex gap-2">
-          <Button type="button" variant="outline" className="px-3 py-1.5 text-xs" disabled={busy} onClick={() => onRun('cordon')}>
-            {cordonLabel}
-          </Button>
-          {inc.action === 'cordon_and_drain' && (
-            <Button type="button" variant="danger" className="px-3 py-1.5 text-xs" disabled={busy} onClick={() => onRun('drain')}>
-              {drainLabel}
+      <div className="flex flex-wrap gap-2">
+        {inc.executable && (
+          <>
+            <Button type="button" variant="outline" className="px-3 py-1.5 text-xs" disabled={busy} onClick={() => onRun('cordon')}>
+              {cordonLabel}
             </Button>
-          )}
-        </div>
-      )}
+            {inc.action === 'cordon_and_drain' && (
+              <Button type="button" variant="danger" className="px-3 py-1.5 text-xs" disabled={busy} onClick={() => onRun('drain')}>
+                {drainLabel}
+              </Button>
+            )}
+          </>
+        )}
+        <Button type="button" variant="ghost" className="px-3 py-1.5 text-xs" disabled={skillSaved} onClick={onSaveSkill}>
+          {skillLabel}
+        </Button>
+      </div>
     </div>
   )
 }
