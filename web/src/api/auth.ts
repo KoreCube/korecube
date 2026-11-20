@@ -41,7 +41,7 @@ export type LinkedOAuthProvider = {
   connected_at?: string
 }
 
-const OAUTH_NOTICE_KEY = 'cilikube_oauth_notice'
+const OAUTH_NOTICE_KEY = 'korecube_oauth_notice'
 
 export type OAuthNotice = {
   kind: 'new_viewer' | 'viewer'
@@ -96,7 +96,7 @@ export async function completeOAuthLogin(provider: string, code: string, state?:
   return data
 }
 
-export async function fetchOAuthAuthURL(provider: string, state = 'cilikube_link') {
+export async function fetchOAuthAuthURL(provider: string, state = 'korecube_link') {
   return apiGet<{ auth_url: string; state: string }>(
     `/api/v1/auth/oauth/${encodeURIComponent(provider)}/auth`,
     { state },

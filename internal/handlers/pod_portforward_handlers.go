@@ -9,8 +9,8 @@ import (
 	"sync"
 	"time"
 
-	"github.com/ciliverse/cilikube/internal/service"
-	"github.com/ciliverse/cilikube/pkg/k8s"
+	"github.com/korecube/korecube/internal/service"
+	"github.com/korecube/korecube/pkg/k8s"
 	"github.com/gin-gonic/gin"
 	"github.com/gorilla/websocket"
 )
@@ -112,7 +112,7 @@ func (h *PodPortForwardHandler) PortForward(c *gin.Context) {
 			Type:    "ready",
 			Ports:   ports,
 			Message: fmt.Sprintf(
-				"Ready on CiliKube API host 127.0.0.1 for %s (not your browser localhost)",
+				"Ready on KoreCube API host 127.0.0.1 for %s (not your browser localhost)",
 				strings.Join(ports, ", "),
 			),
 		})

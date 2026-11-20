@@ -1,6 +1,6 @@
 import { hexToRgba, type Theme, type ThemeColors, type TerminalTheme } from './themes'
 
-const STORAGE_KEY = 'cilikube_custom_themes'
+const STORAGE_KEY = 'korecube_custom_themes'
 
 let cache: Theme[] = read()
 

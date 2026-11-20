@@ -4,8 +4,8 @@ import (
 	"testing"
 	"time"
 
-	"github.com/ciliverse/cilikube/configs"
-	"github.com/ciliverse/cilikube/internal/store"
+	"github.com/korecube/korecube/configs"
+	"github.com/korecube/korecube/internal/store"
 )
 
 func TestPasswordValidation(t *testing.T) {

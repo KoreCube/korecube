@@ -1,6 +1,6 @@
-# CiliKube API v1
+# KoreCube API v1
 
-This directory contains the API definitions and documentation for CiliKube v1.
+This directory contains the API definitions and documentation for KoreCube v1.
 
 ## API Documentation
 
@@ -10,7 +10,7 @@ This directory contains the API definitions and documentation for CiliKube v1.
 
 ## API Overview
 
-CiliKube API provides comprehensive Kubernetes multi-cluster management capabilities including:
+KoreCube API provides comprehensive Kubernetes multi-cluster management capabilities including:
 
 ### Authentication
 - User login/logout

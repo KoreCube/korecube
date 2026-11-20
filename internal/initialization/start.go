@@ -11,7 +11,7 @@ import (
 	"github.com/fatih/color"
 )
 
-// Version allows injection via build parameters (go build -ldflags "-X 'github.com/ciliverse/cilikube/internal/initialization.Version=v0.3.1'")
+// Version allows injection via build parameters (go build -ldflags "-X 'github.com/korecube/korecube/internal/initialization.Version=v0.3.1'")
 var Version = ""
 
 // DisplayServerInfo prints service startup information, including local/LAN addresses, mode, version, Go version, startup time, etc.
@@ -28,7 +28,7 @@ func DisplayServerInfo(serverAddr, mode string) {
 	} else {
 		startTime = time.Now().Format("2006-01-02 15:04:05")
 	}
-	color.Cyan("🚀 CiliKube Server is running!")
+	color.Cyan("🚀 KoreCube Server is running!")
 	color.Green("   ➜  Local:       http://127.0.0.1%s", serverAddr)
 	color.Green("   ➜  Network:     http://%s%s", getLocalIP(), serverAddr)
 	color.Yellow("  ➜  Mode:        %s", mode)
@@ -44,7 +44,7 @@ func DisplayServerInfo(serverAddr, mode string) {
 
 // getVersion gets version number, priority: environment variable > build variable > VERSION file > default value
 func getVersion() string {
-	if v := os.Getenv("CILIKUBE_VERSION"); v != "" {
+	if v := os.Getenv("KORECUBE_VERSION"); v != "" {
 		return v
 	}
 	if Version != "" {
@@ -58,7 +58,7 @@ func getVersion() string {
 	return "v0.0.1"
 }
 
-// getBuildTime supports injecting build time via build parameters (go build -ldflags "-X 'github.com/ciliverse/cilikube/internal/initialization.BuildTime=2025-06-24T12:00:00Z'")
+// getBuildTime supports injecting build time via build parameters (go build -ldflags "-X 'github.com/korecube/korecube/internal/initialization.BuildTime=2025-06-24T12:00:00Z'")
 var BuildTime = ""
 
 func getBuildTime() string {

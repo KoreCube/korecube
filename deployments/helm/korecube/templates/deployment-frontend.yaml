@@ -1,21 +1,21 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: {{ include "cilikube.fullname" . }}-frontend
+  name: {{ include "korecube.fullname" . }}-frontend
   labels:
-    {{- include "cilikube.labels" . | nindent 4 }}
+    {{- include "korecube.labels" . | nindent 4 }}
     app.kubernetes.io/component: frontend
 spec:
   replicas: {{ .Values.frontend.replicas }}
   selector:
     matchLabels:
-      app.kubernetes.io/name: {{ include "cilikube.name" . }}
+      app.kubernetes.io/name: {{ include "korecube.name" . }}
       app.kubernetes.io/instance: {{ .Release.Name }}
       app.kubernetes.io/component: frontend
   template:
     metadata:
       labels:
-        app.kubernetes.io/name: {{ include "cilikube.name" . }}
+        app.kubernetes.io/name: {{ include "korecube.name" . }}
         app.kubernetes.io/instance: {{ .Release.Name }}
         app.kubernetes.io/component: frontend
     spec:

@@ -24,7 +24,7 @@ type NamespaceContextValue = {
 }
 
 const NamespaceContext = createContext<NamespaceContextValue | null>(null)
-const STORAGE_KEY = 'cilikube_namespace'
+const STORAGE_KEY = 'korecube_namespace'
 
 export function NamespaceProvider({ children }: { children: ReactNode }) {
   const { clusterId } = useCluster()

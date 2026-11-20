@@ -107,7 +107,7 @@ export function AiChatPage() {
   const isDesktop = useIsDesktopHistory()
   const [historyOpen, setHistoryOpen] = useState(() => {
     try {
-      const saved = localStorage.getItem('cilikube_ai_rail')
+      const saved = localStorage.getItem('korecube_ai_rail')
       if (saved === '0') return false
       if (saved === '1') return true
     } catch {
@@ -120,7 +120,7 @@ export function AiChatPage() {
     setHistoryOpen((v) => {
       const next = !v
       try {
-        localStorage.setItem('cilikube_ai_rail', next ? '1' : '0')
+        localStorage.setItem('korecube_ai_rail', next ? '1' : '0')
       } catch {
         /* ignore */
       }
@@ -131,7 +131,7 @@ export function AiChatPage() {
   const closeHistory = () => {
     setHistoryOpen(false)
     try {
-      localStorage.setItem('cilikube_ai_rail', '0')
+      localStorage.setItem('korecube_ai_rail', '0')
     } catch {
       /* ignore */
     }

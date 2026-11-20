@@ -3,9 +3,9 @@ package routes
 import (
 	"github.com/gin-gonic/gin"
 
-	"github.com/ciliverse/cilikube/configs"
-	"github.com/ciliverse/cilikube/internal/ai"
-	"github.com/ciliverse/cilikube/pkg/k8s"
+	"github.com/korecube/korecube/configs"
+	"github.com/korecube/korecube/internal/ai"
+	"github.com/korecube/korecube/pkg/k8s"
 )
 
 func RegisterAIRoutes(router *gin.RouterGroup, cfg *configs.Config, manager *k8s.ClusterManager) {

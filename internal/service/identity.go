@@ -9,10 +9,10 @@ import (
 	"sync"
 	"time"
 
-	idauth "github.com/ciliverse/cilikube/internal/auth"
-	"github.com/ciliverse/cilikube/internal/models"
-	"github.com/ciliverse/cilikube/internal/store"
-	appauth "github.com/ciliverse/cilikube/pkg/auth"
+	idauth "github.com/korecube/korecube/internal/auth"
+	"github.com/korecube/korecube/internal/models"
+	"github.com/korecube/korecube/internal/store"
+	appauth "github.com/korecube/korecube/pkg/auth"
 )
 
 type mfaChallenge struct {
@@ -77,7 +77,7 @@ func (s *AuthService) BeginTOTPSetup(userID uint) (secret, url string, err error
 	if err := s.store.UpdateUser(user); err != nil {
 		return "", "", err
 	}
-	return secret, idauth.TOTPAuthURL("CiliKube", user.Username, secret), nil
+	return secret, idauth.TOTPAuthURL("KoreCube", user.Username, secret), nil
 }
 
 // ConfirmTOTP turns on MFA after the user proves they can generate a code.

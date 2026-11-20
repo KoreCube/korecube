@@ -4,7 +4,7 @@ import (
 	"log/slog"
 	"os"
 
-	"github.com/ciliverse/cilikube/internal/app"
+	"github.com/korecube/korecube/internal/app"
 )
 
 // just do it ! go!go!go!

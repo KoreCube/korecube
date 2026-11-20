@@ -1,15 +1,15 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: cilikube-backend
-  namespace: cilikube
+  name: korecube-backend
+  namespace: korecube
   labels:
-    app.kubernetes.io/name: cilikube
+    app.kubernetes.io/name: korecube
     app.kubernetes.io/component: backend
 spec:
   type: ClusterIP
   selector:
-    app.kubernetes.io/name: cilikube
+    app.kubernetes.io/name: korecube
     app.kubernetes.io/component: backend
   ports:
     - name: http

@@ -1,6 +1,6 @@
-# CiliKube Web (React)
+# KoreCube Web (React)
 
-Mainstream React control plane for the CiliKube monorepo.
+Mainstream React control plane for the KoreCube monorepo.
 
 ## Stack (current)
 
@@ -36,6 +36,6 @@ pnpm --dir web lint
 
 ## Note on Vue
 
-The previous Vue UI lives in the separate [`cilikube-web`](https://github.com/cillianxtech/cilikube-web) repository.
+The previous Vue UI lives in the separate [`korecube-web`](https://github.com/cillianxtech/korecube-web) repository.
 This monorepo’s frontend source of truth is `web/` (React).
 A sync patch for recent Vue pages is under `../patches/`.

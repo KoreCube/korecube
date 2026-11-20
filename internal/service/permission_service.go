@@ -5,7 +5,7 @@ import (
 	"log"
 
 	"github.com/casbin/casbin/v2"
-	"github.com/ciliverse/cilikube/internal/store"
+	"github.com/korecube/korecube/internal/store"
 )
 
 // PermissionService provides permission management functionality

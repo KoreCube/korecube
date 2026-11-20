@@ -1,23 +1,23 @@
 # Monitoring Configuration
 
-This directory contains monitoring configurations for CiliKube, including Prometheus, Grafana, and AlertManager setups.
+This directory contains monitoring configurations for KoreCube, including Prometheus, Grafana, and AlertManager setups.
 
 ## Overview
 
-The monitoring stack provides comprehensive observability for CiliKube deployments:
+The monitoring stack provides comprehensive observability for KoreCube deployments:
 
 - **Prometheus**: Metrics collection and storage
 - **Grafana**: Visualization and dashboards
 - **AlertManager**: Alert routing and notifications
 - **Node Exporter**: System metrics collection
-- **Application Metrics**: Custom CiliKube metrics
+- **Application Metrics**: Custom KoreCube metrics
 
 ## Quick Start
 
 ### Docker Compose
 
 ```bash
-# Start monitoring stack with CiliKube
+# Start monitoring stack with KoreCube
 docker-compose --profile monitoring up -d
 
 # Access services
@@ -53,8 +53,8 @@ The Prometheus configuration includes scrape configs for:
 
 ```yaml
 scrape_configs:
-  # CiliKube backend metrics
-  - job_name: 'cilikube-backend'
+  # KoreCube backend metrics
+  - job_name: 'korecube-backend'
     static_configs:
       - targets: ['backend:8080']
     metrics_path: '/metrics'
@@ -93,17 +93,17 @@ scrape_configs:
 Define recording rules for common queries:
 
 ```yaml
-# rules/cilikube.yml
+# rules/korecube.yml
 groups:
-- name: cilikube.rules
+- name: korecube.rules
   rules:
-  - record: cilikube:request_duration_seconds:rate5m
+  - record: korecube:request_duration_seconds:rate5m
     expr: rate(http_request_duration_seconds_sum[5m]) / rate(http_request_duration_seconds_count[5m])
   
-  - record: cilikube:request_rate:rate5m
+  - record: korecube:request_rate:rate5m
     expr: rate(http_requests_total[5m])
   
-  - record: cilikube:error_rate:rate5m
+  - record: korecube:error_rate:rate5m
     expr: rate(http_requests_total{status=~"5.."}[5m]) / rate(http_requests_total[5m])
 ```
 
@@ -111,7 +111,7 @@ groups:
 
 ### Pre-built Dashboards
 
-1. **CiliKube Overview**
+1. **KoreCube Overview**
    - Application metrics
    - Request rates and latency
    - Error rates
@@ -134,7 +134,7 @@ groups:
 ```json
 {
   "dashboard": {
-    "title": "CiliKube Overview",
+    "title": "KoreCube Overview",
     "panels": [
       {
         "title": "Request Rate",
@@ -158,19 +158,19 @@ groups:
 ```yaml
 # rules/alerts.yml
 groups:
-- name: cilikube.alerts
+- name: korecube.alerts
   rules:
-  - alert: CiliKubeDown
-    expr: up{job="cilikube-backend"} == 0
+  - alert: KoreCubeDown
+    expr: up{job="korecube-backend"} == 0
     for: 1m
     labels:
       severity: critical
     annotations:
-      summary: "CiliKube backend is down"
-      description: "CiliKube backend has been down for more than 1 minute"
+      summary: "KoreCube backend is down"
+      description: "KoreCube backend has been down for more than 1 minute"
 
   - alert: HighErrorRate
-    expr: cilikube:error_rate:rate5m > 0.1
+    expr: korecube:error_rate:rate5m > 0.1
     for: 5m
     labels:
       severity: warning
@@ -179,7 +179,7 @@ groups:
       description: "Error rate is {{ $value | humanizePercentage }} for the last 5 minutes"
 
   - alert: HighLatency
-    expr: cilikube:request_duration_seconds:rate5m > 1
+    expr: korecube:request_duration_seconds:rate5m > 1
     for: 5m
     labels:
       severity: warning
@@ -194,7 +194,7 @@ groups:
 # alertmanager/alertmanager.yml
 global:
   smtp_smarthost: 'localhost:587'
-  smtp_from: 'alerts@cilikube.example.com'
+  smtp_from: 'alerts@korecube.example.com'
 
 route:
   group_by: ['alertname']
@@ -206,8 +206,8 @@ route:
 receivers:
 - name: 'web.hook'
   email_configs:
-  - to: 'admin@cilikube.example.com'
-    subject: 'CiliKube Alert: {{ .GroupLabels.alertname }}'
+  - to: 'admin@korecube.example.com'
+    subject: 'KoreCube Alert: {{ .GroupLabels.alertname }}'
     body: |
       {{ range .Alerts }}
       Alert: {{ .Annotations.summary }}
@@ -217,7 +217,7 @@ receivers:
   slack_configs:
   - api_url: 'YOUR_SLACK_WEBHOOK_URL'
     channel: '#alerts'
-    title: 'CiliKube Alert'
+    title: 'KoreCube Alert'
     text: '{{ range .Alerts }}{{ .Annotations.summary }}{{ end }}'
 ```
 
@@ -225,7 +225,7 @@ receivers:
 
 ### Application Metrics
 
-CiliKube exposes custom metrics:
+KoreCube exposes custom metrics:
 
 ```go
 // Example metrics in Go application
@@ -257,11 +257,11 @@ Monitor Kubernetes-specific metrics:
 apiVersion: monitoring.coreos.com/v1
 kind: ServiceMonitor
 metadata:
-  name: cilikube-metrics
+  name: korecube-metrics
 spec:
   selector:
     matchLabels:
-      app: cilikube
+      app: korecube
   endpoints:
   - port: metrics
     interval: 30s
@@ -315,7 +315,7 @@ basic_auth_users:
 auth:
   generic_oauth:
     enabled: true
-    client_id: cilikube
+    client_id: korecube
     client_secret: your-secret
     auth_url: https://auth.example.com/oauth/authorize
     token_url: https://auth.example.com/oauth/token
@@ -363,8 +363,8 @@ tar -czf prometheus-backup-$(date +%Y%m%d).tar.gz \
 ```bash
 # Export dashboards
 curl -H "Authorization: Bearer YOUR_API_KEY" \
-  http://localhost:3000/api/dashboards/db/cilikube-overview \
-  > cilikube-dashboard.json
+  http://localhost:3000/api/dashboards/db/korecube-overview \
+  > korecube-dashboard.json
 ```
 
 ## Troubleshooting
@@ -408,7 +408,7 @@ promtool check rules rules/*.yml
 
 # Test queries
 curl -G http://localhost:9090/api/v1/query \
-  --data-urlencode 'query=up{job="cilikube-backend"}'
+  --data-urlencode 'query=up{job="korecube-backend"}'
 ```
 
 ## Integration

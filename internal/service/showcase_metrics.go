@@ -134,7 +134,7 @@ func showcasePodMetrics(config *rest.Config, namespace string) *PodsMetricsRespo
 			{"production", "postgres-1", 65, 480},
 			{"monitoring", "prometheus-0abc1", 200, 640},
 			{"kube-system", "coredns-xyz01", 15, 48},
-			{"cilibase", "cilikube-demo-1a2b3", 40, 90},
+			{"cilibase", "korecube-demo-1a2b3", 40, 90},
 		}
 	}
 	items := make([]PodMetrics, 0, len(seeds))

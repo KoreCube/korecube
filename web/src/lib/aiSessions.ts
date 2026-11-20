@@ -1,6 +1,6 @@
 import type { AiChatMessage } from '@/api/ai'
 
-const STORAGE_KEY = 'cilikube_ai_sessions_v1'
+const STORAGE_KEY = 'korecube_ai_sessions_v1'
 const MAX_SESSIONS = 40
 const MAX_TITLE = 64
 

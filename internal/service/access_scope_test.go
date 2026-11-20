@@ -3,7 +3,7 @@ package service
 import (
 	"testing"
 
-	"github.com/ciliverse/cilikube/internal/store"
+	"github.com/korecube/korecube/internal/store"
 )
 
 func TestAccessDecisionUnrestricted(t *testing.T) {

@@ -97,7 +97,7 @@ func (s *MemoryAuthStore) Initialize() error {
 	adminUser := &User{
 		ID:            s.nextUserID,
 		Username:      "admin",
-		Email:         "admin@cilikube.com",
+		Email:         "admin@korecube.com",
 		DisplayName:   "System Administrator",
 		IsActive:      true,
 		EmailVerified: true,

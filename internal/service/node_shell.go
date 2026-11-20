@@ -38,7 +38,7 @@ func BuildNodeShellPod(nodeName, image string) (*corev1.Pod, error) {
 			GenerateName: "ck-node-shell-",
 			Namespace:    nodeShellNamespace,
 			Labels: map[string]string{
-				"app.kubernetes.io/managed-by": "cilikube",
+				"app.kubernetes.io/managed-by": "korecube",
 				"app.kubernetes.io/name":       "node-shell",
 			},
 		},

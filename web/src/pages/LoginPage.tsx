@@ -397,7 +397,7 @@ export function LoginPage() {
           ·
         </span>
         <a href={APP_REPO_URL} target="_blank" rel="noreferrer noopener">
-          cilikube-2026@ciliverse
+          korecube-2026@korecube
         </a>
         <span className="login-footer-sep" aria-hidden>
           ·

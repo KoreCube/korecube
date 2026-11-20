@@ -4,11 +4,11 @@ import (
 	"fmt"
 	"log/slog"
 
-	"github.com/ciliverse/cilikube/internal/store"
-	"github.com/ciliverse/cilikube/pkg/k8s"
+	"github.com/korecube/korecube/internal/store"
+	"github.com/korecube/korecube/pkg/k8s"
 )
 
-// EnsureShowcaseAccounts resets public demo users/passwords when CILIKUBE_SHOWCASE=1.
+// EnsureShowcaseAccounts resets public demo users/passwords when KORECUBE_SHOWCASE=1.
 // Local/dev without the flag is untouched. Fail-closed: no-op outside showcase.
 // Even under the flag it never overwrites an account an operator has personalised —
 // see adoptableForShowcase.
@@ -20,10 +20,10 @@ func EnsureShowcaseAccounts(mainStore store.Store) error {
 		return fmt.Errorf("store required for showcase accounts")
 	}
 
-	if err := upsertShowcaseUser(mainStore, k8s.ShowcaseAdminUser, "demo-admin@cilikube.local", k8s.ShowcaseAdminPass, "admin"); err != nil {
+	if err := upsertShowcaseUser(mainStore, k8s.ShowcaseAdminUser, "demo-admin@korecube.local", k8s.ShowcaseAdminPass, "admin"); err != nil {
 		return err
 	}
-	if err := upsertShowcaseUser(mainStore, k8s.ShowcaseGuestUser, "demo-guest@cilikube.local", k8s.ShowcaseGuestPass, "viewer"); err != nil {
+	if err := upsertShowcaseUser(mainStore, k8s.ShowcaseGuestUser, "demo-guest@korecube.local", k8s.ShowcaseGuestPass, "viewer"); err != nil {
 		return err
 	}
 	if err := upsertShowcaseUser(mainStore, k8s.ShowcaseDirectoryUser, "directory@example.com", k8s.ShowcaseDirectoryPass, "viewer"); err != nil {
@@ -51,7 +51,7 @@ func upsertShowcaseUser(mainStore store.Store, username, email, password, roleNa
 		slog.Warn("showcase: refusing to overwrite a personalised account",
 			"username", username,
 			"email", user.Email,
-			"hint", "delete the account or set CILIKUBE_SHOWCASE only on the public exhibit host",
+			"hint", "delete the account or set KORECUBE_SHOWCASE only on the public exhibit host",
 		)
 		return nil
 	}

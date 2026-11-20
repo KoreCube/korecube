@@ -42,7 +42,7 @@ function parseMemoryGi(v: unknown) {
   return parseNum(s)
 }
 
-/** Aggregate per-node metrics-server rows into cluster rollup (cilikube-web style). */
+/** Aggregate per-node metrics-server rows into cluster rollup (korecube-web style). */
 export function parseNodeMetricsSummary(nodes: NodeMetricsRow[]): NodeMetricsSummary {
   if (!nodes.length) {
     return {

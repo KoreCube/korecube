@@ -6,7 +6,7 @@ import (
 	"path/filepath"
 	"strings"
 
-	"github.com/ciliverse/cilikube/internal/service"
+	"github.com/korecube/korecube/internal/service"
 	"github.com/gin-gonic/gin"
 )
 

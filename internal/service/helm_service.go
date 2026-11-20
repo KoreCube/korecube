@@ -11,7 +11,7 @@ import (
 	"sync"
 	"time"
 
-	"github.com/ciliverse/cilikube/pkg/k8s"
+	"github.com/korecube/korecube/pkg/k8s"
 	"gopkg.in/yaml.v3"
 	"k8s.io/client-go/tools/clientcmd"
 	clientcmdapi "k8s.io/client-go/tools/clientcmd/api"
@@ -116,14 +116,14 @@ func (s *HelmService) withKubeconfig(clusterID string, fn func(kubeconfigPath st
 	}
 	cfg := client.Config
 	apiCfg := clientcmdapi.NewConfig()
-	clusterName := "cilikube"
-	contextName := "cilikube"
+	clusterName := "korecube"
+	contextName := "korecube"
 	apiCfg.Clusters[clusterName] = &clientcmdapi.Cluster{
 		Server:                   cfg.Host,
 		CertificateAuthorityData: cfg.CAData,
 		InsecureSkipTLSVerify:    cfg.Insecure,
 	}
-	authName := "cilikube-user"
+	authName := "korecube-user"
 	apiCfg.AuthInfos[authName] = &clientcmdapi.AuthInfo{
 		Token:                 cfg.BearerToken,
 		ClientCertificateData: cfg.CertData,
@@ -137,7 +137,7 @@ func (s *HelmService) withKubeconfig(clusterID string, fn func(kubeconfigPath st
 	}
 	apiCfg.CurrentContext = contextName
 
-	tmp, err := os.CreateTemp("", "cilikube-helm-*.kubeconfig")
+	tmp, err := os.CreateTemp("", "korecube-helm-*.kubeconfig")
 	if err != nil {
 		return err
 	}
@@ -222,7 +222,7 @@ func (s *HelmService) Install(clusterID string, req HelmInstallRequest) (string,
 	var output string
 	err := s.withKubeconfig(clusterID, func(kc string) error {
 		if req.Repo != "" {
-			repoName := "cilikube-" + strings.ReplaceAll(req.Name, "/", "-")
+			repoName := "korecube-" + strings.ReplaceAll(req.Name, "/", "-")
 			if _, err := s.runHelm(kc, "repo", "add", repoName, req.Repo); err != nil {
 				// ignore if already exists
 				if !strings.Contains(err.Error(), "already exists") {
@@ -240,7 +240,7 @@ func (s *HelmService) Install(clusterID string, req HelmInstallRequest) (string,
 		}
 		var valuesFile string
 		if req.Values != "" {
-			f, err := os.CreateTemp("", "cilikube-values-*.yaml")
+			f, err := os.CreateTemp("", "korecube-values-*.yaml")
 			if err != nil {
 				return err
 			}
@@ -275,7 +275,7 @@ func (s *HelmService) Upgrade(clusterID, namespace, name string, req HelmUpgrade
 			args = append(args, "--version", req.Version)
 		}
 		if req.Values != "" {
-			f, err := os.CreateTemp("", "cilikube-values-*.yaml")
+			f, err := os.CreateTemp("", "korecube-values-*.yaml")
 			if err != nil {
 				return err
 			}

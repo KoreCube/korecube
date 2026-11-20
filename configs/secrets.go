@@ -10,7 +10,7 @@ import (
 // Known-insecure defaults that must never ship in networked release mode.
 var knownWeakJWTSecrets = map[string]struct{}{
 	"": {},
-	"cilikube-secret-key-change-in-production": {},
+	"korecube-secret-key-change-in-production": {},
 	"change-me-jwt-secret-in-production":       {},
 	"CHANGE_ME_JWT_SECRET_KEY":                {},
 	"your_jwt_secret_key_change_in_production": {},
@@ -31,13 +31,13 @@ func applySecretEnvOverrides() {
 	if v := strings.TrimSpace(os.Getenv("JWT_SECRET")); v != "" {
 		GlobalConfig.JWT.SecretKey = v
 	}
-	if v := strings.TrimSpace(os.Getenv("CILIKUBE_JWT_SECRET")); v != "" {
+	if v := strings.TrimSpace(os.Getenv("KORECUBE_JWT_SECRET")); v != "" {
 		GlobalConfig.JWT.SecretKey = v
 	}
 	if v := strings.TrimSpace(os.Getenv("ENCRYPTION_KEY")); v != "" {
 		GlobalConfig.Server.EncryptionKey = v
 	}
-	if v := strings.TrimSpace(os.Getenv("CILIKUBE_ENCRYPTION_KEY")); v != "" {
+	if v := strings.TrimSpace(os.Getenv("KORECUBE_ENCRYPTION_KEY")); v != "" {
 		GlobalConfig.Server.EncryptionKey = v
 	}
 }

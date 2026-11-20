@@ -38,7 +38,7 @@ export function getAiStatus() {
 
 function authToken(): string {
   try {
-    return localStorage.getItem('cilikube_token') || ''
+    return localStorage.getItem('korecube_token') || ''
   } catch {
     return ''
   }
@@ -46,7 +46,7 @@ function authToken(): string {
 
 function clusterId(): string {
   try {
-    return localStorage.getItem('cilikube_cluster') || ''
+    return localStorage.getItem('korecube_cluster') || ''
   } catch {
     return ''
   }

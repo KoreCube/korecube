@@ -5,9 +5,9 @@ import (
 	"strconv"
 	"strings"
 
-	"github.com/ciliverse/cilikube/internal/models"
-	"github.com/ciliverse/cilikube/internal/service"
-	"github.com/ciliverse/cilikube/pkg/auth"
+	"github.com/korecube/korecube/internal/models"
+	"github.com/korecube/korecube/internal/service"
+	"github.com/korecube/korecube/pkg/auth"
 	"github.com/gin-gonic/gin"
 )
 

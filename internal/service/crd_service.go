@@ -5,8 +5,8 @@ import (
 	"fmt"
 	"sort"
 
-	"github.com/ciliverse/cilikube/internal/models"
-	"github.com/ciliverse/cilikube/pkg/k8s"
+	"github.com/korecube/korecube/internal/models"
+	"github.com/korecube/korecube/pkg/k8s"
 	apiextensionsv1 "k8s.io/apiextensions-apiserver/pkg/apis/apiextensions/v1"
 	apiextensionsclientset "k8s.io/apiextensions-apiserver/pkg/client/clientset/clientset"
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"

@@ -32,7 +32,7 @@ func crashLoopPod(nsName, name, app, nodeName string) *corev1.Pod {
 		Name:         app,
 		Ready:        false,
 		RestartCount: 12,
-		Image:        "ghcr.io/ciliverse/" + app + ":showcase",
+		Image:        "ghcr.io/korecube/" + app + ":showcase",
 		State: corev1.ContainerState{
 			Waiting: &corev1.ContainerStateWaiting{
 				Reason:  "CrashLoopBackOff",

@@ -1,14 +1,14 @@
 {
-  "name": "cilikube-desktop",
+  "name": "korecube-desktop",
   "version": "1.6.0",
   "private": true,
-  "description": "CiliKube desktop shell (Electron + Go sidecar)",
+  "description": "KoreCube desktop shell (Electron + Go sidecar)",
   "main": "dist/main.js",
-  "author": "ciliverse",
+  "author": "korecube",
   "license": "AGPL-3.0-only",
   "repository": {
     "type": "git",
-    "url": "https://github.com/ciliverse/cilikube.git"
+    "url": "https://github.com/korecube/korecube.git"
   },
   "scripts": {
     "build": "tsc -p tsconfig.json",
@@ -32,8 +32,8 @@
     ]
   },
   "build": {
-    "appId": "website.cillian.cilikube",
-    "productName": "CiliKube",
+    "appId": "website.cillian.korecube",
+    "productName": "KoreCube",
     "directories": {
       "output": "release",
       "buildResources": "assets"
@@ -97,7 +97,7 @@
           ]
         }
       ],
-      "artifactName": "CiliKube-${version}-mac-${arch}.${ext}"
+      "artifactName": "KoreCube-${version}-mac-${arch}.${ext}"
     },
     "linux": {
       "icon": "assets/icon.png",
@@ -110,21 +110,21 @@
           ]
         }
       ],
-      "artifactName": "CiliKube-${version}-linux-${arch}.${ext}"
+      "artifactName": "KoreCube-${version}-linux-${arch}.${ext}"
     },
     "publish": null,
     "nsis": {
       "oneClick": false,
       "allowToChangeInstallationDirectory": true,
       "createDesktopShortcut": true,
-      "shortcutName": "CiliKube",
-      "artifactName": "CiliKube-${version}-win-${arch}-setup.${ext}"
+      "shortcutName": "KoreCube",
+      "artifactName": "KoreCube-${version}-win-${arch}-setup.${ext}"
     },
     "portable": {
-      "artifactName": "CiliKube-${version}-win-${arch}-portable.${ext}"
+      "artifactName": "KoreCube-${version}-win-${arch}-portable.${ext}"
     },
     "dmg": {
-      "artifactName": "CiliKube-${version}-mac-${arch}.${ext}"
+      "artifactName": "KoreCube-${version}-mac-${arch}.${ext}"
     }
   }
 }

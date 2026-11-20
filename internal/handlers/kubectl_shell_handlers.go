@@ -9,16 +9,16 @@ import (
 	"os"
 	"os/exec"
 
-	"github.com/ciliverse/cilikube/internal/service"
-	"github.com/ciliverse/cilikube/pkg/auth"
-	"github.com/ciliverse/cilikube/pkg/k8s"
+	"github.com/korecube/korecube/internal/service"
+	"github.com/korecube/korecube/pkg/auth"
+	"github.com/korecube/korecube/pkg/k8s"
 	"github.com/creack/pty"
 	"github.com/gin-gonic/gin"
 	"github.com/gorilla/websocket"
 )
 
 // KubectlShellHandler runs a local kubectl against the selected cluster.
-// The process uses the cluster credential stored in CiliKube, so only admins may open it.
+// The process uses the cluster credential stored in KoreCube, so only admins may open it.
 type KubectlShellHandler struct {
 	clusterManager *k8s.ClusterManager
 	audit          *service.AuditService
@@ -60,7 +60,7 @@ func (h *KubectlShellHandler) Shell(c *gin.Context) {
 		return
 	}
 	if _, err := exec.LookPath("kubectl"); err != nil {
-		_ = ws.WriteMessage(websocket.TextMessage, []byte("kubectl is not installed on the CiliKube server\r\n"))
+		_ = ws.WriteMessage(websocket.TextMessage, []byte("kubectl is not installed on the KoreCube server\r\n"))
 		return
 	}
 	raw, err := k8s.KubeconfigFromREST(client.Config)
@@ -68,7 +68,7 @@ func (h *KubectlShellHandler) Shell(c *gin.Context) {
 		_ = ws.WriteMessage(websocket.TextMessage, []byte(fmt.Sprintf("kubeconfig: %v\r\n", err)))
 		return
 	}
-	file, err := os.CreateTemp("", "cilikube-kubeconfig-")
+	file, err := os.CreateTemp("", "korecube-kubeconfig-")
 	if err != nil {
 		_ = ws.WriteMessage(websocket.TextMessage, []byte(fmt.Sprintf("temp file: %v\r\n", err)))
 		return

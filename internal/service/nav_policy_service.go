@@ -6,7 +6,7 @@ import (
 	"sort"
 	"strings"
 
-	"github.com/ciliverse/cilikube/internal/store"
+	"github.com/korecube/korecube/internal/store"
 )
 
 const (

@@ -14,7 +14,7 @@ export type ShowcaseInfo = {
   accounts?: ShowcaseAccount[]
 }
 
-/** Public endpoint — credentials only when server runs with CILIKUBE_SHOWCASE=1. */
+/** Public endpoint — credentials only when server runs with KORECUBE_SHOWCASE=1. */
 export async function fetchShowcaseInfo(): Promise<ShowcaseInfo> {
   try {
     const data = await apiGet<ShowcaseInfo>('/api/v1/showcase/info')

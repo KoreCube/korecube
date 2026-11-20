@@ -923,7 +923,7 @@ func (s *MemoryStore) Initialize() error {
 	// Create default admin user
 	adminUser := &User{
 		Username:      "admin",
-		Email:         "admin@cilikube.com",
+		Email:         "admin@korecube.com",
 		PasswordHash:  "12345678", // Will be hashed
 		DisplayName:   "System Administrator",
 		IsActive:      true,

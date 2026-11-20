@@ -3,7 +3,7 @@ import { useTranslation } from 'react-i18next'
 import { APP_VERSION, formatAppVersion } from '@/lib/version'
 
 const STEPS = [
-  `cilikube bootloader ${formatAppVersion(APP_VERSION)}`,
+  `korecube bootloader ${formatAppVersion(APP_VERSION)}`,
   'initializing control-plane UI',
   'loading casbin policy cache',
   'probing cluster contexts',
@@ -13,7 +13,7 @@ const STEPS = [
   'system online',
 ]
 
-const BOOT_SESSION_KEY = 'cilikube_boot_done'
+const BOOT_SESSION_KEY = 'korecube_boot_done'
 
 function ts(i: number): string {
   const v = (i * 0.37 + (i % 3) * 0.08 + 0.12).toFixed(2)
@@ -24,10 +24,10 @@ export function shouldShowBootScreen(): boolean {
   if (typeof window === 'undefined') return false
   if (sessionStorage.getItem(BOOT_SESSION_KEY)) return false
   if (window.location.pathname.startsWith('/login/oauth/callback')) return false
-  // Opt-out: ?boot=0 or localStorage cilikube_boot=0
+  // Opt-out: ?boot=0 or localStorage korecube_boot=0
   try {
     const params = new URLSearchParams(window.location.search)
-    if (params.get('boot') === '0' || localStorage.getItem('cilikube_boot') === '0') {
+    if (params.get('boot') === '0' || localStorage.getItem('korecube_boot') === '0') {
       sessionStorage.setItem(BOOT_SESSION_KEY, '1')
       return false
     }
@@ -35,7 +35,7 @@ export function shouldShowBootScreen(): boolean {
     /* ignore */
   }
   try {
-    if (localStorage.getItem('cilikube_token')) return false
+    if (localStorage.getItem('korecube_token')) return false
   } catch {
     /* ignore */
   }
@@ -92,7 +92,7 @@ export function BootScreen({ onDone }: { onDone: () => void }) {
     <div className={`ck-boot${exiting ? ' ck-boot-exit' : ''}`} role="dialog" aria-label="booting">
       <div className="ck-boot-scan" aria-hidden />
       <div className="ck-boot-inner">
-        <div className="ck-boot-logo" data-text="CILIKUBE">
+        <div className="ck-boot-logo" data-text="KORECUBE">
           CILI<span className="accent">KUBE</span>
         </div>
         <div className="ck-boot-sub">// {t('boot.subtitle')}</div>

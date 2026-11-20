@@ -1,31 +1,31 @@
 # Helm Deployment
 
-This directory contains Helm charts for deploying CiliKube in Kubernetes clusters with parameterized configurations.
+This directory contains Helm charts for deploying KoreCube in Kubernetes clusters with parameterized configurations.
 
 ## Quick Start
 
 ### Using Helm Repository (Recommended)
 
 ```bash
-# Add CiliKube Helm repository
-helm repo add ciliverse https://charts.cillian.website
+# Add KoreCube Helm repository
+helm repo add korecube https://charts.cillian.website
 helm repo update
 
-# Install CiliKube
-helm install cilikube ciliverse/cilikube -n cilikube --create-namespace
+# Install KoreCube
+helm install korecube korecube/korecube -n korecube --create-namespace
 
-# Upgrade CiliKube
-helm upgrade cilikube ciliverse/cilikube -n cilikube
+# Upgrade KoreCube
+helm upgrade korecube korecube/korecube -n korecube
 ```
 
 ### Using Local Charts
 
 ```bash
 # Install from local chart
-helm install cilikube ./deployments/helm/cilikube -n cilikube --create-namespace
+helm install korecube ./deployments/helm/korecube -n korecube --create-namespace
 
 # Install with custom values
-helm install cilikube ./deployments/helm/cilikube -f custom-values.yaml -n cilikube --create-namespace
+helm install korecube ./deployments/helm/korecube -f custom-values.yaml -n korecube --create-namespace
 ```
 
 ## Prerequisites
@@ -38,7 +38,7 @@ helm install cilikube ./deployments/helm/cilikube -f custom-values.yaml -n cilik
 
 ```
 helm/
-└── cilikube/
+└── korecube/
     ├── Chart.yaml          # Chart metadata
     ├── values.yaml         # Default configuration values
     ├── values-dev.yaml     # Development environment values
@@ -65,13 +65,13 @@ The chart comes with sensible defaults in `values.yaml`:
 ```yaml
 # Application configuration
 app:
-  name: cilikube
+  name: korecube
   version: latest
 
 # Backend configuration
 backend:
   image:
-    repository: ghcr.io/ciliverse/cilikube
+    repository: ghcr.io/korecube/korecube
     tag: v0.9.0
     pullPolicy: IfNotPresent
   replicas: 2
@@ -86,7 +86,7 @@ backend:
 # Frontend configuration
 frontend:
   image:
-    repository: ghcr.io/ciliverse/cilikube-web
+    repository: ghcr.io/korecube/korecube-web
     tag: v0.9.0
     pullPolicy: IfNotPresent
   replicas: 2
@@ -105,18 +105,18 @@ frontend:
 
 ```bash
 # Install for development
-helm install cilikube ./deployments/helm/cilikube \
-  -f ./deployments/helm/cilikube/values-dev.yaml \
-  -n cilikube-dev --create-namespace
+helm install korecube ./deployments/helm/korecube \
+  -f ./deployments/helm/korecube/values-dev.yaml \
+  -n korecube-dev --create-namespace
 ```
 
 #### Production Environment
 
 ```bash
 # Install for production
-helm install cilikube ./deployments/helm/cilikube \
-  -f ./deployments/helm/cilikube/values-prod.yaml \
-  -n cilikube-prod --create-namespace
+helm install korecube ./deployments/helm/korecube \
+  -f ./deployments/helm/korecube/values-prod.yaml \
+  -n korecube-prod --create-namespace
 ```
 
 ### Custom Configuration
@@ -139,14 +139,14 @@ ingress:
   enabled: true
   className: nginx
   hosts:
-    - host: cilikube.example.com
+    - host: korecube.example.com
       paths:
         - path: /
           pathType: Prefix
   tls:
-    - secretName: cilikube-tls
+    - secretName: korecube-tls
       hosts:
-        - cilikube.example.com
+        - korecube.example.com
 
 monitoring:
   prometheus:
@@ -229,7 +229,7 @@ security:
 ### Minimal Installation
 
 ```bash
-helm install cilikube ciliverse/cilikube \
+helm install korecube korecube/korecube \
   --set backend.replicas=1 \
   --set frontend.replicas=1 \
   --set monitoring.prometheus.enabled=false \
@@ -239,12 +239,12 @@ helm install cilikube ciliverse/cilikube \
 ### Production Installation
 
 ```bash
-helm install cilikube ciliverse/cilikube \
+helm install korecube korecube/korecube \
   --set backend.replicas=3 \
   --set frontend.replicas=2 \
   --set autoscaling.enabled=true \
   --set ingress.enabled=true \
-  --set ingress.hosts[0].host=cilikube.example.com \
+  --set ingress.hosts[0].host=korecube.example.com \
   --set monitoring.prometheus.enabled=true \
   --set monitoring.grafana.enabled=true \
   --set persistence.enabled=true
@@ -253,7 +253,7 @@ helm install cilikube ciliverse/cilikube \
 ### High Availability Installation
 
 ```bash
-helm install cilikube ciliverse/cilikube \
+helm install korecube korecube/korecube \
   --set backend.replicas=5 \
   --set frontend.replicas=3 \
   --set autoscaling.enabled=true \
@@ -274,26 +274,26 @@ helm install cilikube ciliverse/cilikube \
 helm repo update
 
 # Upgrade to latest version
-helm upgrade cilikube ciliverse/cilikube -n cilikube
+helm upgrade korecube korecube/korecube -n korecube
 ```
 
 ### Upgrade with New Values
 
 ```bash
 # Upgrade with custom values
-helm upgrade cilikube ciliverse/cilikube \
+helm upgrade korecube korecube/korecube \
   -f new-values.yaml \
-  -n cilikube
+  -n korecube
 ```
 
 ### Rollback
 
 ```bash
 # List releases
-helm history cilikube -n cilikube
+helm history korecube -n korecube
 
 # Rollback to previous version
-helm rollback cilikube 1 -n cilikube
+helm rollback korecube 1 -n korecube
 ```
 
 ## Customization
@@ -308,9 +308,9 @@ Create additional templates in the `templates/` directory:
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: {{ include "cilikube.fullname" . }}-custom
+  name: {{ include "korecube.fullname" . }}-custom
   labels:
-    {{- include "cilikube.labels" . | nindent 4 }}
+    {{- include "korecube.labels" . | nindent 4 }}
 data:
   custom.conf: |
     {{ .Values.customConfig.content | indent 4 }}
@@ -326,7 +326,7 @@ Add Helm hooks for custom operations:
 apiVersion: batch/v1
 kind: Job
 metadata:
-  name: {{ include "cilikube.fullname" . }}-pre-install
+  name: {{ include "korecube.fullname" . }}-pre-install
   annotations:
     "helm.sh/hook": pre-install
     "helm.sh/hook-weight": "-5"
@@ -364,7 +364,7 @@ Pre-configured dashboards are included:
 grafana:
   dashboards:
     enabled: true
-    configMapName: cilikube-dashboards
+    configMapName: korecube-dashboards
 ```
 
 ## Troubleshooting
@@ -373,25 +373,25 @@ grafana:
 
 ```bash
 # List releases
-helm list -n cilikube
+helm list -n korecube
 
 # Get release status
-helm status cilikube -n cilikube
+helm status korecube -n korecube
 
 # Get release values
-helm get values cilikube -n cilikube
+helm get values korecube -n korecube
 ```
 
 ### Debug Templates
 
 ```bash
 # Render templates without installing
-helm template cilikube ./deployments/helm/cilikube \
+helm template korecube ./deployments/helm/korecube \
   -f values.yaml \
   --debug
 
 # Dry run installation
-helm install cilikube ./deployments/helm/cilikube \
+helm install korecube ./deployments/helm/korecube \
   --dry-run --debug
 ```
 
@@ -400,29 +400,29 @@ helm install cilikube ./deployments/helm/cilikube \
 1. **Values not applied**
    ```bash
    # Check current values
-   helm get values cilikube -n cilikube
+   helm get values korecube -n korecube
    ```
 
 2. **Template errors**
    ```bash
    # Validate templates
-   helm lint ./deployments/helm/cilikube
+   helm lint ./deployments/helm/korecube
    ```
 
 3. **Resource conflicts**
    ```bash
    # Check existing resources
-   kubectl get all -n cilikube
+   kubectl get all -n korecube
    ```
 
 ## Uninstallation
 
 ```bash
 # Uninstall release
-helm uninstall cilikube -n cilikube
+helm uninstall korecube -n korecube
 
 # Delete namespace (optional)
-kubectl delete namespace cilikube
+kubectl delete namespace korecube
 ```
 
 ## Contributing

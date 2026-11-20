@@ -3,7 +3,7 @@ package repository
 import (
 	"errors"
 
-	"github.com/ciliverse/cilikube/internal/models"
+	"github.com/korecube/korecube/internal/models"
 	"gorm.io/gorm"
 )
 

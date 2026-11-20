@@ -9,7 +9,7 @@ import (
 	"k8s.io/client-go/kubernetes"
 	gatewayv1 "sigs.k8s.io/gateway-api/apis/v1"
 
-	"github.com/ciliverse/cilikube/pkg/k8s"
+	"github.com/korecube/korecube/pkg/k8s"
 )
 
 // --- GatewayClassClient (Cluster-scoped) ---

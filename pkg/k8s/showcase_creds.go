@@ -4,12 +4,12 @@ package k8s
 // These are NOT production secrets: the process talks to an in-memory fake cluster only.
 const (
 	ShowcaseAdminUser = "admin"
-	ShowcaseAdminPass = "CiliKubeDemoAdmin2026!"
+	ShowcaseAdminPass = "KoreCubeDemoAdmin2026!"
 	ShowcaseGuestUser = "guest"
-	ShowcaseGuestPass = "CiliKubeGuest2026!"
+	ShowcaseGuestPass = "KoreCubeGuest2026!"
 	// ShowcaseDirectoryUser is a simulated directory account. No external directory is contacted.
 	ShowcaseDirectoryUser = "directory"
-	ShowcaseDirectoryPass = "CiliKubeDirectory2026!"
+	ShowcaseDirectoryPass = "KoreCubeDirectory2026!"
 )
 
 // ShowcaseAccount is returned by the public showcase info endpoint.

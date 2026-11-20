@@ -1,4 +1,4 @@
-module github.com/ciliverse/cilikube
+module github.com/korecube/korecube
 
 go 1.26.0
 

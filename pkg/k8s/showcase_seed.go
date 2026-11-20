@@ -83,7 +83,7 @@ func pod(ns, name, app, nodeName, phase string, containers ...string) *corev1.Po
 	for _, c := range containers {
 		cs = append(cs, corev1.Container{
 			Name:  c,
-			Image: fmt.Sprintf("ghcr.io/ciliverse/%s:showcase", c),
+			Image: fmt.Sprintf("ghcr.io/korecube/%s:showcase", c),
 			Resources: corev1.ResourceRequirements{
 				Requests: corev1.ResourceList{corev1.ResourceCPU: qty("50m"), corev1.ResourceMemory: qty("64Mi")},
 				Limits:   corev1.ResourceList{corev1.ResourceCPU: qty("500m"), corev1.ResourceMemory: qty("256Mi")},
@@ -93,7 +93,7 @@ func pod(ns, name, app, nodeName, phase string, containers ...string) *corev1.Po
 			Name:  c,
 			Ready: phase == string(corev1.PodRunning),
 			State: corev1.ContainerState{Running: &corev1.ContainerStateRunning{StartedAt: metav1.Now()}},
-			Image: fmt.Sprintf("ghcr.io/ciliverse/%s:showcase", c),
+			Image: fmt.Sprintf("ghcr.io/korecube/%s:showcase", c),
 		})
 	}
 	return &corev1.Pod{
@@ -126,7 +126,7 @@ func deploy(ns, name string, replicas int32) *appsv1.Deployment {
 				Spec: corev1.PodSpec{
 					Containers: []corev1.Container{{
 						Name:  name,
-						Image: fmt.Sprintf("ghcr.io/ciliverse/%s:showcase", name),
+						Image: fmt.Sprintf("ghcr.io/korecube/%s:showcase", name),
 					}},
 				},
 			},
@@ -295,7 +295,7 @@ func ShowcaseSeedObjects() []runtime.Object {
 		// Storage
 		&storagev1.StorageClass{
 			ObjectMeta:  metav1.ObjectMeta{Name: "demo-ssd", Labels: map[string]string{"showcase": "true"}},
-			Provisioner: "showcase.cilikube.io/ssd",
+			Provisioner: "showcase.korecube.io/ssd",
 		},
 		&corev1.PersistentVolume{
 			ObjectMeta: metav1.ObjectMeta{Name: "pv-postgres-0", Labels: map[string]string{"showcase": "true"}},
@@ -324,7 +324,7 @@ func ShowcaseSeedObjects() []runtime.Object {
 			ObjectMeta: metav1.ObjectMeta{Name: "web", Namespace: "default", Labels: appLabels("web-frontend")},
 			Spec: networkingv1.IngressSpec{
 				Rules: []networkingv1.IngressRule{{
-					Host: "demo.cilikube.local",
+					Host: "demo.korecube.local",
 					IngressRuleValue: networkingv1.IngressRuleValue{
 						HTTP: &networkingv1.HTTPIngressRuleValue{
 							Paths: []networkingv1.HTTPIngressPath{{
@@ -413,10 +413,10 @@ func ShowcaseSeedObjects() []runtime.Object {
 		},
 
 		// cilibase sample
-		deploy("cilibase", "cilikube-demo", 2),
-		pod("cilibase", "cilikube-demo-1a2b3", "cilikube-demo", "demo-worker-1", "Running"),
-		pod("cilibase", "cilikube-demo-4c5d6", "cilikube-demo", "demo-worker-2", "Running"),
-		svc("cilibase", "cilikube-demo", 8080),
+		deploy("cilibase", "korecube-demo", 2),
+		pod("cilibase", "korecube-demo-1a2b3", "korecube-demo", "demo-worker-1", "Running"),
+		pod("cilibase", "korecube-demo-4c5d6", "korecube-demo", "demo-worker-2", "Running"),
+		svc("cilibase", "korecube-demo", 8080),
 	}
 
 	objs = append(objs, ShowcaseEventObjects()...)

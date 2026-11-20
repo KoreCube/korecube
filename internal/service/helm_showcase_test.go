@@ -15,8 +15,8 @@ func helmOnPath() bool {
 }
 
 func TestShowcaseHelmActiveRequiresShowcase(t *testing.T) {
-	t.Setenv("CILIKUBE_SHOWCASE", "")
-	t.Setenv("CILIKUBE_MODE", "")
+	t.Setenv("KORECUBE_SHOWCASE", "")
+	t.Setenv("KORECUBE_MODE", "")
 	if showcaseHelmActive() {
 		t.Fatal("local/dev must never serve the canned catalog")
 	}
@@ -25,7 +25,7 @@ func TestShowcaseHelmActiveRequiresShowcase(t *testing.T) {
 // A real helm wins over the canned data, so installing the binary on the
 // exhibit host is all it takes to make the marketplace live.
 func TestShowcaseHelmActiveYieldsToRealHelm(t *testing.T) {
-	t.Setenv("CILIKUBE_SHOWCASE", "1")
+	t.Setenv("KORECUBE_SHOWCASE", "1")
 	if got, want := showcaseHelmActive(), !helmOnPath(); got != want {
 		t.Fatalf("showcaseHelmActive()=%v, want %v (helm on PATH: %v)", got, want, helmOnPath())
 	}
@@ -116,7 +116,7 @@ func TestShowcaseReleasesFilterByNamespace(t *testing.T) {
 }
 
 func TestShowcaseWritesAreRejected(t *testing.T) {
-	t.Setenv("CILIKUBE_SHOWCASE", "1")
+	t.Setenv("KORECUBE_SHOWCASE", "1")
 	// Hide any helm the dev machine has, so this covers the exhibit's situation
 	// rather than skipping wherever helm happens to be installed.
 	t.Setenv("PATH", "")

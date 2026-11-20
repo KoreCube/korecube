@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# CiliKube Docker Build Script
+# KoreCube Docker Build Script
 # Usage: ./build.sh [version] [environment]
 
 set -e
@@ -8,7 +8,7 @@ set -e
 # Default parameters
 VERSION=${1:-"dev"}
 ENVIRONMENT=${2:-"production"}
-IMAGE_NAME="cilikube"
+IMAGE_NAME="korecube"
 REGISTRY=${REGISTRY:-"cilliantech"}
 
 # Color output
@@ -113,7 +113,7 @@ cleanup_old_images() {
 
 # Main function
 main() {
-    log_info "CiliKube Docker Build Script"
+    log_info "KoreCube Docker Build Script"
     log_info "============================"
     
     # Change to script directory
@@ -129,7 +129,7 @@ main() {
     log_info "Build completed! 🎉"
     log_info ""
     log_info "Run container:"
-    log_info "  docker run -d --name cilikube -p 8080:8080 $REGISTRY/$IMAGE_NAME:$VERSION"
+    log_info "  docker run -d --name korecube -p 8080:8080 $REGISTRY/$IMAGE_NAME:$VERSION"
     log_info ""
     log_info "Use Docker Compose:"
     log_info "  cd ../../ && docker-compose up -d"
@@ -137,7 +137,7 @@ main() {
 
 # Help information
 show_help() {
-    echo "CiliKube Docker Build Script"
+    echo "KoreCube Docker Build Script"
     echo ""
     echo "Usage:"
     echo "  $0 [version] [environment]"

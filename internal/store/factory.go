@@ -4,8 +4,8 @@ import (
 	"fmt"
 	"time"
 
-	"github.com/ciliverse/cilikube/configs"
-	"github.com/ciliverse/cilikube/pkg/database"
+	"github.com/korecube/korecube/configs"
+	"github.com/korecube/korecube/pkg/database"
 	"github.com/google/uuid"
 	"gorm.io/gorm"
 	"gorm.io/gorm/clause"
@@ -141,7 +141,7 @@ func (s *DatabaseStore) createDefaultAdminUser() error {
 	// Create admin user
 	adminUser := &User{
 		Username:           "admin",
-		Email:              "admin@cilikube.com",
+		Email:              "admin@korecube.com",
 		DisplayName:        "System Administrator",
 		IsActive:           true,
 		EmailVerified:      true,

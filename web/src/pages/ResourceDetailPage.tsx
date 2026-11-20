@@ -279,7 +279,7 @@ export function ResourceDetailPage({
       tpl.metadata = tpl.metadata || {}
       tpl.metadata.annotations = {
         ...(tpl.metadata.annotations || {}),
-        'cilikube.io/restartedAt': new Date().toISOString(),
+        'korecube.io/restartedAt': new Date().toISOString(),
       }
       await updateNamespacedResource(namespace, resource, name, clone)
       await detailQ.refetch()

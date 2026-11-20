@@ -14,7 +14,7 @@ import (
 	"sync"
 	"time"
 
-	"github.com/ciliverse/cilikube/configs"
+	"github.com/korecube/korecube/configs"
 )
 
 type Step string

@@ -25,10 +25,11 @@ out/
 minikube-darwin-arm64
 # Ignore output directory
 output/
-# Ignore Cilikube binary and related files (root only; do not ignore deployments/helm/cilikube)
-/cilikube
-/cilikube.exe
-/cilikube-*
+# Ignore KoreCube binary and related files (root only; do not ignore deployments/helm/korecube)
+/korecube
+/korecube.exe
+/korecube-*
+/bin/
 # Compiled Go server binary (曾被误提交，导致历史膨胀)
 cmd/server/server
 # Runtime logs (曾被误提交，导致历史膨胀)

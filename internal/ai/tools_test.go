@@ -5,7 +5,7 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/ciliverse/cilikube/pkg/k8s"
+	"github.com/korecube/korecube/pkg/k8s"
 )
 
 func TestListPodsPhasesClusterWideIgnoresDefaultTrap(t *testing.T) {

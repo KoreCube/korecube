@@ -1,7 +1,7 @@
 /** App release — keep in sync with repo root `VERSION`. */
 export const APP_VERSION = '1.6.0'
 
-export const APP_REPO_URL = 'https://github.com/ciliverse/cilikube'
+export const APP_REPO_URL = 'https://github.com/korecube/korecube'
 
 /** Display form: always `vX.Y.Z`. */
 export function formatAppVersion(v: string = APP_VERSION): string {

@@ -11,7 +11,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"sigs.k8s.io/yaml"
 
-	"github.com/ciliverse/cilikube/pkg/k8s"
+	"github.com/korecube/korecube/pkg/k8s"
 )
 
 type toolDef struct {

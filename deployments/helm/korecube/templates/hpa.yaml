@@ -2,14 +2,14 @@
 apiVersion: autoscaling/v2
 kind: HorizontalPodAutoscaler
 metadata:
-  name: {{ include "cilikube.fullname" . }}-backend
+  name: {{ include "korecube.fullname" . }}-backend
   labels:
-    {{- include "cilikube.labels" . | nindent 4 }}
+    {{- include "korecube.labels" . | nindent 4 }}
 spec:
   scaleTargetRef:
     apiVersion: apps/v1
     kind: Deployment
-    name: {{ include "cilikube.fullname" . }}-backend
+    name: {{ include "korecube.fullname" . }}-backend
   minReplicas: {{ .Values.autoscaling.minReplicas }}
   maxReplicas: {{ .Values.autoscaling.maxReplicas }}
   metrics:

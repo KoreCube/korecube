@@ -21,7 +21,7 @@ type EnvironmentContextValue = {
 }
 
 const EnvironmentContext = createContext<EnvironmentContextValue | null>(null)
-const STORAGE_KEY = 'cilikube_environment'
+const STORAGE_KEY = 'korecube_environment'
 
 export function EnvironmentProvider({ children }: { children: ReactNode }) {
   const { setClusterId } = useCluster()

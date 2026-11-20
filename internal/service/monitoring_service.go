@@ -5,8 +5,8 @@ import (
 	"sync"
 	"time"
 
-	"github.com/ciliverse/cilikube/configs"
-	"github.com/ciliverse/cilikube/internal/store"
+	"github.com/korecube/korecube/configs"
+	"github.com/korecube/korecube/internal/store"
 )
 
 // MonitoringService provides real-time monitoring and alerting

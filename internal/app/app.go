@@ -17,14 +17,14 @@ import (
 	"github.com/casbin/casbin/v2"
 	"github.com/gin-gonic/gin"
 
-	"github.com/ciliverse/cilikube/configs"
-	"github.com/ciliverse/cilikube/internal/initialization"
-	"github.com/ciliverse/cilikube/internal/logger"
-	"github.com/ciliverse/cilikube/internal/service"
-	"github.com/ciliverse/cilikube/internal/store"
-	"github.com/ciliverse/cilikube/pkg/auth"
-	"github.com/ciliverse/cilikube/pkg/database"
-	"github.com/ciliverse/cilikube/pkg/k8s"
+	"github.com/korecube/korecube/configs"
+	"github.com/korecube/korecube/internal/initialization"
+	"github.com/korecube/korecube/internal/logger"
+	"github.com/korecube/korecube/internal/service"
+	"github.com/korecube/korecube/internal/store"
+	"github.com/korecube/korecube/pkg/auth"
+	"github.com/korecube/korecube/pkg/database"
+	"github.com/korecube/korecube/pkg/k8s"
 )
 
 type Application struct {
@@ -84,12 +84,12 @@ func New(configPath string) (*Application, error) {
 
 	slog.Info("storage system initialized successfully", "type", cfg.GetStorageType())
 
-	// Showcase: pin public demo usernames/passwords (no-op unless CILIKUBE_SHOWCASE=1)
+	// Showcase: pin public demo usernames/passwords (no-op unless KORECUBE_SHOWCASE=1)
 	if err := service.EnsureShowcaseAccounts(mainStore); err != nil {
 		return nil, fmt.Errorf("failed to ensure showcase accounts: %w", err)
 	}
 
-	// Redact CILIKUBE_PRIVACY_IPS from historical audit/session rows (env-only; no IPs in source)
+	// Redact KORECUBE_PRIVACY_IPS from historical audit/session rows (env-only; no IPs in source)
 	if cfg.Database.Enabled && database.DB != nil {
 		if err := auth.ScrubPrivacyIPs(database.DB); err != nil {
 			slog.Warn("failed to scrub privacy IPs from audit history", "error", err)
@@ -200,10 +200,10 @@ func GetConfigPath() string {
 		return *config
 	}
 
-	if env := os.Getenv("CILIKUBE_CONFIG"); env != "" {
+	if env := os.Getenv("KORECUBE_CONFIG"); env != "" {
 		return env
 	}
-	if env := os.Getenv("CILIKUBE_CONFIG_PATH"); env != "" {
+	if env := os.Getenv("KORECUBE_CONFIG_PATH"); env != "" {
 		return env
 	}
 

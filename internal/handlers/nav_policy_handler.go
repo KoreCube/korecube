@@ -5,8 +5,8 @@ import (
 
 	"github.com/gin-gonic/gin"
 
-	"github.com/ciliverse/cilikube/internal/service"
-	"github.com/ciliverse/cilikube/pkg/utils"
+	"github.com/korecube/korecube/internal/service"
+	"github.com/korecube/korecube/pkg/utils"
 )
 
 // NavPolicyHandler exposes per-role sidebar visibility policies.

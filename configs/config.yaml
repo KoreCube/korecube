@@ -10,7 +10,7 @@ kubernetes:
 installer:
     minikubePath: /usr/local/bin/minikube
     minikubeDriver: docker
-    downloadDir: /tmp/cilikube_downloads
+    downloadDir: /tmp/korecube_downloads
 database:
     enabled: true
     type: sqlite
@@ -18,7 +18,7 @@ database:
     port: 0
     username: ""
     password: ""
-    database: ./data/cilikube.db
+    database: ./data/korecube.db
     charset: ""
 storage:
     type: database
@@ -29,12 +29,12 @@ storage:
         port: 0
         username: ""
         password: ""
-        database: ./data/cilikube.db
+        database: ./data/korecube.db
         charset: ""
 jwt:
-    secret_key: cilikube-secret-key-change-in-production
+    secret_key: korecube-secret-key-change-in-production
     expire_duration: 24h0m0s
-    issuer: cilikube
+    issuer: korecube
 oauth:
     github:
         client_id: ""

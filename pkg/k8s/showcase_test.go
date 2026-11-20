@@ -129,14 +129,14 @@ func TestShowcaseFleetSeeds(t *testing.T) {
 }
 
 func TestIsShowcaseEnv(t *testing.T) {
-	t.Setenv("CILIKUBE_SHOWCASE", "")
-	t.Setenv("CILIKUBE_MODE", "")
+	t.Setenv("KORECUBE_SHOWCASE", "")
+	t.Setenv("KORECUBE_MODE", "")
 	if IsShowcase() {
 		t.Fatal("default must be false")
 	}
-	t.Setenv("CILIKUBE_SHOWCASE", "1")
+	t.Setenv("KORECUBE_SHOWCASE", "1")
 	if !IsShowcase() {
 		t.Fatal("SHOWCASE=1 should enable")
 	}
-	_ = os.Unsetenv("CILIKUBE_SHOWCASE")
+	_ = os.Unsetenv("KORECUBE_SHOWCASE")
 }

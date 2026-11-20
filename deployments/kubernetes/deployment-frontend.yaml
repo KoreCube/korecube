@@ -1,26 +1,26 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: cilikube-frontend
-  namespace: cilikube
+  name: korecube-frontend
+  namespace: korecube
   labels:
-    app.kubernetes.io/name: cilikube
+    app.kubernetes.io/name: korecube
     app.kubernetes.io/component: frontend
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app.kubernetes.io/name: cilikube
+      app.kubernetes.io/name: korecube
       app.kubernetes.io/component: frontend
   template:
     metadata:
       labels:
-        app.kubernetes.io/name: cilikube
+        app.kubernetes.io/name: korecube
         app.kubernetes.io/component: frontend
     spec:
       containers:
         - name: frontend
-          image: ghcr.io/ciliverse/cilikube-web:v1.6.0
+          image: ghcr.io/korecube/korecube-web:v1.6.0
           imagePullPolicy: IfNotPresent
           ports:
             - name: http

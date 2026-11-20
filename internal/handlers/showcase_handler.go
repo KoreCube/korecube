@@ -3,12 +3,12 @@ package handlers
 import (
 	"net/http"
 
-	"github.com/ciliverse/cilikube/pkg/k8s"
+	"github.com/korecube/korecube/pkg/k8s"
 	"github.com/gin-gonic/gin"
 )
 
 // GetShowcaseInfo is a public endpoint. Credentials are returned only when
-// CILIKUBE_SHOWCASE=1 (fail-closed otherwise).
+// KORECUBE_SHOWCASE=1 (fail-closed otherwise).
 func GetShowcaseInfo(c *gin.Context) {
 	info := k8s.PublicShowcaseInfo()
 	if !info.Showcase {

@@ -39,7 +39,7 @@ type SkillSeed = {
   toolsHint?: string[]
 }
 
-const CUSTOM_STORAGE_KEY = 'cilikube_ai_custom_skills_v1'
+const CUSTOM_STORAGE_KEY = 'korecube_ai_custom_skills_v1'
 const MAX_CUSTOM_SKILLS = 30
 const MAX_LABEL = 24
 const MAX_BLURB = 48

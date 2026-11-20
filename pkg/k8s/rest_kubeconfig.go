@@ -31,12 +31,12 @@ func KubeconfigFromREST(cfg *rest.Config) ([]byte, error) {
 		auth.ClientKey = cfg.KeyFile
 	}
 	raw := clientcmdapi.NewConfig()
-	raw.Clusters["cilikube"] = cluster
-	raw.AuthInfos["cilikube"] = auth
-	raw.Contexts["cilikube"] = &clientcmdapi.Context{
-		Cluster:  "cilikube",
-		AuthInfo: "cilikube",
+	raw.Clusters["korecube"] = cluster
+	raw.AuthInfos["korecube"] = auth
+	raw.Contexts["korecube"] = &clientcmdapi.Context{
+		Cluster:  "korecube",
+		AuthInfo: "korecube",
 	}
-	raw.CurrentContext = "cilikube"
+	raw.CurrentContext = "korecube"
 	return clientcmd.Write(*raw)
 }

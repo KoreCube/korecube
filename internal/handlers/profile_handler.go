@@ -12,9 +12,9 @@ import (
 	"github.com/gin-gonic/gin"
 	"github.com/google/uuid"
 
-	"github.com/ciliverse/cilikube/internal/models"
-	"github.com/ciliverse/cilikube/internal/service"
-	"github.com/ciliverse/cilikube/pkg/utils"
+	"github.com/korecube/korecube/internal/models"
+	"github.com/korecube/korecube/internal/service"
+	"github.com/korecube/korecube/pkg/utils"
 )
 
 // ProfileHandler handles user profile related requests

@@ -44,19 +44,19 @@ jobs:
               echo "dockerhub=false"
             fi
             echo "backend_tags<<EOF"
-            echo "ghcr.io/${OWNER}/cilikube:${TAG}"
-            echo "ghcr.io/${OWNER}/cilikube:latest"
+            echo "ghcr.io/${OWNER}/korecube:${TAG}"
+            echo "ghcr.io/${OWNER}/korecube:latest"
             if [ -n "${DOCKERHUB_USERNAME}" ]; then
-              echo "${DOCKERHUB_USERNAME}/cilikube:${TAG}"
-              echo "${DOCKERHUB_USERNAME}/cilikube:latest"
+              echo "${DOCKERHUB_USERNAME}/korecube:${TAG}"
+              echo "${DOCKERHUB_USERNAME}/korecube:latest"
             fi
             echo "EOF"
             echo "frontend_tags<<EOF"
-            echo "ghcr.io/${OWNER}/cilikube-web:${TAG}"
-            echo "ghcr.io/${OWNER}/cilikube-web:latest"
+            echo "ghcr.io/${OWNER}/korecube-web:${TAG}"
+            echo "ghcr.io/${OWNER}/korecube-web:latest"
             if [ -n "${DOCKERHUB_USERNAME}" ]; then
-              echo "${DOCKERHUB_USERNAME}/cilikube-web:${TAG}"
-              echo "${DOCKERHUB_USERNAME}/cilikube-web:latest"
+              echo "${DOCKERHUB_USERNAME}/korecube-web:${TAG}"
+              echo "${DOCKERHUB_USERNAME}/korecube-web:latest"
             fi
             echo "EOF"
           } >> "$GITHUB_OUTPUT"

@@ -17,9 +17,9 @@ import (
 	clientcmdapi "k8s.io/client-go/tools/clientcmd/api"
 	"k8s.io/client-go/util/homedir"
 
-	"github.com/ciliverse/cilikube/internal/models"
-	"github.com/ciliverse/cilikube/internal/store"
-	"github.com/ciliverse/cilikube/pkg/k8s"
+	"github.com/korecube/korecube/internal/models"
+	"github.com/korecube/korecube/internal/store"
+	"github.com/korecube/korecube/pkg/k8s"
 )
 
 const fleetProbeTimeout = 4 * time.Second

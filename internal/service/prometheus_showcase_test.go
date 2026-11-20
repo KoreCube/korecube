@@ -7,12 +7,12 @@ import (
 	"testing"
 	"time"
 
-	"github.com/ciliverse/cilikube/configs"
+	"github.com/korecube/korecube/configs"
 )
 
 func TestShowcasePrometheusQueryRange(t *testing.T) {
-	t.Setenv("CILIKUBE_SHOWCASE", "1")
-	defer os.Unsetenv("CILIKUBE_SHOWCASE")
+	t.Setenv("KORECUBE_SHOWCASE", "1")
+	defer os.Unsetenv("KORECUBE_SHOWCASE")
 
 	svc := NewPrometheusService(&configs.Config{
 		Prometheus: configs.PrometheusConfig{Enabled: false},
@@ -54,8 +54,8 @@ func TestShowcasePrometheusQueryRange(t *testing.T) {
 }
 
 func TestRemotePreferredOverShowcase(t *testing.T) {
-	t.Setenv("CILIKUBE_SHOWCASE", "1")
-	defer os.Unsetenv("CILIKUBE_SHOWCASE")
+	t.Setenv("KORECUBE_SHOWCASE", "1")
+	defer os.Unsetenv("KORECUBE_SHOWCASE")
 
 	svc := NewPrometheusService(&configs.Config{
 		Prometheus: configs.PrometheusConfig{

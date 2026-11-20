@@ -1,7 +1,7 @@
 import axios from 'axios'
 
-const TOKEN_KEY = 'cilikube_token'
-const CLUSTER_KEY = 'cilikube_cluster'
+const TOKEN_KEY = 'korecube_token'
+const CLUSTER_KEY = 'korecube_cluster'
 
 export const getToken = () => localStorage.getItem(TOKEN_KEY)
 export const setToken = (token: string) => localStorage.setItem(TOKEN_KEY, token)

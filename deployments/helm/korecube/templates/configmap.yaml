@@ -1,9 +1,9 @@
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: {{ include "cilikube.fullname" . }}-config
+  name: {{ include "korecube.fullname" . }}-config
   labels:
-    {{- include "cilikube.labels" . | nindent 4 }}
+    {{- include "korecube.labels" . | nindent 4 }}
 data:
   config.yaml: |
     server:
@@ -17,8 +17,8 @@ data:
     database:
       enabled: true
       type: sqlite
-      database: /app/data/cilikube.db
+      database: /app/data/korecube.db
     jwt:
       secret_key: {{ .Values.secrets.jwtSecret | quote }}
       expire_duration: {{ .Values.config.jwtExpire }}
-      issuer: cilikube
+      issuer: korecube

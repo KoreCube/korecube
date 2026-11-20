@@ -5,7 +5,7 @@ import (
 	"strings"
 	"time"
 
-	"github.com/ciliverse/cilikube/internal/store"
+	"github.com/korecube/korecube/internal/store"
 	appsv1 "k8s.io/api/apps/v1"
 	autoscalingv2 "k8s.io/api/autoscaling/v2"
 	batchv1 "k8s.io/api/batch/v1"
@@ -25,25 +25,33 @@ import (
 const (
 	ShowcaseClusterID   = "showcase-demo"
 	ShowcaseClusterName = "demo"
-	ShowcaseAPIHost     = "https://showcase.cilikube.local"
+	ShowcaseAPIHost     = "https://showcase.korecube.local"
 	ShowcaseVersion     = "v1.36.2-showcase"
 
 	ShowcaseProdClusterID   = "showcase-prod"
 	ShowcaseProdClusterName = "prod-east"
-	ShowcaseProdAPIHost     = "https://prod-east.showcase.cilikube.local"
+	ShowcaseProdAPIHost     = "https://prod-east.showcase.korecube.local"
 	ShowcaseProdVersion     = "v1.33.4-showcase"
 
 	ShowcaseStagingClusterID   = "showcase-staging"
 	ShowcaseStagingClusterName = "staging-lab"
-	ShowcaseStagingAPIHost     = "https://staging-lab.showcase.cilikube.local"
+	ShowcaseStagingAPIHost     = "https://staging-lab.showcase.korecube.local"
 	ShowcaseStagingVersion     = "v1.35.0-showcase"
 )
 
 // IsShowcase reports whether the process is running the public read-only exhibit.
-// Local/dev defaults to false — set CILIKUBE_SHOWCASE=1 only on the public host.
+// Local/dev defaults to false — set KORECUBE_SHOWCASE=1 only on the public host.
+// CILIKUBE_SHOWCASE / CILIKUBE_MODE are still accepted from the upstream project.
 func IsShowcase() bool {
-	v := strings.TrimSpace(os.Getenv("CILIKUBE_SHOWCASE"))
-	return v == "1" || strings.EqualFold(v, "true") || strings.EqualFold(os.Getenv("CILIKUBE_MODE"), "showcase")
+	v := strings.TrimSpace(os.Getenv("KORECUBE_SHOWCASE"))
+	if v == "" {
+		v = strings.TrimSpace(os.Getenv("CILIKUBE_SHOWCASE"))
+	}
+	mode := os.Getenv("KORECUBE_MODE")
+	if mode == "" {
+		mode = os.Getenv("CILIKUBE_MODE")
+	}
+	return v == "1" || strings.EqualFold(v, "true") || strings.EqualFold(mode, "showcase")
 }
 
 // IsShowcaseConfig detects an in-memory demo rest.Config (any fleet showcase cluster).
@@ -51,7 +59,7 @@ func IsShowcaseConfig(cfg *rest.Config) bool {
 	if cfg == nil || cfg.Host == "" {
 		return false
 	}
-	return strings.Contains(cfg.Host, "showcase.cilikube.local")
+	return strings.Contains(cfg.Host, "showcase.korecube.local")
 }
 
 // ShowcaseProfile is one simulated cluster in the public multi-cluster fleet.

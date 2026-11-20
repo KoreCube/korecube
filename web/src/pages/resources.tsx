@@ -383,7 +383,7 @@ export function DeploymentsPage() {
             clone.spec.template.metadata = clone.spec.template.metadata || {}
             clone.spec.template.metadata.annotations = {
               ...(clone.spec.template.metadata.annotations || {}),
-              'cilikube.io/restartedAt': new Date().toISOString(),
+              'korecube.io/restartedAt': new Date().toISOString(),
             }
             await updateNamespacedResource(ns, 'deployments', name, clone)
             refetchRef.current?.()
@@ -529,7 +529,7 @@ export function StatefulSetsPage() {
             clone.spec.template.metadata = clone.spec.template.metadata || {}
             clone.spec.template.metadata.annotations = {
               ...(clone.spec.template.metadata.annotations || {}),
-              'cilikube.io/restartedAt': new Date().toISOString(),
+              'korecube.io/restartedAt': new Date().toISOString(),
             }
             await updateNamespacedResource(ns, 'statefulsets', name, clone)
             refetchRef.current?.()
@@ -805,9 +805,9 @@ export function ServicesPage() {
     const token = getToken() || ''
     const clusterId = getClusterId()
     const prefix = `/api/v1/namespaces/${encodeURIComponent(ns)}/services/${encodeURIComponent(name)}/proxy`
-    document.cookie = `cilikube_proxy=${encodeURIComponent(token)}; Path=${prefix}; SameSite=Lax`
-    document.cookie = `cilikube_proxy_cluster=${encodeURIComponent(clusterId)}; Path=${prefix}; SameSite=Lax`
-    document.cookie = `cilikube_proxy_port=${encodeURIComponent(String(port))}; Path=${prefix}; SameSite=Lax`
+    document.cookie = `korecube_proxy=${encodeURIComponent(token)}; Path=${prefix}; SameSite=Lax`
+    document.cookie = `korecube_proxy_cluster=${encodeURIComponent(clusterId)}; Path=${prefix}; SameSite=Lax`
+    document.cookie = `korecube_proxy_port=${encodeURIComponent(String(port))}; Path=${prefix}; SameSite=Lax`
     window.open(`${prefix}/?port=${port}`, '_blank', 'noopener')
   }
   return (

@@ -7,7 +7,7 @@
 database_sqlite:
     enabled: true
     type: "sqlite"
-    database: "./data/cilikube.db"  # SQLite database file path
+    database: "./data/korecube.db"  # SQLite database file path
     host: ""
     port: 0
     username: ""
@@ -24,7 +24,7 @@ database_postgresql:
     port: 5432                      # PostgreSQL default port
     username: "postgres"
     password: "your-password"
-    database: "cilikube"
+    database: "korecube"
     charset: ""
 
 # ==================== Usage ====================

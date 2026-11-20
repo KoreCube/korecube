@@ -25,7 +25,7 @@ import {
   type ResourceAction,
 } from '@/lib/permissions'
 
-const PENDING_OLD_PW_KEY = 'cilikube_pending_old_pw'
+const PENDING_OLD_PW_KEY = 'korecube_pending_old_pw'
 
 type AuthContextValue = {
   token: string | null
@@ -52,7 +52,7 @@ const AuthContext = createContext<AuthContextValue | null>(null)
 export function AuthProvider({ children }: { children: ReactNode }) {
   const [token, setTokenState] = useState<string | null>(() => getToken())
   const [user, setUser] = useState<UserInfo | null>(() => {
-    const raw = localStorage.getItem('cilikube_user')
+    const raw = localStorage.getItem('korecube_user')
     return raw ? (JSON.parse(raw) as UserInfo) : null
   })
   const [pendingOldPassword, setPendingOldPassword] = useState(
@@ -68,7 +68,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     setToken(result.token)
     setTokenState(result.token)
     setUser(result.user)
-    localStorage.setItem('cilikube_user', JSON.stringify(result.user))
+    localStorage.setItem('korecube_user', JSON.stringify(result.user))
     if (!result.user.must_change_password) {
       sessionStorage.removeItem(PENDING_OLD_PW_KEY)
       setPendingOldPassword('')
@@ -93,7 +93,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   const logout = useCallback(async () => {
     await logoutApi()
     clearToken()
-    localStorage.removeItem('cilikube_user')
+    localStorage.removeItem('korecube_user')
     sessionStorage.removeItem(PENDING_OLD_PW_KEY)
     setPendingOldPassword('')
     setTokenState(null)

@@ -1,6 +1,6 @@
-# CiliKube Deployment
+# KoreCube Deployment
 
-This directory contains deployment configurations and scripts for CiliKube across different platforms and environments.
+This directory contains deployment configurations and scripts for KoreCube across different platforms and environments.
 
 ## Directory Structure
 
@@ -14,7 +14,7 @@ deployments/
 
 ## Public / standalone host (viewer + read-only kubeconfig)
 
-Preferred: **Nginx static frontend + Go binary (systemd)**. Personal runbook lives outside this repo (e.g. local `docs/cilikube/public/DEPLOY.md`). Generic prod config template: `configs/config.prod.example.yaml`.
+Preferred: **Nginx static frontend + Go binary (systemd)**. Personal runbook lives outside this repo (e.g. local `docs/korecube/public/DEPLOY.md`). Generic prod config template: `configs/config.prod.example.yaml`.
 
 ## Deployment Options
 
@@ -26,7 +26,7 @@ Preferred: **Nginx static frontend + Go binary (systemd)**. Personal runbook liv
 docker-compose up -d
 
 # Using Docker directly
-docker run -d --name cilikube -p 8080:8080 ghcr.io/ciliverse/cilikube:v1.6.0
+docker run -d --name korecube -p 8080:8080 ghcr.io/korecube/korecube:v1.6.0
 ```
 
 **Features:**
@@ -45,7 +45,7 @@ docker run -d --name cilikube -p 8080:8080 ghcr.io/ciliverse/cilikube:v1.6.0
 kubectl apply -f deployments/kubernetes/
 
 # Or using Helm
-helm install cilikube deployments/helm/cilikube
+helm install korecube deployments/helm/korecube
 ```
 
 **Features:**
@@ -61,10 +61,10 @@ helm install cilikube deployments/helm/cilikube
 **Quick Start:**
 ```bash
 # Add Helm repository
-helm repo add ciliverse https://charts.cillian.website
+helm repo add korecube https://charts.cillian.website
 
-# Install CiliKube
-helm install cilikube ciliverse/cilikube
+# Install KoreCube
+helm install korecube korecube/korecube
 ```
 
 **Features:**
@@ -173,13 +173,13 @@ Access monitoring:
 
 ```bash
 # Docker
-docker logs cilikube-backend
+docker logs korecube-backend
 
 # Kubernetes
-kubectl logs -f deployment/cilikube-backend
+kubectl logs -f deployment/korecube-backend
 
 # Helm
-kubectl logs -f -l app.kubernetes.io/name=cilikube
+kubectl logs -f -l app.kubernetes.io/name=korecube
 ```
 
 ## Contributing
@@ -194,6 +194,6 @@ When adding new deployment configurations:
 
 ## Support
 
-- **Documentation**: [cilikube.cillian.website](https://cilikube.cillian.website)
-- **Issues**: [GitHub Issues](https://github.com/ciliverse/cilikube/issues)
-- **Discussions**: [GitHub Discussions](https://github.com/ciliverse/cilikube/discussions)
+- **Documentation**: [korecube.cillian.website](https://korecube.cillian.website)
+- **Issues**: [GitHub Issues](https://github.com/korecube/korecube/issues)
+- **Discussions**: [GitHub Discussions](https://github.com/korecube/korecube/discussions)

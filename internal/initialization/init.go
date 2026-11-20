@@ -4,14 +4,14 @@ import (
 	"log"
 
 	"github.com/casbin/casbin/v2"
-	"github.com/ciliverse/cilikube/configs"
-	"github.com/ciliverse/cilikube/internal/handlers"
-	"github.com/ciliverse/cilikube/internal/routes"
-	"github.com/ciliverse/cilikube/internal/service"
-	"github.com/ciliverse/cilikube/internal/store"
-	"github.com/ciliverse/cilikube/pkg/auth"
-	"github.com/ciliverse/cilikube/pkg/k8s"
-	"github.com/ciliverse/cilikube/pkg/metrics"
+	"github.com/korecube/korecube/configs"
+	"github.com/korecube/korecube/internal/handlers"
+	"github.com/korecube/korecube/internal/routes"
+	"github.com/korecube/korecube/internal/service"
+	"github.com/korecube/korecube/internal/store"
+	"github.com/korecube/korecube/pkg/auth"
+	"github.com/korecube/korecube/pkg/k8s"
+	"github.com/korecube/korecube/pkg/metrics"
 	"github.com/gin-gonic/gin"
 	"k8s.io/apimachinery/pkg/runtime"
 )
@@ -479,7 +479,7 @@ func SetupRouter(cfg *configs.Config, services *service.AppServices, k8sManager 
 	router.GET("/live", handlers.LivenessCheck)
 	router.GET("/metrics", metrics.PromHandler())
 	router.GET("/version", handlers.GetVersion)
-	// Public: credentials only when CILIKUBE_SHOWCASE=1 (empty otherwise).
+	// Public: credentials only when KORECUBE_SHOWCASE=1 (empty otherwise).
 	router.GET("/api/v1/showcase/info", handlers.GetShowcaseInfo)
 
 	// Serve static files for uploaded avatars

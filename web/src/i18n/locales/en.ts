@@ -145,7 +145,7 @@ const en = {
     searchPlaceholder: 'Search resources…',
   },
   boot: {
-    title: 'CILIKUBE',
+    title: 'KORECUBE',
     subtitle: 'Multi-cluster control plane · operator console',
   },
   login: {
@@ -186,10 +186,10 @@ const en = {
   cta: {
     badge: 'OSS',
     starLine1: 'Open source takes time — star the repo to cheer Cillian on',
-    starLine2: 'Like CiliKube? Leave a Star on GitHub',
+    starLine2: 'Like KoreCube? Leave a Star on GitHub',
     starLine3: 'Your Star keeps this hobby open-source project going',
     starMessage:
-      'Open source is hard. If CiliKube helps you, a Star encourages author Cillian to keep building.',
+      'Open source is hard. If KoreCube helps you, a Star encourages author Cillian to keep building.',
     starMessageShowcase:
       'This is the public demo. Open source is hard — a Star encourages Cillian to keep polishing the AI console.',
     starAction: 'Star on GitHub',
@@ -366,7 +366,7 @@ const en = {
     emptyCatalog: 'No charts available. Add a repository first.',
     noHelmCli: 'Helm CLI not found on API host',
     noHelmCliHint:
-      'Install the helm binary on the machine running the CiliKube API and make sure it is on PATH, then refresh.',
+      'Install the helm binary on the machine running the KoreCube API and make sure it is on PATH, then refresh.',
     release: 'Release',
     chart: 'Chart',
     revision: 'Revision',
@@ -891,7 +891,7 @@ const en = {
     serviceNodePortRange: 'NodePort must be an integer between {{min}} and {{max}}',
   },
   desktop: {
-    startFailedTitle: 'CiliKube failed to start',
+    startFailedTitle: 'KoreCube failed to start',
     logSaved: 'Detailed log saved to:\n{{path}}',
   },
   resourcePages: {

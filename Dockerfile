@@ -30,7 +30,7 @@ ARG GIT_COMMIT
 # 编译应用
 RUN go build \
     -ldflags="-w -s -X main.Version=${VERSION} -X main.BuildTime=${BUILD_TIME} -X main.GitCommit=${GIT_COMMIT}" \
-    -o cilikube \
+    -o korecube \
     ./cmd/server/main.go
 
 
@@ -49,7 +49,7 @@ RUN addgroup -g 1001 -S appgroup && \
 WORKDIR /app
 
 # 从构建阶段复制二进制文件和配置
-COPY --from=builder /build/cilikube ./
+COPY --from=builder /build/korecube ./
 COPY --from=builder /build/configs ./configs/
 # Casbin model (loaded as ./pkg/auth/model.conf from process cwd /app)
 COPY --from=builder /build/pkg/auth/model.conf ./pkg/auth/model.conf
@@ -57,7 +57,7 @@ COPY --from=builder /build/pkg/auth/model.conf ./pkg/auth/model.conf
 # 设置文件权限
 RUN mkdir -p /app/data /app/kube && \
     chown -R appuser:appgroup /app && \
-    chmod +x /app/cilikube
+    chmod +x /app/korecube
 
 # 健康检查
 HEALTHCHECK --interval=30s --timeout=3s --start-period=5s --retries=3 \
@@ -70,5 +70,5 @@ EXPOSE 8080
 USER appuser
 
 # 设置入口点
-ENTRYPOINT ["./cilikube"]
+ENTRYPOINT ["./korecube"]
 CMD ["--config", "configs/config.yaml"]

@@ -7,9 +7,9 @@ import (
 	"sync"
 	"time"
 
-	"github.com/ciliverse/cilikube/configs"
-	"github.com/ciliverse/cilikube/internal/models"
-	"github.com/ciliverse/cilikube/internal/store"
+	"github.com/korecube/korecube/configs"
+	"github.com/korecube/korecube/internal/models"
+	"github.com/korecube/korecube/internal/store"
 )
 
 type ClusterInfoResponse struct {
@@ -47,7 +47,7 @@ func NewClusterManager(clusterStore store.ClusterStore, config *configs.Config) 
 
 	if IsShowcase() {
 		// Public exhibit: in-memory fake cluster only — never dial a real apiserver / k3s.
-		log.Println("CILIKUBE_SHOWCASE=1 — registering simulated demo cluster (no real kubeconfig)")
+		log.Println("KORECUBE_SHOWCASE=1 — registering simulated demo cluster (no real kubeconfig)")
 		manager.registerShowcaseCluster()
 	} else if clusterStore != nil {
 		dbClusters, err := clusterStore.GetAllClusters()

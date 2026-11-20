@@ -5,9 +5,9 @@ import (
 )
 
 func TestApplyDesktopOverridesAddrAndWebRoot(t *testing.T) {
-	t.Setenv("CILIKUBE_DESKTOP", "1")
-	t.Setenv("CILIKUBE_ADDR", "127.0.0.1:19090")
-	t.Setenv("CILIKUBE_WEB_ROOT", "/tmp/cilikube-web")
+	t.Setenv("KORECUBE_DESKTOP", "1")
+	t.Setenv("KORECUBE_ADDR", "127.0.0.1:19090")
+	t.Setenv("KORECUBE_WEB_ROOT", "/tmp/korecube-web")
 
 	cfg := &Config{}
 	cfg.Server.Port = "8080"
@@ -21,7 +21,7 @@ func TestApplyDesktopOverridesAddrAndWebRoot(t *testing.T) {
 	if cfg.Server.Port != "19090" {
 		t.Fatalf("port=%q", cfg.Server.Port)
 	}
-	if cfg.Server.WebRoot != "/tmp/cilikube-web" {
+	if cfg.Server.WebRoot != "/tmp/korecube-web" {
 		t.Fatalf("webRoot=%q", cfg.Server.WebRoot)
 	}
 	if cfg.OAuth.GitHub.Enabled {
@@ -30,8 +30,8 @@ func TestApplyDesktopOverridesAddrAndWebRoot(t *testing.T) {
 }
 
 func TestApplyDesktopOverridesNonDesktopKeepsOAuth(t *testing.T) {
-	t.Setenv("CILIKUBE_DESKTOP", "")
-	t.Setenv("CILIKUBE_ADDR", "127.0.0.1:19191")
+	t.Setenv("KORECUBE_DESKTOP", "")
+	t.Setenv("KORECUBE_ADDR", "127.0.0.1:19191")
 
 	cfg := &Config{}
 	cfg.OAuth.GitHub.Enabled = true

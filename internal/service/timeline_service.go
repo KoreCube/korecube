@@ -8,10 +8,10 @@ import (
 	"sync"
 	"time"
 
-	"github.com/ciliverse/cilikube/internal/models"
-	"github.com/ciliverse/cilikube/internal/store"
-	"github.com/ciliverse/cilikube/pkg/database"
-	"github.com/ciliverse/cilikube/pkg/k8s"
+	"github.com/korecube/korecube/internal/models"
+	"github.com/korecube/korecube/internal/store"
+	"github.com/korecube/korecube/pkg/database"
+	"github.com/korecube/korecube/pkg/k8s"
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/client-go/kubernetes"
 	"gorm.io/gorm"
@@ -257,7 +257,7 @@ func showcaseTimelineLive(clusterID string, now time.Time) []liveResource {
 			{Namespace: "default", Kind: "service", Name: "web-frontend", AppGroup: "web-frontend", Status: TLHealthy, Reason: "ClusterIP", Href: "/services/default/web-frontend"},
 			{Namespace: "production", Kind: "deployment", Name: "orders-api", AppGroup: "orders-api", Status: TLHealthy, Reason: "4/4 ready", Href: "/deployments/production/orders-api"},
 			{Namespace: "kube-system", Kind: "deployment", Name: "coredns", AppGroup: "coredns", Status: TLHealthy, Reason: "2/2 ready", Href: "/deployments/kube-system/coredns"},
-			{Namespace: "cilibase", Kind: "deployment", Name: "cilikube-demo", AppGroup: "cilikube-demo", Status: TLHealthy, Reason: "2/2 ready", Href: "/deployments/cilibase/cilikube-demo"},
+			{Namespace: "cilibase", Kind: "deployment", Name: "korecube-demo", AppGroup: "korecube-demo", Status: TLHealthy, Reason: "2/2 ready", Href: "/deployments/cilibase/korecube-demo"},
 		}
 	}
 }

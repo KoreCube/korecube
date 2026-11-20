@@ -11,8 +11,8 @@ import (
 	"net/url"
 	"sync"
 
-	"github.com/ciliverse/cilikube/internal/models"
-	"github.com/ciliverse/cilikube/internal/store"
+	"github.com/korecube/korecube/internal/models"
+	"github.com/korecube/korecube/internal/store"
 	"github.com/go-webauthn/webauthn/protocol"
 	"github.com/go-webauthn/webauthn/webauthn"
 )
@@ -84,7 +84,7 @@ func (s *AuthService) webAuthn(origin string) (*webauthn.WebAuthn, error) {
 	}
 	return webauthn.New(&webauthn.Config{
 		RPID:          rpid,
-		RPDisplayName: "CiliKube",
+		RPDisplayName: "KoreCube",
 		RPOrigins:     origins,
 	})
 }

@@ -10,7 +10,7 @@ assignees: ''
 **⚠️ Please check the following before submitting:**
 
 * [ ] I have searched existing Issues to confirm this problem hasn't been reported before.
-* [ ] I am using the latest version of CiliKube.
+* [ ] I am using the latest version of KoreCube.
 
 **Describe the Bug**
 A clear and concise description of what the bug is.
@@ -31,7 +31,7 @@ A clear and concise description of what actually happened.
 If applicable, add screenshots or relevant log snippets to help explain your problem.
 
 **Environment Information:**
-* **CiliKube Version:** [e.g. v1.2.3]
+* **KoreCube Version:** [e.g. v1.2.3]
 * **Kubernetes Version (kubectl version):** `clientVersion` and `serverVersion`
 * **Cloud Provider (if applicable):** [e.g. AWS, GCP, Azure, local Kubeadm, Minikube, Kind, etc.]
 * **Operating System (node and client):** [e.g. Ubuntu 20.04, macOS Big Sur]

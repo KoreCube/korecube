@@ -6,8 +6,8 @@ import (
 	"log"
 	"net/http"
 
-	"github.com/ciliverse/cilikube/internal/service"
-	"github.com/ciliverse/cilikube/pkg/k8s"
+	"github.com/korecube/korecube/internal/service"
+	"github.com/korecube/korecube/pkg/k8s"
 	"github.com/gin-gonic/gin"
 	"github.com/gorilla/websocket"
 )

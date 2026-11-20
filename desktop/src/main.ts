@@ -30,7 +30,7 @@ function resourcesRoot(): string {
 }
 
 function sidecarBinary(): string {
-  const name = process.platform === 'win32' ? 'cilikube.exe' : 'cilikube'
+  const name = process.platform === 'win32' ? 'korecube.exe' : 'korecube'
   return path.join(resourcesRoot(), 'bin', name)
 }
 
@@ -108,7 +108,7 @@ storage:
 jwt:
   secret_key: "${jwtSecret}"
   expire_duration: 24h0m0s
-  issuer: cilikube
+  issuer: korecube
 preferences:
   ui:
     default_language: en
@@ -198,15 +198,15 @@ function classifySidecarError(raw: string): { title: string; body: string } {
   const lower = raw.toLowerCase()
   if (lower.includes('sidecar binary not found')) {
     return {
-      title: 'CiliKube 启动失败 · 缺少后端程序',
+      title: 'KoreCube 启动失败 · 缺少后端程序',
       body:
-        '未找到内嵌的 cilikube 后端程序。\n请重新安装或从 GitHub Releases 重新下载完整安装包。\n\n' +
+        '未找到内嵌的 korecube 后端程序。\n请重新安装或从 GitHub Releases 重新下载完整安装包。\n\n' +
         raw,
     }
   }
   if (lower.includes('did not become healthy') || lower.includes('health check failed')) {
     return {
-      title: 'CiliKube 启动失败 · 后端未就绪',
+      title: 'KoreCube 启动失败 · 后端未就绪',
       body:
         '内嵌 API 服务启动超时或健康检查失败。\n常见原因：端口被占用、配置损坏、本机安全软件拦截。\n\n' +
         raw,
@@ -214,14 +214,14 @@ function classifySidecarError(raw: string): { title: string; body: string } {
   }
   if (lower.includes('kubeconfig') || lower.includes('kubernetes')) {
     return {
-      title: 'CiliKube 启动失败 · 集群配置',
+      title: 'KoreCube 启动失败 · 集群配置',
       body:
         `读取 Kubernetes 配置时出错。\n请确认 ${kubeconfigHint()} 存在且可读（应用仍可启动后在「集群管理」中导入）。\n\n` +
         raw,
     }
   }
   return {
-    title: 'CiliKube 启动失败',
+    title: 'KoreCube 启动失败',
     body: raw,
   }
 }
@@ -269,7 +269,7 @@ async function startSidecar(): Promise<string> {
   const addr = `127.0.0.1:${port}`
   const userData = app.getPath('userData')
   const configPath = path.join(userData, 'config.yaml')
-  const dbPath = path.join(userData, 'cilikube.db')
+  const dbPath = path.join(userData, 'korecube.db')
   ensureDesktopConfig(configPath, dbPath)
 
   const webRoot = path.join(resourcesRoot(), 'web')
@@ -287,12 +287,12 @@ async function startSidecar(): Promise<string> {
 
   const env = {
     ...process.env,
-    CILIKUBE_DESKTOP: '1',
-    CILIKUBE_ADDR: addr,
-    CILIKUBE_CONFIG: configPath,
-    CILIKUBE_WEB_ROOT: webRoot,
-    CILIKUBE_CASBIN_MODEL: casbinModel,
-    CILIKUBE_VERSION: appVersion,
+    KORECUBE_DESKTOP: '1',
+    KORECUBE_ADDR: addr,
+    KORECUBE_CONFIG: configPath,
+    KORECUBE_WEB_ROOT: webRoot,
+    KORECUBE_CASBIN_MODEL: casbinModel,
+    KORECUBE_VERSION: appVersion,
   }
 
   pushLog(`starting sidecar: ${bin}`)
@@ -330,7 +330,7 @@ async function startSidecar(): Promise<string> {
     sidecar = null
     if (mainWindow && !mainWindow.isDestroyed()) {
       dialog.showErrorBox(
-        'CiliKube 后端已退出',
+        'KoreCube 后端已退出',
         `内嵌 API 进程意外退出（code=${code} signal=${signal}）。\n应用将关闭，请查看日志后重试。`,
       )
       app.quit()
@@ -380,7 +380,7 @@ async function createWindow(addr: string) {
     height: 900,
     minWidth: 1100,
     minHeight: 700,
-    title: 'CiliKube',
+    title: 'KoreCube',
     webPreferences: {
       preload: path.join(__dirname, 'preload.js'),
       contextIsolation: true,

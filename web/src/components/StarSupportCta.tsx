@@ -4,7 +4,7 @@ import { fetchShowcaseInfo } from '@/api/showcase'
 import { APP_REPO_URL } from '@/lib/version'
 import { cn } from '@/lib/utils'
 
-const LEGACY_DISMISS_KEY = 'cilikube_star_cta_dismissed_until'
+const LEGACY_DISMISS_KEY = 'korecube_star_cta_dismissed_until'
 
 /** Rotating support line for login brand / document-adjacent copy. */
 export function StarSupportRotator({ className }: { className?: string }) {

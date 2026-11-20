@@ -1,29 +1,29 @@
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: cilikube
-  namespace: cilikube
+  name: korecube
+  namespace: korecube
   labels:
-    app.kubernetes.io/name: cilikube
+    app.kubernetes.io/name: korecube
   annotations:
     nginx.ingress.kubernetes.io/proxy-body-size: "50m"
 spec:
   ingressClassName: nginx
   rules:
-    - host: cilikube.local
+    - host: korecube.local
       http:
         paths:
           - path: /api
             pathType: Prefix
             backend:
               service:
-                name: cilikube-backend
+                name: korecube-backend
                 port:
                   number: 8080
           - path: /
             pathType: Prefix
             backend:
               service:
-                name: cilikube-frontend
+                name: korecube-frontend
                 port:
                   number: 80

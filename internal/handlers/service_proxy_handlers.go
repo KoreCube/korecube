@@ -8,7 +8,7 @@ import (
 	"strconv"
 	"strings"
 
-	"github.com/ciliverse/cilikube/pkg/k8s"
+	"github.com/korecube/korecube/pkg/k8s"
 	"github.com/gin-gonic/gin"
 	"k8s.io/client-go/rest"
 )
@@ -60,7 +60,7 @@ func NewServiceProxyHandler(cm *k8s.ClusterManager) *ServiceProxyHandler {
 
 func (h *ServiceProxyHandler) Proxy(c *gin.Context) {
 	if c.Query("clusterId") == "" {
-		if id, err := c.Cookie("cilikube_proxy_cluster"); err == nil && id != "" {
+		if id, err := c.Cookie("korecube_proxy_cluster"); err == nil && id != "" {
 			q := c.Request.URL.Query()
 			q.Set("clusterId", id)
 			c.Request.URL.RawQuery = q.Encode()
@@ -74,7 +74,7 @@ func (h *ServiceProxyHandler) Proxy(c *gin.Context) {
 	name := c.Param("name")
 	port := c.Query("port")
 	if port == "" {
-		if p, err := c.Cookie("cilikube_proxy_port"); err == nil && p != "" {
+		if p, err := c.Cookie("korecube_proxy_port"); err == nil && p != "" {
 			port = p
 		}
 	}

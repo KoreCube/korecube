@@ -1,10 +1,10 @@
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: cilikube-config
-  namespace: cilikube
+  name: korecube-config
+  namespace: korecube
   labels:
-    app.kubernetes.io/name: cilikube
+    app.kubernetes.io/name: korecube
 data:
   config.yaml: |
     server:
@@ -19,13 +19,13 @@ data:
     database:
       enabled: true
       type: sqlite
-      database: /app/data/cilikube.db
+      database: /app/data/korecube.db
     jwt:
       # Overridden by JWT_SECRET env from Secret when set.
       secret_key: ""
       expire_duration: 24h0m0s
-      issuer: cilikube
+      issuer: korecube
     installer:
       minikubePath: /usr/local/bin/minikube
       minikubeDriver: docker
-      downloadDir: /tmp/cilikube_downloads
+      downloadDir: /tmp/korecube_downloads

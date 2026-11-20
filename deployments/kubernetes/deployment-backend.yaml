@@ -1,27 +1,27 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: cilikube-backend
-  namespace: cilikube
+  name: korecube-backend
+  namespace: korecube
   labels:
-    app.kubernetes.io/name: cilikube
+    app.kubernetes.io/name: korecube
     app.kubernetes.io/component: backend
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app.kubernetes.io/name: cilikube
+      app.kubernetes.io/name: korecube
       app.kubernetes.io/component: backend
   template:
     metadata:
       labels:
-        app.kubernetes.io/name: cilikube
+        app.kubernetes.io/name: korecube
         app.kubernetes.io/component: backend
     spec:
-      serviceAccountName: cilikube
+      serviceAccountName: korecube
       containers:
         - name: backend
-          image: ghcr.io/ciliverse/cilikube:v1.6.0
+          image: ghcr.io/korecube/korecube:v1.6.0
           imagePullPolicy: IfNotPresent
           args: ["--config", "/app/configs/config.yaml"]
           ports:
@@ -30,17 +30,17 @@ spec:
           env:
             - name: GIN_MODE
               value: release
-            - name: CILIKUBE_CONFIG_PATH
+            - name: KORECUBE_CONFIG_PATH
               value: /app/configs/config.yaml
             - name: JWT_SECRET
               valueFrom:
                 secretKeyRef:
-                  name: cilikube-secrets
+                  name: korecube-secrets
                   key: JWT_SECRET
             - name: ENCRYPTION_KEY
               valueFrom:
                 secretKeyRef:
-                  name: cilikube-secrets
+                  name: korecube-secrets
                   key: ENCRYPTION_KEY
           volumeMounts:
             - name: config
@@ -70,7 +70,7 @@ spec:
       volumes:
         - name: config
           configMap:
-            name: cilikube-config
+            name: korecube-config
         - name: data
           persistentVolumeClaim:
-            claimName: cilikube-data
+            claimName: korecube-data

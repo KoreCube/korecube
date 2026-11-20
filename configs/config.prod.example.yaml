@@ -1,5 +1,5 @@
 # 宿主机部署（Nginx 静态前端 + 本机二进制）时复制并改密钥：
-#   cp configs/config.prod.example.yaml /opt/cilikube/configs/config.prod.yaml
+#   cp configs/config.prod.example.yaml /opt/korecube/configs/config.prod.yaml
 #   # 必改 encryptionKey、jwt.secret_key；按需改路径与域名
 
 server:
@@ -14,32 +14,32 @@ server:
 
 kubernetes:
   # 本机只读 kubeconfig（勿用管理员 ~/.kube/config）
-  kubeconfig: /opt/cilikube/readonly.kubeconfig
+  kubeconfig: /opt/korecube/readonly.kubeconfig
 
 database:
   enabled: true
   type: sqlite
-  database: /opt/cilikube/data/cilikube.db
+  database: /opt/korecube/data/korecube.db
 
 storage:
   type: database
   database:
     enabled: true
     type: sqlite
-    database: /opt/cilikube/data/cilikube.db
+    database: /opt/korecube/data/korecube.db
 
 jwt:
   # 生成：openssl rand -hex 32
   secret_key: "CHANGE_ME_JWT_SECRET_KEY"
   expire_duration: 24h0m0s
-  issuer: cilikube
+  issuer: korecube
 
 oauth:
   github:
     client_id: ""
     client_secret: ""
     # GitHub App 回调填前端页（SPA 再调 /api/v1/auth/oauth/callback 换票）
-    redirect_url: https://cilikube.cillian.website/login/oauth/callback
+    redirect_url: https://korecube.cillian.website/login/oauth/callback
     enabled: false
   # 公网务必关闭自助注册，访客由管理员在 UI 创建
   allow_registration: false

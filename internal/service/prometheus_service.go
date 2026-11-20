@@ -11,7 +11,7 @@ import (
 	"strings"
 	"time"
 
-	"github.com/ciliverse/cilikube/configs"
+	"github.com/korecube/korecube/configs"
 )
 
 // PrometheusService queries an external Prometheus server via its HTTP API.

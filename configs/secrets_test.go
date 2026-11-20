@@ -3,7 +3,7 @@ package configs
 import "testing"
 
 func TestIsWeakJWTSecret(t *testing.T) {
-	if !isWeakJWTSecret("cilikube-secret-key-change-in-production") {
+	if !isWeakJWTSecret("korecube-secret-key-change-in-production") {
 		t.Fatal("expected known default to be weak")
 	}
 	if !isWeakJWTSecret("short") {

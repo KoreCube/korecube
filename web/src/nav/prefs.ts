@@ -1,7 +1,7 @@
 import { useSyncExternalStore } from 'react'
 import type { NavGroup } from './definitions'
 
-const NAV_PREFS_STORAGE_KEY = 'cilikube_nav_prefs'
+const NAV_PREFS_STORAGE_KEY = 'korecube_nav_prefs'
 
 /**
  * Personal sidebar layout, per browser. Group ids are `titleKey`s and item ids

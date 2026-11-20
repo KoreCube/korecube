@@ -5,9 +5,9 @@ import (
 	"strings"
 	"time"
 
-	"github.com/ciliverse/cilikube/internal/service"
-	"github.com/ciliverse/cilikube/pkg/k8s"
-	"github.com/ciliverse/cilikube/pkg/utils"
+	"github.com/korecube/korecube/internal/service"
+	"github.com/korecube/korecube/pkg/k8s"
+	"github.com/korecube/korecube/pkg/utils"
 	"github.com/gin-gonic/gin"
 )
 

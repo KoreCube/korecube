@@ -3,19 +3,19 @@ version: '3.8'
 services:
   # Backend service
   backend:
-    image: ghcr.io/ciliverse/cilikube:v1.6.0
-    container_name: cilikube-backend
+    image: ghcr.io/korecube/korecube:v1.6.0
+    container_name: korecube-backend
     restart: unless-stopped
     ports:
       - "8080:8080"
     environment:
       - GIN_MODE=release
-      - CILIKUBE_CONFIG_PATH=/app/configs/config.yaml
+      - KORECUBE_CONFIG_PATH=/app/configs/config.yaml
     volumes:
       - ~/.kube:/root/.kube:ro
       - ./configs:/app/configs:ro
     networks:
-      - cilikube-net
+      - korecube-net
     healthcheck:
       test: ["CMD", "wget", "--no-verbose", "--tries=1", "--spider", "http://localhost:8080/health"]
       interval: 30s
@@ -30,8 +30,8 @@ services:
 
   # Frontend service
   frontend:
-    image: ghcr.io/ciliverse/cilikube-web:v1.6.0
-    container_name: cilikube-frontend
+    image: ghcr.io/korecube/korecube-web:v1.6.0
+    container_name: korecube-frontend
     restart: unless-stopped
     ports:
       - "80:80"
@@ -39,7 +39,7 @@ services:
       backend:
         condition: service_healthy
     networks:
-      - cilikube-net
+      - korecube-net
     healthcheck:
       test: ["CMD", "curl", "-f", "http://localhost:80/health"]
       interval: 30s
@@ -55,14 +55,14 @@ services:
   # Redis cache (optional)
   redis:
     image: redis:7-alpine
-    container_name: cilikube-redis
+    container_name: korecube-redis
     restart: unless-stopped
     ports:
       - "6379:6379"
     volumes:
       - redis_data:/data
     networks:
-      - cilikube-net
+      - korecube-net
     healthcheck:
       test: ["CMD", "redis-cli", "ping"]
       interval: 30s
@@ -77,20 +77,20 @@ services:
   # PostgreSQL database (optional, for production-like setups)
   postgres:
     image: postgres:16-alpine
-    container_name: cilikube-postgres
+    container_name: korecube-postgres
     restart: unless-stopped
     ports:
       - "5432:5432"
     environment:
       POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: cilikube_password
-      POSTGRES_DB: cilikube
+      POSTGRES_PASSWORD: korecube_password
+      POSTGRES_DB: korecube
     volumes:
       - postgres_data:/var/lib/postgresql/data
     networks:
-      - cilikube-net
+      - korecube-net
     healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U postgres -d cilikube"]
+      test: ["CMD-SHELL", "pg_isready -U postgres -d korecube"]
       interval: 30s
       timeout: 10s
       retries: 3
@@ -104,7 +104,7 @@ services:
   # Prometheus monitoring (optional)
   prometheus:
     image: prom/prometheus:latest
-    container_name: cilikube-prometheus
+    container_name: korecube-prometheus
     restart: unless-stopped
     ports:
       - "9090:9090"
@@ -119,14 +119,14 @@ services:
       - '--storage.tsdb.retention.time=200h'
       - '--web.enable-lifecycle'
     networks:
-      - cilikube-net
+      - korecube-net
     profiles:
       - monitoring
 
   # Grafana dashboard (optional)
   grafana:
     image: grafana/grafana:latest
-    container_name: cilikube-grafana
+    container_name: korecube-grafana
     restart: unless-stopped
     ports:
       - "3000:3000"
@@ -136,12 +136,12 @@ services:
       - grafana_data:/var/lib/grafana
       - ./monitoring/grafana/provisioning:/etc/grafana/provisioning:ro
     networks:
-      - cilikube-net
+      - korecube-net
     profiles:
       - monitoring
 
 networks:
-  cilikube-net:
+  korecube-net:
     driver: bridge
     ipam:
       config:

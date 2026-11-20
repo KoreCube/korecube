@@ -5,8 +5,8 @@ import (
 	"fmt"
 	"strings"
 
-	"github.com/ciliverse/cilikube/configs"
-	"github.com/ciliverse/cilikube/pkg/k8s"
+	"github.com/korecube/korecube/configs"
+	"github.com/korecube/korecube/pkg/k8s"
 )
 
 type sendFn func(SSEEvent)
@@ -59,7 +59,7 @@ func systemPrompt(namespace, lang string) string {
 	}
 	if isZh(lang) {
 		return strings.TrimSpace(`
-你是 CiliKube「集群调查员」——只读巡检与导航助手。
+你是 KoreCube「集群调查员」——只读巡检与导航助手。
 职责：用工具取证，用中文给出简洁结论，并指出控制台下一步入口。
 规则：
 - 涉及集群现状时必须先调用工具，禁止编造资源名。
@@ -72,7 +72,7 @@ func systemPrompt(namespace, lang string) string {
 `)
 	}
 	return strings.TrimSpace(`
-You are CiliKube's cluster investigator — a read-only triage and navigation agent.
+You are KoreCube's cluster investigator — a read-only triage and navigation agent.
 Your job: gather evidence with tools, summarize clearly in English, and point the user into the console for details.
 Rules:
 - Always call tools before concluding about live cluster state. Never invent resource names.

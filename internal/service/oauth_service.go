@@ -10,11 +10,11 @@ import (
 	"strings"
 	"time"
 
-	"github.com/ciliverse/cilikube/configs"
-	"github.com/ciliverse/cilikube/internal/models"
-	"github.com/ciliverse/cilikube/internal/store"
-	"github.com/ciliverse/cilikube/pkg/auth"
-	"github.com/ciliverse/cilikube/pkg/k8s"
+	"github.com/korecube/korecube/configs"
+	"github.com/korecube/korecube/internal/models"
+	"github.com/korecube/korecube/internal/store"
+	"github.com/korecube/korecube/pkg/auth"
+	"github.com/korecube/korecube/pkg/k8s"
 )
 
 // OAuthService provides OAuth authentication functionality
@@ -75,7 +75,7 @@ func (s *OAuthService) ListPublicProviders() map[string]interface{} {
 	ghReady := s.config.OAuth.GitHub.Enabled && ghConfigured
 	var authURL string
 	if ghReady {
-		authURL, _ = s.GetAuthURL("github", "cilikube_login")
+		authURL, _ = s.GetAuthURL("github", "korecube_login")
 	}
 	return map[string]interface{}{
 		"providers": []map[string]interface{}{

@@ -8,9 +8,9 @@ import (
 	"strings"
 	"time"
 
-	"github.com/ciliverse/cilikube/internal/service"
-	"github.com/ciliverse/cilikube/internal/store"
-	"github.com/ciliverse/cilikube/pkg/geoip"
+	"github.com/korecube/korecube/internal/service"
+	"github.com/korecube/korecube/internal/store"
+	"github.com/korecube/korecube/pkg/geoip"
 	"github.com/gin-gonic/gin"
 )
 

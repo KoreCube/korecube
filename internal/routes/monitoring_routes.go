@@ -1,9 +1,9 @@
 package routes
 
 import (
-	"github.com/ciliverse/cilikube/internal/handlers"
-	"github.com/ciliverse/cilikube/internal/service"
-	"github.com/ciliverse/cilikube/pkg/k8s"
+	"github.com/korecube/korecube/internal/handlers"
+	"github.com/korecube/korecube/internal/service"
+	"github.com/korecube/korecube/pkg/k8s"
 	"github.com/gin-gonic/gin"
 )
 

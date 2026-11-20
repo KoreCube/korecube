@@ -6,7 +6,7 @@ import { useAuth } from '@/store/auth'
 import { Button } from '@/components/ui'
 
 function isLinkState(state: string | null) {
-  return Boolean(state && (state === 'cilikube_link' || state.startsWith('cilikube_link')))
+  return Boolean(state && (state === 'korecube_link' || state.startsWith('korecube_link')))
 }
 
 export function OAuthCallbackPage() {

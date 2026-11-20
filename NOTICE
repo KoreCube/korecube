@@ -1,0 +1,12 @@
+KoreCube
+Copyright (C) 2026 KoreCube contributors
+
+This program is free software: you can redistribute it and/or modify
+it under the terms of the GNU Affero General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version. See the LICENSE file.
+
+KoreCube is a derivative of CiliKube by ciliverse
+(https://github.com/ciliverse/cilikube), which is also licensed under
+the GNU Affero General Public License v3.0 only.
+The imported upstream revision is 4b3a1eebb47534c1b151aa01d877152ad08fdd2e.

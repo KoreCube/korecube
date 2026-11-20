@@ -63,13 +63,13 @@ var defaultResolver = &Resolver{}
 func Default() *Resolver { return defaultResolver }
 
 // Init loads (or downloads) the IPv4 xdb and prepares the searcher.
-// dbPath empty → CILIKUBE_IP2REGION_DB or data/ip2region_v4.xdb.
+// dbPath empty → KORECUBE_IP2REGION_DB or data/ip2region_v4.xdb.
 func (r *Resolver) Init(dbPath string) error {
 	r.initOnce.Do(func() {
 		r.cache = make(map[string]*Location)
 		path := strings.TrimSpace(dbPath)
 		if path == "" {
-			path = strings.TrimSpace(os.Getenv("CILIKUBE_IP2REGION_DB"))
+			path = strings.TrimSpace(os.Getenv("KORECUBE_IP2REGION_DB"))
 		}
 		if path == "" {
 			path = defaultDBRelPath
@@ -198,7 +198,7 @@ func ensureDB(path string) error {
 	if err := os.MkdirAll(filepath.Dir(path), 0o755); err != nil {
 		return err
 	}
-	url := strings.TrimSpace(os.Getenv("CILIKUBE_IP2REGION_URL"))
+	url := strings.TrimSpace(os.Getenv("KORECUBE_IP2REGION_URL"))
 	if url == "" {
 		url = defaultDBURL
 	}
@@ -206,7 +206,7 @@ func ensureDB(path string) error {
 	client := &http.Client{Timeout: 120 * time.Second}
 	resp, err := client.Get(url)
 	if err != nil {
-		return fmt.Errorf("download ip2region db: %w (set CILIKUBE_IP2REGION_DB to a local .xdb)", err)
+		return fmt.Errorf("download ip2region db: %w (set KORECUBE_IP2REGION_DB to a local .xdb)", err)
 	}
 	defer resp.Body.Close()
 	if resp.StatusCode != http.StatusOK {

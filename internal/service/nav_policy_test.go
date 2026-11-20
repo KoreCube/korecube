@@ -4,7 +4,7 @@ import (
 	"reflect"
 	"testing"
 
-	"github.com/ciliverse/cilikube/internal/store"
+	"github.com/korecube/korecube/internal/store"
 )
 
 func policyRow(role string, groups, items string) store.RoleNavPolicy {

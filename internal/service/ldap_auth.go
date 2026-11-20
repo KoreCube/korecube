@@ -7,9 +7,9 @@ import (
 	"fmt"
 	"strings"
 
-	"github.com/ciliverse/cilikube/configs"
-	"github.com/ciliverse/cilikube/internal/store"
-	"github.com/ciliverse/cilikube/pkg/k8s"
+	"github.com/korecube/korecube/configs"
+	"github.com/korecube/korecube/internal/store"
+	"github.com/korecube/korecube/pkg/k8s"
 	ldap "github.com/go-ldap/ldap/v3"
 )
 

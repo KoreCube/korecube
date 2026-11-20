@@ -1,12 +1,12 @@
 openapi: 3.0.3
 info:
-  title: CiliKube API
+  title: KoreCube API
   description: |
-    CiliKube is an enterprise-grade, open-source Kubernetes multi-cluster management platform.
+    KoreCube is an enterprise-grade, open-source Kubernetes multi-cluster management platform.
     This API provides comprehensive Kubernetes resource management capabilities.
   version: 1.0.0
   contact:
-    name: CiliKube Team
+    name: KoreCube Team
     email: cilliantech@gmail.com
     url: https://www.cillian.website
   license:
@@ -16,7 +16,7 @@ info:
 servers:
   - url: http://localhost:8080/api/v1
     description: Development server
-  - url: https://api.cilikube.example.com/api/v1
+  - url: https://api.korecube.example.com/api/v1
     description: Production server
 
 security:

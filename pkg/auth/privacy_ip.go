@@ -9,9 +9,9 @@ import (
 	"gorm.io/gorm"
 )
 
-// Privacy IPs are never hardcoded — set CILIKUBE_PRIVACY_IPS (comma-separated)
+// Privacy IPs are never hardcoded — set KORECUBE_PRIVACY_IPS (comma-separated)
 // on the public showcase host only. Example:
-//   Environment=CILIKUBE_PRIVACY_IPS=x.x.x.x
+//   Environment=KORECUBE_PRIVACY_IPS=x.x.x.x
 // Local/dev without the env var records real client IPs unchanged.
 
 // Plausible public decoys (not the operator's network). Stable pick per real IP.
@@ -26,7 +26,7 @@ var privacyDecoyPool = []string{
 
 func privacyIPSet() map[string]struct{} {
 	set := make(map[string]struct{})
-	for _, part := range strings.Split(os.Getenv("CILIKUBE_PRIVACY_IPS"), ",") {
+	for _, part := range strings.Split(os.Getenv("KORECUBE_PRIVACY_IPS"), ",") {
 		ip := strings.TrimSpace(part)
 		if ip != "" {
 			set[ip] = struct{}{}
@@ -47,7 +47,7 @@ func IsPrivacyIP(ip string) bool {
 
 // DecoyIP returns a stable fake address for a privacy IP (same real IP → same decoy).
 func DecoyIP(real string) string {
-	sum := sha256.Sum256([]byte("cilikube-privacy-v1|" + strings.TrimSpace(real)))
+	sum := sha256.Sum256([]byte("korecube-privacy-v1|" + strings.TrimSpace(real)))
 	return privacyDecoyPool[int(sum[0])%len(privacyDecoyPool)]
 }
 

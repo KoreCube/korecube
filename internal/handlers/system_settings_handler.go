@@ -9,9 +9,9 @@ import (
 
 	"github.com/gin-gonic/gin"
 
-	"github.com/ciliverse/cilikube/configs"
-	"github.com/ciliverse/cilikube/pkg/k8s"
-	"github.com/ciliverse/cilikube/pkg/utils"
+	"github.com/korecube/korecube/configs"
+	"github.com/korecube/korecube/pkg/k8s"
+	"github.com/korecube/korecube/pkg/utils"
 )
 
 // SystemSettingsHandler handles system settings operations for administrators
@@ -135,7 +135,7 @@ func (h *SystemSettingsHandler) UpdateOAuthSettings(c *gin.Context) {
 		}
 	}
 	if strings.TrimSpace(cfg.OAuth.GitHub.RedirectURL) == "" {
-		cfg.OAuth.GitHub.RedirectURL = "https://cilikube.cillian.website/login/oauth/callback"
+		cfg.OAuth.GitHub.RedirectURL = "https://korecube.cillian.website/login/oauth/callback"
 	}
 
 	if err := configs.SaveGlobalConfig(); err != nil {
@@ -485,7 +485,7 @@ func (h *SystemSettingsHandler) UpdatePrometheusSettings(c *gin.Context) {
 }
 
 func readVersion() string {
-	if v := os.Getenv("CILIKUBE_VERSION"); v != "" {
+	if v := os.Getenv("KORECUBE_VERSION"); v != "" {
 		return v
 	}
 	data, err := os.ReadFile("VERSION")

@@ -5,7 +5,7 @@ import (
 	"sync"
 	"time"
 
-	"github.com/ciliverse/cilikube/configs"
+	"github.com/korecube/korecube/configs"
 	"github.com/gin-gonic/gin"
 )
 

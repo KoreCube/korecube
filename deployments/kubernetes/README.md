@@ -1,6 +1,6 @@
 # Kubernetes Deployment
 
-This directory contains Kubernetes manifests for deploying CiliKube in a Kubernetes cluster.
+This directory contains Kubernetes manifests for deploying KoreCube in a Kubernetes cluster.
 
 ## Quick Start
 
@@ -9,10 +9,10 @@ This directory contains Kubernetes manifests for deploying CiliKube in a Kuberne
 kubectl apply -f deployments/kubernetes/
 
 # Check deployment status
-kubectl get pods -l app=cilikube
+kubectl get pods -l app=korecube
 
 # Access the application
-kubectl port-forward service/cilikube-frontend 8080:80
+kubectl port-forward service/korecube-frontend 8080:80
 ```
 
 ## Prerequisites
@@ -27,7 +27,7 @@ kubectl port-forward service/cilikube-frontend 8080:80
 ```
 ┌─────────────────┐    ┌─────────────────┐
 │   Frontend      │    │   Backend       │
-│   (cilikube-ui) │────│   (cilikube)    │
+│   (korecube-ui) │────│   (korecube)    │
 └─────────────────┘    └─────────────────┘
          │                       │
          │              ┌─────────────────┐
@@ -45,7 +45,7 @@ kubectl port-forward service/cilikube-frontend 8080:80
 
 | File | Description |
 |------|-------------|
-| `namespace.yaml` | Namespace for CiliKube resources |
+| `namespace.yaml` | Namespace for KoreCube resources |
 | `configmap.yaml` | Configuration files |
 | `secret.yaml` | Sensitive configuration data |
 | `deployment-backend.yaml` | Backend application deployment |
@@ -66,7 +66,7 @@ The backend deployment supports the following environment variables:
 env:
 - name: GIN_MODE
   value: "release"
-- name: CILIKUBE_CONFIG_PATH
+- name: KORECUBE_CONFIG_PATH
   value: "/app/configs/config.yaml"
 - name: KUBECONFIG
   value: "/etc/kubeconfig/config"
@@ -78,12 +78,12 @@ Create secrets for sensitive data:
 
 ```bash
 # JWT secret
-kubectl create secret generic cilikube-jwt \
+kubectl create secret generic korecube-jwt \
   --from-literal=secret=your-jwt-secret
 
 # Database credentials (if using external database)
-kubectl create secret generic cilikube-db \
-  --from-literal=username=cilikube \
+kubectl create secret generic korecube-db \
+  --from-literal=username=korecube \
   --from-literal=password=your-password
 ```
 
@@ -93,7 +93,7 @@ Configuration files are mounted via ConfigMap:
 
 ```bash
 # Create ConfigMap from local config
-kubectl create configmap cilikube-config \
+kubectl create configmap korecube-config \
   --from-file=configs/config.yaml
 ```
 
@@ -114,7 +114,7 @@ Ensure you have a default StorageClass or specify one:
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  name: cilikube-config
+  name: korecube-config
 spec:
   storageClassName: fast-ssd  # Specify your StorageClass
   accessModes:
@@ -140,44 +140,44 @@ Configure ingress for external access:
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: cilikube-ingress
+  name: korecube-ingress
   annotations:
     kubernetes.io/ingress.class: nginx
     cert-manager.io/cluster-issuer: letsencrypt-prod
 spec:
   tls:
   - hosts:
-    - cilikube.example.com
-    secretName: cilikube-tls
+    - korecube.example.com
+    secretName: korecube-tls
   rules:
-  - host: cilikube.example.com
+  - host: korecube.example.com
     http:
       paths:
       - path: /
         pathType: Prefix
         backend:
           service:
-            name: cilikube-frontend
+            name: korecube-frontend
             port:
               number: 80
       - path: /api
         pathType: Prefix
         backend:
           service:
-            name: cilikube-backend
+            name: korecube-backend
             port:
               number: 8080
 ```
 
 ## RBAC
 
-CiliKube requires specific Kubernetes permissions:
+KoreCube requires specific Kubernetes permissions:
 
 ```yaml
 apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRole
 metadata:
-  name: cilikube-role
+  name: korecube-role
 rules:
 - apiGroups: [""]
   resources: ["pods", "services", "configmaps", "secrets"]
@@ -217,12 +217,12 @@ Enable auto-scaling based on CPU/memory:
 apiVersion: autoscaling/v2
 kind: HorizontalPodAutoscaler
 metadata:
-  name: cilikube-backend-hpa
+  name: korecube-backend-hpa
 spec:
   scaleTargetRef:
     apiVersion: apps/v1
     kind: Deployment
-    name: cilikube-backend
+    name: korecube-backend
   minReplicas: 2
   maxReplicas: 10
   metrics:
@@ -242,12 +242,12 @@ Enable VPA for automatic resource adjustment:
 apiVersion: autoscaling.k8s.io/v1
 kind: VerticalPodAutoscaler
 metadata:
-  name: cilikube-backend-vpa
+  name: korecube-backend-vpa
 spec:
   targetRef:
     apiVersion: apps/v1
     kind: Deployment
-    name: cilikube-backend
+    name: korecube-backend
   updatePolicy:
     updateMode: "Auto"
 ```
@@ -262,7 +262,7 @@ Apply pod security standards:
 apiVersion: v1
 kind: Namespace
 metadata:
-  name: cilikube
+  name: korecube
   labels:
     pod-security.kubernetes.io/enforce: restricted
     pod-security.kubernetes.io/audit: restricted
@@ -277,11 +277,11 @@ Implement network segmentation:
 apiVersion: networking.k8s.io/v1
 kind: NetworkPolicy
 metadata:
-  name: cilikube-network-policy
+  name: korecube-network-policy
 spec:
   podSelector:
     matchLabels:
-      app: cilikube
+      app: korecube
   policyTypes:
   - Ingress
   - Egress
@@ -289,7 +289,7 @@ spec:
   - from:
     - podSelector:
         matchLabels:
-          app: cilikube-frontend
+          app: korecube-frontend
     ports:
     - protocol: TCP
       port: 8080
@@ -308,20 +308,20 @@ spec:
 2. **Service not accessible**
    ```bash
    kubectl get svc
-   kubectl describe svc cilikube-backend
+   kubectl describe svc korecube-backend
    ```
 
 3. **Ingress not working**
    ```bash
    kubectl get ingress
-   kubectl describe ingress cilikube-ingress
+   kubectl describe ingress korecube-ingress
    ```
 
 ### Debug Commands
 
 ```bash
 # Check all resources
-kubectl get all -l app=cilikube
+kubectl get all -l app=korecube
 
 # Check events
 kubectl get events --sort-by=.metadata.creationTimestamp
@@ -331,15 +331,15 @@ kubectl top pods
 kubectl top nodes
 
 # Port forward for debugging
-kubectl port-forward deployment/cilikube-backend 8080:8080
+kubectl port-forward deployment/korecube-backend 8080:8080
 ```
 
 ## Cleanup
 
 ```bash
-# Delete all CiliKube resources
+# Delete all KoreCube resources
 kubectl delete -f deployments/kubernetes/
 
 # Or delete by label
-kubectl delete all -l app=cilikube
+kubectl delete all -l app=korecube
 ```

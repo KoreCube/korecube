@@ -124,7 +124,7 @@ export function ProfilePage() {
     setErr('')
     setMsg('')
     try {
-      const data = await fetchOAuthAuthURL('github', 'cilikube_link')
+      const data = await fetchOAuthAuthURL('github', 'korecube_link')
       if (!data?.auth_url) throw new Error(t('profilePage.githubAuthUrlFailed'))
       window.location.href = data.auth_url
     } catch (e: any) {

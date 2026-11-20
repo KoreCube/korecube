@@ -7,8 +7,8 @@ import (
 	"strings"
 	"time"
 
-	"github.com/ciliverse/cilikube/configs"
-	"github.com/ciliverse/cilikube/internal/models"
+	"github.com/korecube/korecube/configs"
+	"github.com/korecube/korecube/internal/models"
 	"github.com/gin-gonic/gin"
 	"github.com/golang-jwt/jwt/v5"
 )
@@ -145,7 +145,7 @@ func extractBearerToken(c *gin.Context) (string, string) {
 	if token := strings.TrimSpace(c.Query("token")); token != "" {
 		return token, ""
 	}
-	if token, err := c.Cookie("cilikube_proxy"); err == nil && strings.TrimSpace(token) != "" {
+	if token, err := c.Cookie("korecube_proxy"); err == nil && strings.TrimSpace(token) != "" {
 		return strings.TrimSpace(token), ""
 	}
 	if token := strings.TrimSpace(c.Query("access_token")); token != "" {

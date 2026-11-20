@@ -1,5 +1,5 @@
 OUT_DIR := output
-BINARY_NAME := cilikube
+BINARY_NAME := korecube
 VERSION := $(shell git describe --tags --always --dirty)
 BUILD_TIME := $(shell date -u '+%Y-%m-%d_%H:%M:%S')
 LDFLAGS := -ldflags "-X main.Version=$(VERSION) -X main.BuildTime=$(BUILD_TIME) -w -s"
@@ -95,13 +95,13 @@ build-all: build-linux build-mac build-windows
 # Docker 构建
 docker:
 	@echo "Building Docker image..."
-	docker build -t cilikube:$(VERSION) .
-	docker build -t cilikube:latest .
+	docker build -t korecube:$(VERSION) .
+	docker build -t korecube:latest .
 
 # Docker 运行
 docker-run:
 	@echo "Running Docker container..."
-	docker run -d --name cilikube -p 8080:8080 -v ~/.kube:/root/.kube:ro cilikube:latest
+	docker run -d --name korecube -p 8080:8080 -v ~/.kube:/root/.kube:ro korecube:latest
 
 # 安装开发工具
 install-tools:

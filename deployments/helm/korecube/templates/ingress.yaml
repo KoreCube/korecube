@@ -2,9 +2,9 @@
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: {{ include "cilikube.fullname" . }}
+  name: {{ include "korecube.fullname" . }}
   labels:
-    {{- include "cilikube.labels" . | nindent 4 }}
+    {{- include "korecube.labels" . | nindent 4 }}
   annotations:
     nginx.ingress.kubernetes.io/proxy-body-size: "50m"
 spec:
@@ -17,14 +17,14 @@ spec:
             pathType: Prefix
             backend:
               service:
-                name: {{ include "cilikube.fullname" . }}-backend
+                name: {{ include "korecube.fullname" . }}-backend
                 port:
                   number: {{ .Values.backend.service.port }}
           - path: /
             pathType: Prefix
             backend:
               service:
-                name: {{ include "cilikube.fullname" . }}-frontend
+                name: {{ include "korecube.fullname" . }}-frontend
                 port:
                   number: {{ .Values.frontend.service.port }}
 {{- end }}

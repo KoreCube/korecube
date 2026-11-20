@@ -276,7 +276,7 @@ func loadViperConfig(path string) (*Config, error) {
 	v.SetConfigFile(path)
 
 	// Set environment variable prefix
-	v.SetEnvPrefix("CILIKUBE")
+	v.SetEnvPrefix("KORECUBE")
 	v.AutomaticEnv()
 
 	// Set field name mapping so viper can correctly map fields
@@ -374,7 +374,7 @@ func setDefaults() {
 		switch GlobalConfig.Database.Type {
 		case "sqlite":
 			if GlobalConfig.Database.Database == "" {
-				GlobalConfig.Database.Database = "./data/cilikube.db"
+				GlobalConfig.Database.Database = "./data/korecube.db"
 			}
 			// SQLite doesn't need host, port, username, password
 		case "postgresql", "postgres":
@@ -388,10 +388,10 @@ func setDefaults() {
 				GlobalConfig.Database.Username = "postgres"
 			}
 			if GlobalConfig.Database.Password == "" {
-				GlobalConfig.Database.Password = "cilikube-password-change-in-production"
+				GlobalConfig.Database.Password = "korecube-password-change-in-production"
 			}
 			if GlobalConfig.Database.Database == "" {
-				GlobalConfig.Database.Database = "cilikube"
+				GlobalConfig.Database.Database = "korecube"
 			}
 		default:
 			log.Printf("warning: unsupported database type %q; use sqlite or postgresql", GlobalConfig.Database.Type)
@@ -401,14 +401,14 @@ func setDefaults() {
 	if GlobalConfig.JWT.SecretKey == "" {
 		GlobalConfig.JWT.SecretKey = os.Getenv("JWT_SECRET")
 		if GlobalConfig.JWT.SecretKey == "" {
-			GlobalConfig.JWT.SecretKey = "cilikube-secret-key-change-in-production"
+			GlobalConfig.JWT.SecretKey = "korecube-secret-key-change-in-production"
 		}
 	}
 	if GlobalConfig.JWT.ExpireDuration == 0 {
 		GlobalConfig.JWT.ExpireDuration = 24 * time.Hour
 	}
 	if GlobalConfig.JWT.Issuer == "" {
-		GlobalConfig.JWT.Issuer = "cilikube"
+		GlobalConfig.JWT.Issuer = "korecube"
 	}
 	if GlobalConfig.Installer.MinikubeDriver == "" {
 		GlobalConfig.Installer.MinikubeDriver = "docker"

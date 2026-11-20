@@ -97,7 +97,7 @@ export function PodPortForward({ open, namespace, podName, onClose }: Props) {
         <div className="space-y-2 rounded border border-line bg-mist/40 px-3 py-2 text-sm text-text-dim">
           <p>
             Port-forward listens on <span className="font-mono text-cyan">127.0.0.1</span> of the{' '}
-            <strong className="text-text">CiliKube API host</strong>, not your browser machine.
+            <strong className="text-text">KoreCube API host</strong>, not your browser machine.
           </p>
           <p>
             Use this when the API runs locally, or tunnel that host port via SSH. Closing this dialog

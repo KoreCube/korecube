@@ -5,7 +5,7 @@ import { clearOAuthNotice, peekOAuthNotice, type OAuthNotice } from '@/api/auth'
 import { useAuth } from '@/store/auth'
 
 function dismissKey(userId: number) {
-  return `cilikube_viewer_banner_dismissed_${userId}`
+  return `korecube_viewer_banner_dismissed_${userId}`
 }
 
 export function OAuthAccountBanner() {

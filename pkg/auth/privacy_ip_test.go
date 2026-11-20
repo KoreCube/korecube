@@ -5,7 +5,7 @@ import (
 )
 
 func TestMaskPrivacyIP_EnvOnly(t *testing.T) {
-	t.Setenv("CILIKUBE_PRIVACY_IPS", "1.2.3.4")
+	t.Setenv("KORECUBE_PRIVACY_IPS", "1.2.3.4")
 	masked := MaskPrivacyIP("1.2.3.4")
 	if masked == "1.2.3.4" {
 		t.Fatal("env privacy IP should be masked")
@@ -19,9 +19,9 @@ func TestMaskPrivacyIP_EnvOnly(t *testing.T) {
 }
 
 func TestMaskPrivacyIP_NoEnvPassthrough(t *testing.T) {
-	t.Setenv("CILIKUBE_PRIVACY_IPS", "")
+	t.Setenv("KORECUBE_PRIVACY_IPS", "")
 	sample := "203.0.113.99"
 	if MaskPrivacyIP(sample) != sample {
-		t.Fatal("without CILIKUBE_PRIVACY_IPS, IPs must not be masked")
+		t.Fatal("without KORECUBE_PRIVACY_IPS, IPs must not be masked")
 	}
 }

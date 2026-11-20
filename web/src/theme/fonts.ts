@@ -43,7 +43,7 @@ export const FONT_PACKS: FontPack[] = [
 ]
 
 export const DEFAULT_FONT_ID = 'sans'
-export const FONT_STORAGE_KEY = 'cilikube_font'
+export const FONT_STORAGE_KEY = 'korecube_font'
 
 const MAPLE_CN_CSS_ID = 'maple-cn-split'
 const MAPLE_CN_CSS_HREF = '/fonts/maple-cn-split/result.css'

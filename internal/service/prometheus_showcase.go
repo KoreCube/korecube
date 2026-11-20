@@ -8,7 +8,7 @@ import (
 	"strings"
 	"time"
 
-	"github.com/ciliverse/cilikube/pkg/k8s"
+	"github.com/korecube/korecube/pkg/k8s"
 )
 
 // showcasePrometheusActive uses in-process synthetic PromQL when the public
@@ -25,7 +25,7 @@ func (s *PrometheusService) showcasePrometheusActive() bool {
 		return true
 	}
 	lower := strings.ToLower(u)
-	if strings.HasPrefix(lower, "showcase:") || strings.Contains(lower, "showcase.cilikube.local") {
+	if strings.HasPrefix(lower, "showcase:") || strings.Contains(lower, "showcase.korecube.local") {
 		return true
 	}
 	return false

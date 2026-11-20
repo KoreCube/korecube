@@ -1,4 +1,4 @@
-/** CiliKube theme packs — same idea as CiliTerm: semantic colors → CSS variables. */
+/** KoreCube theme packs — same idea as CiliTerm: semantic colors → CSS variables. */
 
 export type ThemeColors = {
   bg: string
@@ -275,7 +275,7 @@ export const BUILTIN_THEMES: Theme[] = [
 ]
 
 export const DEFAULT_THEME_ID = 'paper'
-export const THEME_STORAGE_KEY = 'cilikube_theme'
+export const THEME_STORAGE_KEY = 'korecube_theme'
 
 export function hexToRgba(hex: string, alpha: number): string {
   let m = hex.replace('#', '').trim()

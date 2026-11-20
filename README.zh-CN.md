@@ -1,6 +1,6 @@
 <div align="center">
-  <img alt="CiliKube Logo" width="150" height="150" src="docs/logo.png">
-  <h1>CiliKube</h1>
+  <img alt="KoreCube Logo" width="150" height="150" src="docs/logo.png">
+  <h1>KoreCube</h1>
   <span><a href="./README.md">English</a> | 中文</span>
 </div>
 
@@ -14,23 +14,23 @@
   <img src="https://img.shields.io/badge/Backend-Gin-blue?style=flat-square&logo=gin" alt="Gin">
   <img src="https://img.shields.io/badge/Kubernetes-1.36.2-blue?style=flat-square&logo=kubernetes" alt="Kubernetes 1.36.2">
   <img src="https://img.shields.io/badge/License-AGPL--3.0-red?style=flat-square" alt="License: AGPL-3.0">
-  <img src="https://img.shields.io/github/stars/ciliverse/cilikube?style=social" alt="GitHub Stars">
-  <img src="https://img.shields.io/github/forks/ciliverse/cilikube?style=social" alt="GitHub Forks">
+  <img src="https://img.shields.io/github/stars/korecube/korecube?style=social" alt="GitHub Stars">
+  <img src="https://img.shields.io/github/forks/korecube/korecube?style=social" alt="GitHub Forks">
 </div>
 
 ## 🌟 项目支持
 
-感谢您对 CiliKube 的关注。如果您认为本项目对您的 Kubernetes 管理工作具有价值，请考虑为仓库点亮星标 ⭐。社区支持是推动项目持续发展和改进的重要动力。
+感谢您对 KoreCube 的关注。如果您认为本项目对您的 Kubernetes 管理工作具有价值，请考虑为仓库点亮星标 ⭐。社区支持是推动项目持续发展和改进的重要动力。
 
 关注微信公众号**希里安**，获取最新版本发布信息和技术洞察。
 
 ## 🤝 贡献者
 
-<a href="https://github.com/ciliverse/cilikube/graphs/contributors">
-  <img src="https://contrib.rocks/image?repo=ciliverse/cilikube" />
+<a href="https://github.com/korecube/korecube/graphs/contributors">
+  <img src="https://contrib.rocks/image?repo=korecube/korecube" />
 </a>
 
-我们向所有通过代码贡献、问题报告和功能建议帮助改进 CiliKube 的贡献者表示诚挚的谢意。
+我们向所有通过代码贡献、问题报告和功能建议帮助改进 KoreCube 的贡献者表示诚挚的谢意。
 
 ## 🏢 赞助支持
 
@@ -42,7 +42,7 @@
 
 ## 📖 产品概述
 
-CiliKube 是开源的 Kubernetes 多集群管理平台，技术栈为 React + TypeScript + Go / Gin。  
+KoreCube 是开源的 Kubernetes 多集群管理平台，技术栈为 React + TypeScript + Go / Gin。  
 **v1.0 起，登录后先进 AI 工作台；资源控制台仍在，但不再是唯一入口。**
 
 定位一句话：
@@ -174,18 +174,18 @@ CiliKube 是开源的 Kubernetes 多集群管理平台，技术栈为 React + Ty
 
 ## 💡 项目起源
 
-CiliKube 源于全栈学习与云原生实践：把想法做成能点开的产品。  
+KoreCube 源于全栈学习与云原生实践：把想法做成能点开的产品。  
 v1.0 在资源控制台之上，补了一层更接近真实排障顺序的入口——先问清楚，再动手改。
 
 ## 🌐 在线预览
 
-- 在线演示: https://cilikube.cillian.website  
+- 在线演示: https://korecube.cillian.website  
   （公网 Demo 为 Showcase **模拟舰队**，登录页可一键填演示账号；勿当生产运维台）
 
 ## 📚 文档
 
-- 演示 / 产品站: [cilikube.cillian.website](https://cilikube.cillian.website)
-- 介绍文: [CiliKube 1.0.0 博客](https://www.cillian.website/post/20260730/)
+- 演示 / 产品站: [korecube.cillian.website](https://korecube.cillian.website)
+- 介绍文: [KoreCube 1.0.0 博客](https://www.cillian.website/post/20260730/)
 
 ## 🚀 技术架构
 
@@ -200,7 +200,7 @@ v1.0 在资源控制台之上，补了一层更接近真实排障顺序的入口
 - **数据 / 路由**: `TanStack Query` `React Router`
 - **动效 / 图表**: `Framer Motion` `Recharts`
 - **HTTP 客户端**: `Axios`
-- 原 Vue 前端仍保留在独立仓库 [cilikube-web](https://github.com/ciliverse/cilikube-web)
+- 原 Vue 前端仍保留在独立仓库 [korecube-web](https://github.com/korecube/korecube-web)
 
 **后端架构**:
 - **框架**: `Go` `Gin`
@@ -235,13 +235,13 @@ v1.0 在资源控制台之上，补了一层更接近真实排障顺序的入口
 
 双击即用：Electron 壳 + 内嵌 Go 后端，自动读取本机 kubeconfig（`~/.kube/config` 或 `%USERPROFILE%\.kube\config`）。
 
-最新版：**[v1.0.0-desktop.1](https://github.com/ciliverse/cilikube/releases/tag/v1.0.0-desktop.1)**
+最新版：**[v1.0.0-desktop.1](https://github.com/korecube/korecube/releases/tag/v1.0.0-desktop.1)**
 
 | 平台 | 下载 |
 | --- | --- |
-| Windows x64 | [安装包](https://github.com/ciliverse/cilikube/releases/download/v1.0.0-desktop.1/CiliKube-1.0.0-win-x64-setup.exe) / [便携版](https://github.com/ciliverse/cilikube/releases/download/v1.0.0-desktop.1/CiliKube-1.0.0-win-x64-portable.exe) |
-| macOS Apple Silicon | [DMG](https://github.com/ciliverse/cilikube/releases/download/v1.0.0-desktop.1/CiliKube-1.0.0-mac-arm64.dmg) |
-| Linux x64 | [AppImage](https://github.com/ciliverse/cilikube/releases/download/v1.0.0-desktop.1/CiliKube-1.0.0-linux-x86_64.AppImage) |
+| Windows x64 | [安装包](https://github.com/korecube/korecube/releases/download/v1.0.0-desktop.1/KoreCube-1.0.0-win-x64-setup.exe) / [便携版](https://github.com/korecube/korecube/releases/download/v1.0.0-desktop.1/KoreCube-1.0.0-win-x64-portable.exe) |
+| macOS Apple Silicon | [DMG](https://github.com/korecube/korecube/releases/download/v1.0.0-desktop.1/KoreCube-1.0.0-mac-arm64.dmg) |
+| Linux x64 | [AppImage](https://github.com/korecube/korecube/releases/download/v1.0.0-desktop.1/KoreCube-1.0.0-linux-x86_64.AppImage) |
 
 - **首次登录**：`admin` / `12345678`（首次登录会强制改密）
 - **说明**：当前未代码签名（Windows SmartScreen / macOS 可能提示拦截）。Intel Mac DMG 暂未发布。
@@ -289,7 +289,7 @@ pnpm build
 
 # 构建后端可执行文件
 cd ..
-go build -o bin/cilikube cmd/server/main.go
+go build -o bin/korecube cmd/server/main.go
 ```
 
 ## 🐳 Docker 部署
@@ -297,10 +297,10 @@ go build -o bin/cilikube cmd/server/main.go
 ### 使用官方镜像
 ```bash
 # 后端
-docker run -d --name cilikube -p 8080:8080 -v ~/.kube:/root/.kube:ro ghcr.io/ciliverse/cilikube:v1.6.0
+docker run -d --name korecube -p 8080:8080 -v ~/.kube:/root/.kube:ro ghcr.io/korecube/korecube:v1.6.0
 
 # 前端
-docker run -d --name cilikube-web -p 80:80 ghcr.io/ciliverse/cilikube-web:v1.6.0
+docker run -d --name korecube-web -p 80:80 ghcr.io/korecube/korecube-web:v1.6.0
 ```
 
 ### 使用 Docker Compose
@@ -320,16 +320,16 @@ docker-compose up -d
 ### 部署步骤
 ```bash
 # 添加 Helm 仓库
-helm repo add ciliverse https://charts.cillian.website
+helm repo add korecube https://charts.cillian.website
 
 # 更新 Helm 仓库
 helm repo update
 
-# 安装 CiliKube
-helm install cilikube ciliverse/cilikube -n cilikube --create-namespace
+# 安装 KoreCube
+helm install korecube korecube/korecube -n korecube --create-namespace
 
 # 查看服务状态
-kubectl get svc cilikube -n cilikube
+kubectl get svc korecube -n korecube
 ```
 
 ## 🎨 历史界面（Vue）
@@ -350,7 +350,7 @@ kubectl get svc cilikube -n cilikube
   </tr>
   <tr>
     <td width="50%">
-      <img src="docs/cilikube12.png" alt="导航菜单" width="100%">
+      <img src="docs/korecube12.png" alt="导航菜单" width="100%">
       <p align="center"><strong>导航菜单</strong></p>
     </td>
     <td width="50%">
@@ -374,7 +374,7 @@ kubectl get svc cilikube -n cilikube
 
 ## 🤝 贡献指南
 
-我们欢迎各种形式的贡献！如果您想参与改进 CiliKube，请：
+我们欢迎各种形式的贡献！如果您想参与改进 KoreCube，请：
 
 1. Fork 本仓库
 2. 创建您的特性分支 (`git checkout -b feature/AmazingFeature`)

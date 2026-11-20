@@ -3,7 +3,7 @@ import { initReactI18next } from 'react-i18next'
 import en from './locales/en'
 import zh from './locales/zh'
 
-export const LANG_STORAGE_KEY = 'cilikube_lang'
+export const LANG_STORAGE_KEY = 'korecube_lang'
 
 export type AppLang = 'zh' | 'en'
 

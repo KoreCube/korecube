@@ -1,6 +1,6 @@
 <div align="center">
-  <img alt="CiliKube Logo" width="200" height="200" src="docs/logo.png">
-  <h1>CiliKube</h1>
+  <img alt="KoreCube Logo" width="200" height="200" src="docs/logo.png">
+  <h1>KoreCube</h1>
   <span>English | <a href="./README.zh-CN.md">中文</a></span>
 </div>
 
@@ -14,23 +14,23 @@
   <img src="https://img.shields.io/badge/Backend-Gin-blue?style=flat-square&logo=gin" alt="Gin">
   <img src="https://img.shields.io/badge/Kubernetes-1.36.2-blue?style=flat-square&logo=kubernetes" alt="Kubernetes 1.36.2">
   <img src="https://img.shields.io/badge/License-AGPL--3.0-red?style=flat-square" alt="License: AGPL-3.0">
-  <img src="https://img.shields.io/github/stars/ciliverse/cilikube?style=social" alt="GitHub Stars">
-  <img src="https://img.shields.io/github/forks/ciliverse/cilikube?style=social" alt="GitHub Forks">
+  <img src="https://img.shields.io/github/stars/korecube/korecube?style=social" alt="GitHub Stars">
+  <img src="https://img.shields.io/github/forks/korecube/korecube?style=social" alt="GitHub Forks">
 </div>
 
 ## 🌟 Project Support
 
-We appreciate your interest in CiliKube. If you find this project valuable for your Kubernetes management needs, please consider starring the repository ⭐. Community support drives continuous development and improvement.
+We appreciate your interest in KoreCube. If you find this project valuable for your Kubernetes management needs, please consider starring the repository ⭐. Community support drives continuous development and improvement.
 
 Stay updated with the latest releases and technical insights by following our WeChat Official Account **希里安**.
 
 ## 🤝 Contributors
 
-<a href="https://github.com/ciliverse/cilikube/graphs/contributors">
-  <img src="https://contrib.rocks/image?repo=ciliverse/cilikube" />
+<a href="https://github.com/korecube/korecube/graphs/contributors">
+  <img src="https://contrib.rocks/image?repo=korecube/korecube" />
 </a>
 
-We extend our gratitude to all contributors who have helped improve CiliKube through code contributions, bug reports, and feature suggestions.
+We extend our gratitude to all contributors who have helped improve KoreCube through code contributions, bug reports, and feature suggestions.
 
 ## 🏢 Sponsorship
 
@@ -42,7 +42,7 @@ This project's CDN acceleration and security protection services are generously 
 
 ## 📖 Overview
 
-CiliKube is an open-source Kubernetes multi-cluster management platform built with React, TypeScript, Go, and Gin.  
+KoreCube is an open-source Kubernetes multi-cluster management platform built with React, TypeScript, Go, and Gin.  
 **From v1.0, login lands on the AI workspace first; the resource console is still there — just no longer the only door.**
 
 In one line:
@@ -174,18 +174,18 @@ Highlights vs earlier releases:
 
 ## 💡 Project Genesis
 
-CiliKube started as a full-stack learning project that grew into a product you can actually open.  
+KoreCube started as a full-stack learning project that grew into a product you can actually open.  
 v1.0 adds an entry that matches how people troubleshoot — ask first, then change.
 
 ## 🌐 Online Demo
 
-- Demo: https://cilikube.cillian.website  
+- Demo: https://korecube.cillian.website  
   (Public demo is a Showcase **fake fleet**; login can fill demo accounts in one click — not a production ops console)
 
 ## 📚 Documentation
 
-- Demo / product site: [cilikube.cillian.website](https://cilikube.cillian.website)
-- Intro post: [CiliKube 1.0.0](https://www.cillian.website/en/post/20260730/)
+- Demo / product site: [korecube.cillian.website](https://korecube.cillian.website)
+- Intro post: [KoreCube 1.0.0](https://www.cillian.website/en/post/20260730/)
 
 ## 🚀 Technology Stack
 
@@ -200,7 +200,7 @@ v1.0 adds an entry that matches how people troubleshoot — ask first, then chan
 - **Data / Routing**: `TanStack Query` `React Router`
 - **Motion / Charts**: `Framer Motion` `Recharts`
 - **HTTP Client**: `Axios`
-- The previous Vue UI remains in [cilikube-web](https://github.com/ciliverse/cilikube-web)
+- The previous Vue UI remains in [korecube-web](https://github.com/korecube/korecube-web)
 
 **Backend Architecture**:
 - **Framework**: `Go` `Gin`
@@ -235,13 +235,13 @@ v1.0 adds an entry that matches how people troubleshoot — ask first, then chan
 
 Double-click app: Electron shell + embedded Go API, using your local kubeconfig (`~/.kube/config` or `%USERPROFILE%\.kube\config`).
 
-Latest: **[v1.0.0-desktop.1](https://github.com/ciliverse/cilikube/releases/tag/v1.0.0-desktop.1)**
+Latest: **[v1.0.0-desktop.1](https://github.com/korecube/korecube/releases/tag/v1.0.0-desktop.1)**
 
 | Platform | Asset |
 | --- | --- |
-| Windows x64 | [setup](https://github.com/ciliverse/cilikube/releases/download/v1.0.0-desktop.1/CiliKube-1.0.0-win-x64-setup.exe) / [portable](https://github.com/ciliverse/cilikube/releases/download/v1.0.0-desktop.1/CiliKube-1.0.0-win-x64-portable.exe) |
-| macOS Apple Silicon | [DMG](https://github.com/ciliverse/cilikube/releases/download/v1.0.0-desktop.1/CiliKube-1.0.0-mac-arm64.dmg) |
-| Linux x64 | [AppImage](https://github.com/ciliverse/cilikube/releases/download/v1.0.0-desktop.1/CiliKube-1.0.0-linux-x86_64.AppImage) |
+| Windows x64 | [setup](https://github.com/korecube/korecube/releases/download/v1.0.0-desktop.1/KoreCube-1.0.0-win-x64-setup.exe) / [portable](https://github.com/korecube/korecube/releases/download/v1.0.0-desktop.1/KoreCube-1.0.0-win-x64-portable.exe) |
+| macOS Apple Silicon | [DMG](https://github.com/korecube/korecube/releases/download/v1.0.0-desktop.1/KoreCube-1.0.0-mac-arm64.dmg) |
+| Linux x64 | [AppImage](https://github.com/korecube/korecube/releases/download/v1.0.0-desktop.1/KoreCube-1.0.0-linux-x86_64.AppImage) |
 
 - **First login**: `admin` / `12345678` (forced password change on first login)
 - **Notes**: builds are unsigned (Windows SmartScreen / macOS Gatekeeper may warn). Intel Mac DMG not yet published.
@@ -289,7 +289,7 @@ pnpm build
 
 # Build backend executable
 cd ..
-go build -o bin/cilikube cmd/server/main.go
+go build -o bin/korecube cmd/server/main.go
 ```
 
 ## 🐳 Docker Deployment
@@ -297,10 +297,10 @@ go build -o bin/cilikube cmd/server/main.go
 ### Using Official Images
 ```bash
 # Backend
-docker run -d --name cilikube -p 8080:8080 -v ~/.kube:/root/.kube:ro ghcr.io/ciliverse/cilikube:v1.6.0
+docker run -d --name korecube -p 8080:8080 -v ~/.kube:/root/.kube:ro ghcr.io/korecube/korecube:v1.6.0
 
 # Frontend
-docker run -d --name cilikube-web -p 80:80 ghcr.io/ciliverse/cilikube-web:v1.6.0
+docker run -d --name korecube-web -p 80:80 ghcr.io/korecube/korecube-web:v1.6.0
 ```
 
 ### Using Docker Compose
@@ -320,16 +320,16 @@ Visit http://localhost to access the interface.
 ### Deployment Steps
 ```bash
 # Add Helm repository
-helm repo add ciliverse https://charts.cillian.website
+helm repo add korecube https://charts.cillian.website
 
 # Update Helm repository
 helm repo update
 
-# Install CiliKube
-helm install cilikube ciliverse/cilikube -n cilikube --create-namespace
+# Install KoreCube
+helm install korecube korecube/korecube -n korecube --create-namespace
 
 # Check service status
-kubectl get svc cilikube -n cilikube
+kubectl get svc korecube -n korecube
 ```
 
 ## 🎨 Previous UI (Vue)
@@ -350,7 +350,7 @@ kubectl get svc cilikube -n cilikube
   </tr>
   <tr>
     <td width="50%">
-      <img src="docs/cilikube12.png" alt="Navigation" width="100%">
+      <img src="docs/korecube12.png" alt="Navigation" width="100%">
       <p align="center"><strong>Navigation Menu</strong></p>
     </td>
     <td width="50%">
@@ -374,7 +374,7 @@ kubectl get svc cilikube -n cilikube
 
 ## 🤝 Contribution Guide
 
-We welcome contributions of all forms! If you'd like to help improve CiliKube, please:
+We welcome contributions of all forms! If you'd like to help improve KoreCube, please:
 
 1. Fork this repository
 2. Create your feature branch (`git checkout -b feature/AmazingFeature`)

@@ -3,13 +3,13 @@ package service
 import (
 	"testing"
 
-	"github.com/ciliverse/cilikube/internal/store"
+	"github.com/korecube/korecube/internal/store"
 )
 
 // Showcase seeding once wiped a real operator's admin password because it upserted
 // straight onto the existing `admin` row. Pin the guard that stops that.
 func TestAdoptableForShowcase(t *testing.T) {
-	const demoEmail = "demo-admin@cilikube.local"
+	const demoEmail = "demo-admin@korecube.local"
 
 	cases := []struct {
 		name string
@@ -23,12 +23,12 @@ func TestAdoptableForShowcase(t *testing.T) {
 		},
 		{
 			name: "freshly seeded account is still adoptable",
-			user: store.User{Email: "admin@cilikube.com", MustChangePassword: true},
+			user: store.User{Email: "admin@korecube.com", MustChangePassword: true},
 			want: true,
 		},
 		{
 			name: "operator who set their own password is left alone",
-			user: store.User{Email: "admin@cilikube.com", MustChangePassword: false},
+			user: store.User{Email: "admin@korecube.com", MustChangePassword: false},
 			want: false,
 		},
 		{

@@ -111,7 +111,7 @@ func InitCasbin(db *gorm.DB) (*casbin.Enforcer, error) {
 	}
 
 	log.Println("Initializing Casbin Enforcer...")
-	modelPath := os.Getenv("CILIKUBE_CASBIN_MODEL")
+	modelPath := os.Getenv("KORECUBE_CASBIN_MODEL")
 	if modelPath == "" {
 		modelPath = "./pkg/auth/model.conf"
 	}

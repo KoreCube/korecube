@@ -5,8 +5,8 @@ import (
 	"fmt"
 	"time"
 
-	"github.com/ciliverse/cilikube/internal/models"
-	"github.com/ciliverse/cilikube/internal/store"
+	"github.com/korecube/korecube/internal/models"
+	"github.com/korecube/korecube/internal/store"
 )
 
 // RoleService provides role management functionality

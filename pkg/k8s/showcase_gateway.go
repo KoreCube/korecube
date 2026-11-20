@@ -29,7 +29,7 @@ func ShowcaseGatewaySeedObjects() []runtime.Object {
 				Labels: map[string]string{"showcase": "true"},
 			},
 			Spec: gatewayv1.GatewayClassSpec{
-				ControllerName: "showcase.cilikube.local/nginx-gateway",
+				ControllerName: "showcase.korecube.local/nginx-gateway",
 			},
 			Status: gatewayv1.GatewayClassStatus{
 				Conditions: []metav1.Condition{{

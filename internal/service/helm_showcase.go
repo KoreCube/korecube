@@ -8,7 +8,7 @@ import (
 	"strings"
 	"time"
 
-	"github.com/ciliverse/cilikube/pkg/k8s"
+	"github.com/korecube/korecube/pkg/k8s"
 )
 
 // The public exhibit runs against a simulated cluster and has no helm binary,
@@ -110,9 +110,9 @@ func showcaseHelmChartDetail(ref, version string) (*HelmChartDetail, error) {
 func showcaseChartReadme(c *HelmChartSummary) string {
 	var b strings.Builder
 	fmt.Fprintf(&b, "# %s\n\n%s\n\n", c.Name, c.Description)
-	b.WriteString("> Public demo. This catalog is served from CiliKube's built-in sample data,\n")
+	b.WriteString("> Public demo. This catalog is served from KoreCube's built-in sample data,\n")
 	b.WriteString("> not from a live Helm repository, and the cluster behind it is simulated.\n")
-	b.WriteString("> Installing is disabled here — run CiliKube against a real cluster to use it.\n\n")
+	b.WriteString("> Installing is disabled here — run KoreCube against a real cluster to use it.\n\n")
 	fmt.Fprintf(&b, "## Installing the chart\n\n```bash\nhelm repo add %s %s\nhelm install my-%s %s --version %s\n```\n\n",
 		c.Repo, showcaseRepoURL(c.Repo), c.Name, c.Ref, c.Version)
 	b.WriteString("## Uninstalling the chart\n\n```bash\nhelm uninstall my-" + c.Name + "\n```\n\n")

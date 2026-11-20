@@ -5,7 +5,7 @@ import (
 	"net/http"
 	"sync"
 
-	"github.com/ciliverse/cilikube/pkg/utils"
+	"github.com/korecube/korecube/pkg/utils"
 	"github.com/gin-gonic/gin"
 )
 

@@ -7,8 +7,8 @@ import (
 	"path/filepath"
 	"time"
 
-	"github.com/ciliverse/cilikube/configs"
-	"github.com/ciliverse/cilikube/internal/models"
+	"github.com/korecube/korecube/configs"
+	"github.com/korecube/korecube/internal/models"
 	"gorm.io/driver/postgres"
 	"gorm.io/driver/sqlite"
 	"gorm.io/gorm"
@@ -119,7 +119,7 @@ func CreateDefaultAdmin() error {
 	if count == 0 {
 		admin := &models.User{
 			Username: "admin",
-			Email:    "admin@cilikube.com",
+			Email:    "admin@korecube.com",
 			Password: "12345678", // This password will be encrypted in BeforeCreate hook
 			Role:     "admin",
 			IsActive: true,

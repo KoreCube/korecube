@@ -1,9 +1,9 @@
 app:
-  name: cilikube
+  name: korecube
 
 backend:
   image:
-    repository: ghcr.io/ciliverse/cilikube
+    repository: ghcr.io/korecube/korecube
     tag: v1.6.0
     pullPolicy: IfNotPresent
   replicas: 1
@@ -19,7 +19,7 @@ backend:
 
 frontend:
   image:
-    repository: ghcr.io/ciliverse/cilikube-web
+    repository: ghcr.io/korecube/korecube-web
     tag: v1.6.0
     pullPolicy: IfNotPresent
   replicas: 1
@@ -44,7 +44,7 @@ rbac:
 ingress:
   enabled: false
   className: nginx
-  host: cilikube.local
+  host: korecube.local
 
 config:
   serverMode: release

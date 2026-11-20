@@ -5,9 +5,9 @@ import (
 	"testing"
 	"time"
 
-	"github.com/ciliverse/cilikube/configs"
-	"github.com/ciliverse/cilikube/internal/models"
-	"github.com/ciliverse/cilikube/internal/store"
+	"github.com/korecube/korecube/configs"
+	"github.com/korecube/korecube/internal/models"
+	"github.com/korecube/korecube/internal/store"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 )
@@ -18,7 +18,7 @@ func setupTestAuthService() (*AuthService, store.Store) {
 		JWT: configs.JWTConfig{
 			SecretKey:      "test-secret-key",
 			ExpireDuration: 24 * time.Hour,
-			Issuer:         "cilikube-test",
+			Issuer:         "korecube-test",
 		},
 		OAuth: configs.OAuthConfig{
 			AllowRegistration: true,

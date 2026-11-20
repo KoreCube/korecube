@@ -145,7 +145,7 @@ const zh = {
     searchPlaceholder: '搜索资源…',
   },
   boot: {
-    title: 'CILIKUBE',
+    title: 'KORECUBE',
     subtitle: '多集群控制平面 · 运维控制台',
   },
   login: {
@@ -185,9 +185,9 @@ const zh = {
   cta: {
     badge: '开源',
     starLine1: '开源不易，点个 Star，鼓励作者 Cillian 持续开发',
-    starLine2: '喜欢 CiliKube？去 GitHub 点亮一颗 Star',
+    starLine2: '喜欢 KoreCube？去 GitHub 点亮一颗 Star',
     starLine3: '你的 Star，是业余开源继续走下去的燃料',
-    starMessage: '开源不易。若 CiliKube 对你有帮助，欢迎点个 Star，鼓励作者 Cillian 持续开发。',
+    starMessage: '开源不易。若 KoreCube 对你有帮助，欢迎点个 Star，鼓励作者 Cillian 持续开发。',
     starMessageShowcase:
       '这是公网 Demo。开源不易，点个 Star，鼓励作者 Cillian 把 AI 控制台继续打磨下去。',
     starAction: '去 GitHub 点个 Star',
@@ -360,7 +360,7 @@ const zh = {
     noMatches: '没有匹配的 Chart。',
     emptyCatalog: '暂无 Chart，请先添加仓库。',
     noHelmCli: 'API 主机上找不到 helm 命令',
-    noHelmCliHint: '请在运行 CiliKube API 的机器上安装 helm 并加入 PATH，然后刷新页面。',
+    noHelmCliHint: '请在运行 KoreCube API 的机器上安装 helm 并加入 PATH，然后刷新页面。',
     release: 'Release',
     chart: 'Chart',
     revision: '版本号',
@@ -878,7 +878,7 @@ const zh = {
     serviceNodePortRange: 'NodePort 必须是 {{min}}–{{max}} 的整数',
   },
   desktop: {
-    startFailedTitle: 'CiliKube 启动失败',
+    startFailedTitle: 'KoreCube 启动失败',
     logSaved: '详细日志已保存到：\n{{path}}',
   },
   resourcePages: {

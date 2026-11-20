@@ -6,9 +6,9 @@ import (
 
 	"github.com/gin-gonic/gin"
 
-	"github.com/ciliverse/cilikube/configs"
-	"github.com/ciliverse/cilikube/pkg/k8s"
-	"github.com/ciliverse/cilikube/pkg/utils"
+	"github.com/korecube/korecube/configs"
+	"github.com/korecube/korecube/pkg/k8s"
+	"github.com/korecube/korecube/pkg/utils"
 )
 
 type Handler struct {

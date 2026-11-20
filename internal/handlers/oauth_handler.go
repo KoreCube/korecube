@@ -3,9 +3,9 @@ package handlers
 import (
 	"net/http"
 
-	"github.com/ciliverse/cilikube/internal/models"
-	"github.com/ciliverse/cilikube/internal/service"
-	"github.com/ciliverse/cilikube/pkg/auth"
+	"github.com/korecube/korecube/internal/models"
+	"github.com/korecube/korecube/internal/service"
+	"github.com/korecube/korecube/pkg/auth"
 	"github.com/gin-gonic/gin"
 )
 
@@ -36,7 +36,7 @@ func (h *OAuthHandler) GetAuthURL(c *gin.Context) {
 	state := c.Query("state")
 
 	if state == "" {
-		state = "cilikube_login"
+		state = "korecube_login"
 	}
 
 	authURL, err := h.oauthService.GetAuthURL(provider, state)

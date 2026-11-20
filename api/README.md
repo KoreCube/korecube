@@ -1,6 +1,6 @@
-# CiliKube API
+# KoreCube API
 
-This directory contains API definitions, specifications, and documentation for CiliKube.
+This directory contains API definitions, specifications, and documentation for KoreCube.
 
 ## API Versions
 

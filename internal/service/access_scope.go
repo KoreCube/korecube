@@ -1,6 +1,6 @@
 package service
 
-import "github.com/ciliverse/cilikube/internal/store"
+import "github.com/korecube/korecube/internal/store"
 
 // AccessDecision is the second-layer cluster/namespace gate (on top of Casbin roles).
 // Unrestricted = admin, or a user with no grants (backward compatible).

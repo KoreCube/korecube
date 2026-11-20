@@ -7,11 +7,11 @@ import (
 	"strings"
 	"time"
 
-	"github.com/ciliverse/cilikube/configs"
-	"github.com/ciliverse/cilikube/internal/models"
-	"github.com/ciliverse/cilikube/internal/store"
-	"github.com/ciliverse/cilikube/pkg/auth"
-	"github.com/ciliverse/cilikube/pkg/k8s"
+	"github.com/korecube/korecube/configs"
+	"github.com/korecube/korecube/internal/models"
+	"github.com/korecube/korecube/internal/store"
+	"github.com/korecube/korecube/pkg/auth"
+	"github.com/korecube/korecube/pkg/k8s"
 )
 
 // IsProtectedUsername reports built-in accounts that must never be deleted,
