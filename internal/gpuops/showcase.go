@@ -13,7 +13,7 @@ func ShowcaseSnapshot() *Snapshot {
 		{Namespace: "llm-inference", Name: "llm-inf-7f-b", Node: "gpu-a100-2", Phase: "Running", GPUMilli: 1000, OwnerKind: "ReplicaSet", RootUID: "dep-1", RootKind: "Deployment", RootName: "llm-inf"},
 		{Namespace: "llm-inference", Name: "llm-inf-7f-c", Node: "gpu-a100-2", Phase: "Running", GPUMilli: 2000, OwnerKind: "ReplicaSet", RootUID: "dep-1", RootKind: "Deployment", RootName: "llm-inf"},
 		{Namespace: "training", Name: "pretrain-0", Node: "gpu-a100-1", Phase: "Failed", GPUMilli: 8000, OwnerKind: "Job", RootUID: "job-1", RootKind: "Job", RootName: "pretrain"},
-		{Namespace: "training", Name: "pretrain-1", Node: "gpu-a100-1", Phase: "Pending", GPUMilli: 8000, OwnerKind: "Job", RootUID: "job-1", RootKind: "Job", RootName: "pretrain"},
+		{Namespace: "training", Name: "pretrain-1", Phase: "Pending", GPUMilli: 8000, OwnerKind: "Job", RootUID: "job-1", RootKind: "Job", RootName: "pretrain"},
 		{Namespace: "kube-system", Name: "nvidia-device-plugin", Node: "gpu-a100-1", Phase: "Running", OwnerKind: "DaemonSet"},
 	}
 	events := []StormEvent{

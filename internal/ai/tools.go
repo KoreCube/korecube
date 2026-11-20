@@ -106,6 +106,51 @@ func toolDefinitions() []toolDef {
 				"properties": map[string]interface{}{},
 			},
 		},
+		{
+			Name:        "get_gpu_anomalies",
+			Description: "Unsupervised Isolation Forest anomalies per GPU, pod and node from DCGM gauges (util, framebuffer, power, temperature). Only anomalies that persist for several minutes are returned; transient spikes are dropped.",
+			Parameters: map[string]interface{}{
+				"type":       "object",
+				"properties": map[string]interface{}{},
+			},
+		},
+		{
+			Name:        "get_gpu_capacity",
+			Description: "Proactive GPU capacity and risk inspection: allocatable vs requested GPUs per node, capacity lost to unhealthy nodes, unscheduled GPU pods that cannot fit (shortage or fragmentation), saturation, and nodes whose failure would leave no room to reschedule (N-1).",
+			Parameters: map[string]interface{}{
+				"type":       "object",
+				"properties": map[string]interface{}{},
+			},
+		},
+		{
+			Name: "plan_autoscaling",
+			Description: "Draft a KEDA ScaledObject (scale a Deployment on queue length, e.g. vLLM waiting requests, Kafka lag, RabbitMQ or Redis list) " +
+				"or a Karpenter NodePool GPU limit. Stores a proposal only; a human approves and applies it on the GPU ops page.",
+			Parameters: map[string]interface{}{
+				"type": "object",
+				"properties": map[string]interface{}{
+					"kind":              map[string]interface{}{"type": "string", "enum": []string{"keda", "karpenter"}},
+					"namespace":         map[string]interface{}{"type": "string"},
+					"target":            map[string]interface{}{"type": "string", "description": "Deployment name; optional when the namespace has one GPU deployment"},
+					"trigger":           map[string]interface{}{"type": "string", "enum": []string{"prometheus", "kafka", "rabbitmq", "redis"}},
+					"query":             map[string]interface{}{"type": "string", "description": "PromQL for the queue length"},
+					"threshold":         map[string]interface{}{"type": "string", "description": "Queue length per replica"},
+					"min_replicas":      map[string]interface{}{"type": "integer"},
+					"max_replicas":      map[string]interface{}{"type": "integer"},
+					"topic":             map[string]interface{}{"type": "string"},
+					"consumer_group":    map[string]interface{}{"type": "string"},
+					"bootstrap_servers": map[string]interface{}{"type": "string"},
+					"queue":             map[string]interface{}{"type": "string", "description": "RabbitMQ queue or Redis list"},
+					"address":           map[string]interface{}{"type": "string", "description": "Redis address"},
+					"pool":              map[string]interface{}{"type": "string", "description": "Karpenter NodePool name"},
+					"gpu_limit":         map[string]interface{}{"type": "integer", "description": "nvidia.com/gpu limit for the NodePool"},
+					"instance_types":    map[string]interface{}{"type": "string", "description": "Comma-separated instance types"},
+					"capacity_type":     map[string]interface{}{"type": "string", "enum": []string{"on-demand", "spot"}},
+					"node_class":        map[string]interface{}{"type": "string"},
+				},
+				"required": []string{"kind"},
+			},
+		},
 	}
 }
 
@@ -133,6 +178,12 @@ func executeTool(ctx context.Context, client *k8s.Client, name string, args map[
 		return toolGPUPlacement(ctx, client, args, zh)
 	case "get_event_storm":
 		return toolEventStorm(ctx, client, zh)
+	case "get_gpu_anomalies":
+		return toolGPUAnomalies(ctx, client, zh)
+	case "get_gpu_capacity":
+		return toolGPUCapacity(ctx, client, zh)
+	case "plan_autoscaling":
+		return toolPlanAutoscaling(ctx, client, args, zh)
 	default:
 		if zh {
 			return toolResult{}, fmt.Errorf("未知工具 %q", name)

@@ -38,6 +38,10 @@ type GPUConfig struct {
 	AutoNamespaces   []string      `yaml:"auto_namespaces" json:"auto_namespaces"`
 	WasteUtilPercent float64       `yaml:"waste_util_percent" json:"waste_util_percent"`
 	Persistence      time.Duration `yaml:"persistence" json:"persistence"`
+	// Isolation Forest anomaly detection over DCGM gauges, run every minute.
+	AnomalyWindow    time.Duration `yaml:"anomaly_window" json:"anomaly_window"`
+	AnomalyThreshold float64       `yaml:"anomaly_threshold" json:"anomaly_threshold"`
+	AnomalyPersist   int           `yaml:"anomaly_persist" json:"anomaly_persist"`
 }
 
 // AIConfig configures the cluster chat assistant (OpenAI-compatible or mock).
@@ -429,6 +433,15 @@ func setDefaults() {
 	}
 	if GlobalConfig.GPU.Persistence <= 0 {
 		GlobalConfig.GPU.Persistence = 2 * time.Minute
+	}
+	if GlobalConfig.GPU.AnomalyWindow <= 0 {
+		GlobalConfig.GPU.AnomalyWindow = time.Hour
+	}
+	if GlobalConfig.GPU.AnomalyThreshold <= 0 || GlobalConfig.GPU.AnomalyThreshold >= 1 {
+		GlobalConfig.GPU.AnomalyThreshold = 0.7
+	}
+	if GlobalConfig.GPU.AnomalyPersist <= 0 {
+		GlobalConfig.GPU.AnomalyPersist = 3
 	}
 	if GlobalConfig.Installer.MinikubeDriver == "" {
 		GlobalConfig.Installer.MinikubeDriver = "docker"

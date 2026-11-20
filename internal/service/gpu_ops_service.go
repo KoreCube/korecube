@@ -41,6 +41,9 @@ type GPUOpsService struct {
 	mu        sync.Mutex
 	seen      map[string]time.Time
 	decisions []GPUDecision
+	anomaly   *gpuops.AnomalyReport
+	plans     []gpuops.ScalingPlan
+	planSeq   int
 }
 
 func NewGPUOpsService(cfg *configs.Config, prom *PrometheusService, nodes *NodeOpsService, audit *AuditService) *GPUOpsService {
@@ -161,6 +164,22 @@ func (s *GPUOpsService) Storm(ctx context.Context, client *k8s.Client) (gpuops.S
 		return gpuops.StormReport{}, err
 	}
 	report := gpuops.GroupStorm(v.snap.Events, v.snap.Owners)
+	report.Source = v.source
+	return report, nil
+}
+
+// Capacity is the proactive capacity and risk inspection. Health incidents use
+// the same persistence state as Health, so a node only stops counting as
+// usable once its incident is reported there.
+func (s *GPUOpsService) Capacity(ctx context.Context, client *k8s.Client, zh bool) (gpuops.CapacityReport, error) {
+	v, err := s.view(ctx, client)
+	if err != nil {
+		return gpuops.CapacityReport{}, err
+	}
+	s.mu.Lock()
+	health := gpuops.BuildHealth(v.snap.Signals, v.snap.Pods, v.policy, time.Now(), s.seen, zh)
+	s.mu.Unlock()
+	report := gpuops.BuildCapacity(v.snap.Pods, v.snap.GPUOnNode, v.snap.Product, health.Incidents, zh)
 	report.Source = v.source
 	return report, nil
 }

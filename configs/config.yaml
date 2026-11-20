@@ -103,6 +103,10 @@ gpu:
     auto_namespaces: []
     waste_util_percent: 40
     persistence: 2m
+    # Isolation Forest per GPU / pod / node: history window, score threshold, minutes an anomaly must last
+    anomaly_window: 1h
+    anomaly_threshold: 0.7
+    anomaly_persist: 3
 ai:
     enabled: true
     provider: mock

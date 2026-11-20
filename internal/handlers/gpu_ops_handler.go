@@ -97,15 +97,95 @@ func (h *GPUOpsHandler) Act(c *gin.Context) {
 	username, _ := user.(string)
 	dec, err := h.svc.Act(c.Request.Context(), client, username, req.Node, req.Action, req.Confirm, zhFrom(c))
 	if err != nil {
-		status := http.StatusInternalServerError
-		switch {
-		case errors.Is(err, gpuops.ErrForbidden):
-			status = http.StatusForbidden
-		case errors.Is(err, gpuops.ErrRejected):
-			status = http.StatusBadRequest
-		}
-		utils.ApiError(c, status, err.Error(), dec.Detail)
+		utils.ApiError(c, gpuErrorStatus(err), err.Error(), dec.Detail)
 		return
 	}
 	utils.ApiSuccess(c, dec, "executed")
+}
+
+func gpuErrorStatus(err error) int {
+	switch {
+	case errors.Is(err, gpuops.ErrForbidden):
+		return http.StatusForbidden
+	case errors.Is(err, gpuops.ErrRejected):
+		return http.StatusBadRequest
+	}
+	return http.StatusInternalServerError
+}
+
+func (h *GPUOpsHandler) Anomalies(c *gin.Context) {
+	client, ok := h.client(c)
+	if !ok {
+		return
+	}
+	report, err := h.svc.Anomalies(c.Request.Context(), client)
+	if err != nil {
+		utils.ApiError(c, http.StatusInternalServerError, "failed to detect GPU anomalies", err.Error())
+		return
+	}
+	utils.ApiSuccess(c, report, "ok")
+}
+
+func (h *GPUOpsHandler) Capacity(c *gin.Context) {
+	client, ok := h.client(c)
+	if !ok {
+		return
+	}
+	report, err := h.svc.Capacity(c.Request.Context(), client, zhFrom(c))
+	if err != nil {
+		utils.ApiError(c, http.StatusInternalServerError, "failed to build GPU capacity report", err.Error())
+		return
+	}
+	utils.ApiSuccess(c, report, "ok")
+}
+
+func (h *GPUOpsHandler) ScalingPlans(c *gin.Context) {
+	client, ok := h.client(c)
+	if !ok {
+		return
+	}
+	utils.ApiSuccess(c, h.svc.ScalingPlans(client), "ok")
+}
+
+func (h *GPUOpsHandler) ProposeScaling(c *gin.Context) {
+	client, ok := h.client(c)
+	if !ok {
+		return
+	}
+	var req gpuops.ScalingRequest
+	if err := c.ShouldBindJSON(&req); err != nil {
+		utils.ApiError(c, http.StatusBadRequest, "invalid request body", err.Error())
+		return
+	}
+	plan, err := h.svc.ProposeScaling(c.Request.Context(), client, req, zhFrom(c))
+	if err != nil {
+		utils.ApiError(c, gpuErrorStatus(err), err.Error(), "")
+		return
+	}
+	utils.ApiSuccess(c, plan, "proposed")
+}
+
+type scalingDecisionRequest struct {
+	ID      string `json:"id"`
+	Approve bool   `json:"approve"`
+}
+
+func (h *GPUOpsHandler) DecideScaling(c *gin.Context) {
+	client, ok := h.client(c)
+	if !ok {
+		return
+	}
+	var req scalingDecisionRequest
+	if err := c.ShouldBindJSON(&req); err != nil {
+		utils.ApiError(c, http.StatusBadRequest, "invalid request body", err.Error())
+		return
+	}
+	user, _ := c.Get("username")
+	username, _ := user.(string)
+	plan, err := h.svc.DecideScaling(c.Request.Context(), client, username, req.ID, req.Approve)
+	if err != nil {
+		utils.ApiError(c, gpuErrorStatus(err), err.Error(), plan.Detail)
+		return
+	}
+	utils.ApiSuccess(c, plan, plan.Status)
 }

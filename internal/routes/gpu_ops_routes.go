@@ -16,6 +16,11 @@ func RegisterGPUOpsRoutes(router *gin.RouterGroup, h *handlers.GPUOpsHandler) {
 		g.GET("/waste", h.Waste)
 		g.GET("/storm", h.Storm)
 		g.GET("/decisions", h.Decisions)
+		g.GET("/anomalies", h.Anomalies)
+		g.GET("/capacity", h.Capacity)
+		g.GET("/scaling", h.ScalingPlans)
 		g.POST("/actions", h.Act)
+		g.POST("/proposals", h.ProposeScaling)
+		g.POST("/scaling", h.DecideScaling)
 	}
 }

@@ -99,6 +99,16 @@ func processMock(ctx context.Context, client *k8s.Client, req *ChatRequest, send
 		strings.Contains(raw, "显卡") || strings.Contains(raw, "利用率") || strings.Contains(raw, "浪费")
 	wantStorm := skill == "skill_event_storm" || strings.Contains(raw, "告警风暴") || strings.Contains(q, "event storm")
 	wantPlacement := strings.Contains(q, "为什么") && (strings.Contains(q, "慢") || strings.Contains(q, "slow"))
+	wantAnomaly := skill == "skill_gpu_anomaly" || strings.Contains(raw, "异常检测") || strings.Contains(q, "anomal") ||
+		strings.Contains(q, "isolation forest")
+	wantCapacity := skill == "skill_gpu_capacity" || comboInspect || strings.Contains(raw, "容量") ||
+		strings.Contains(raw, "巡检") || strings.Contains(q, "capacity") || strings.Contains(q, "headroom")
+	wantScale := skill == "skill_autoscale" || strings.Contains(raw, "伸缩") || strings.Contains(raw, "扩缩") ||
+		strings.Contains(q, "autoscal") || strings.Contains(q, "keda") || strings.Contains(q, "karpenter") ||
+		strings.Contains(raw, "节点池") || strings.Contains(q, "nodepool") || strings.Contains(q, "scale ")
+	if wantScale {
+		wantGPU, wantPlacement, wantCapacity = false, false, false
+	}
 
 	clusterWidePods := comboInspect || comboTriage ||
 		strings.Contains(q, "failed") || strings.Contains(raw, "Failed") ||
@@ -109,7 +119,10 @@ func processMock(ctx context.Context, client *k8s.Client, req *ChatRequest, send
 		strings.Contains(q, "warning") || strings.Contains(raw, "Warning") ||
 		strings.Contains(q, "error") || strings.Contains(raw, "Error")
 
-	if wantOverview || (!wantPods && !wantDeploy && !wantSvc && !wantNode && !wantLogs && !wantEvents && !wantNS && !wantGPU && !wantStorm && !wantPlacement) {
+	if wantScale {
+		wantOverview, wantPods, wantDeploy, wantSvc, wantNode, wantNS, wantEvents, wantLogs = false, false, false, false, false, false, false, false
+	}
+	if wantOverview || (!wantPods && !wantDeploy && !wantSvc && !wantNode && !wantLogs && !wantEvents && !wantNS && !wantGPU && !wantStorm && !wantPlacement && !wantAnomaly && !wantCapacity && !wantScale) {
 		call("get_cluster_overview", map[string]interface{}{})
 	}
 	if wantPods || wantLogs {
@@ -160,6 +173,15 @@ func processMock(ctx context.Context, client *k8s.Client, req *ChatRequest, send
 	}
 	if wantStorm {
 		call("get_event_storm", map[string]interface{}{})
+	}
+	if wantAnomaly || wantGPU {
+		call("get_gpu_anomalies", map[string]interface{}{})
+	}
+	if wantCapacity {
+		call("get_gpu_capacity", map[string]interface{}{})
+	}
+	if wantScale {
+		call("plan_autoscaling", mockScalingArgs(raw, q, ns))
 	}
 	if wantPlacement {
 		podNS, podName := ns, ""
@@ -250,7 +272,11 @@ func buildMockAnswer(
 		if i >= maxParts {
 			break
 		}
-		b.WriteString(truncate(p, 800))
+		limit := 800
+		if strings.Contains(p, "```yaml") {
+			limit = 4000
+		}
+		b.WriteString(truncate(p, limit))
 		b.WriteString("\n\n")
 	}
 	if len(refs) > 0 {

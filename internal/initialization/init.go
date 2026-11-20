@@ -151,6 +151,7 @@ func InitializeHandlers(router *gin.RouterGroup, services *service.AppServices, 
 	routes.RegisterMonitoringRoutes(router, services.MonitoringService, services.PrometheusService, k8sManager)
 	gpuOps := service.NewGPUOpsService(cfg, services.PrometheusService, services.NodeOpsService, services.AuditService)
 	ai.SetGPUReporter(gpuOps)
+	gpuOps.StartAnomalyLoop()
 	routes.RegisterGPUOpsRoutes(router, handlers.NewGPUOpsHandler(gpuOps, k8sManager))
 
 	// --- Topology (Radar-style resource + traffic graph) ---
