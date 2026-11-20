@@ -1,5 +1,12 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" fill="none">
-  <rect width="64" height="64" rx="14" fill="#0F766E"/>
-  <path d="M18 40V24l14-8 14 8v16l-14 8-14-8z" stroke="#ECFEFF" stroke-width="3" fill="none"/>
-  <circle cx="32" cy="32" r="5" fill="#5EEAD4"/>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-label="KoreCube">
+  <rect width="512" height="512" rx="96" fill="#10242C"/>
+  <path d="M256 78 L420 168 L256 258 L92 168 Z" fill="#1FA97A"/>
+  <path d="M256 258 L420 168 L420 332 L256 422 Z" fill="#147A58"/>
+  <path d="M256 258 L92 168 L92 332 L256 422 Z" fill="#0E5C42"/>
+  <g fill="#F0B429">
+    <rect x="292" y="210" width="28" height="28" rx="4"/>
+    <rect x="330" y="232" width="28" height="28" rx="4"/>
+    <rect x="292" y="254" width="28" height="28" rx="4"/>
+    <rect x="330" y="276" width="28" height="28" rx="4"/>
+  </g>
 </svg>
