@@ -39,7 +39,7 @@ oauth:
     client_id: ""
     client_secret: ""
     # GitHub App 回调填前端页（SPA 再调 /api/v1/auth/oauth/callback 换票）
-    redirect_url: https://korecube.cillian.website/login/oauth/callback
+    redirect_url: https://korecube.example.com/login/oauth/callback
     enabled: false
   # 公网务必关闭自助注册，访客由管理员在 UI 创建
   allow_registration: false

@@ -188,13 +188,13 @@ v1.0 adds an entry that matches how people troubleshoot — ask first, then chan
 
 ## 🌐 Online Demo
 
-- Demo: https://korecube.cillian.website  
-  (Public demo is a Showcase **fake fleet**; login can fill demo accounts in one click — not a production ops console)
+- Upstream CiliKube demo: https://cilikube.cillian.website  
+  (Public demo is a Showcase **fake fleet**; login can fill demo accounts in one click — not a production ops console. It runs upstream CiliKube, without the KoreCube GPU operations.)
 
 ## 📚 Documentation
 
-- Demo / product site: [korecube.cillian.website](https://korecube.cillian.website)
-- Intro post: [KoreCube 1.0.0](https://www.cillian.website/en/post/20260730/)
+- Upstream demo / product site: [cilikube.cillian.website](https://cilikube.cillian.website)
+- Upstream intro post: [CiliKube 1.0.0](https://www.cillian.website/en/post/20260730/)
 
 ## 🚀 Technology Stack
 

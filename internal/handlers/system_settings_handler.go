@@ -135,7 +135,7 @@ func (h *SystemSettingsHandler) UpdateOAuthSettings(c *gin.Context) {
 		}
 	}
 	if strings.TrimSpace(cfg.OAuth.GitHub.RedirectURL) == "" {
-		cfg.OAuth.GitHub.RedirectURL = "https://korecube.cillian.website/login/oauth/callback"
+		cfg.OAuth.GitHub.RedirectURL = "https://korecube.example.com/login/oauth/callback"
 	}
 
 	if err := configs.SaveGlobalConfig(); err != nil {

@@ -190,13 +190,13 @@ v1.0 在资源控制台之上，补了一层更接近真实排障顺序的入口
 
 ## 🌐 在线预览
 
-- 在线演示: https://korecube.cillian.website  
-  （公网 Demo 为 Showcase **模拟舰队**，登录页可一键填演示账号；勿当生产运维台）
+- 上游 CiliKube 在线演示: https://cilikube.cillian.website  
+  （公网 Demo 为 Showcase **模拟舰队**，登录页可一键填演示账号；勿当生产运维台。运行的是上游 CiliKube，不含 KoreCube 的 GPU 运维功能）
 
 ## 📚 文档
 
-- 演示 / 产品站: [korecube.cillian.website](https://korecube.cillian.website)
-- 介绍文: [KoreCube 1.0.0 博客](https://www.cillian.website/post/20260730/)
+- 上游演示 / 产品站: [cilikube.cillian.website](https://cilikube.cillian.website)
+- 上游介绍文: [CiliKube 1.0.0 博客](https://www.cillian.website/post/20260730/)
 
 ## 🚀 技术架构
 

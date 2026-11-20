@@ -194,6 +194,6 @@ When adding new deployment configurations:
 
 ## Support
 
-- **Documentation**: [korecube.cillian.website](https://korecube.cillian.website)
+- **Documentation**: [README](https://github.com/korecube/korecube#readme)
 - **Issues**: [GitHub Issues](https://github.com/korecube/korecube/issues)
 - **Discussions**: [GitHub Discussions](https://github.com/korecube/korecube/discussions)
