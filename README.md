@@ -35,14 +35,6 @@ The page is **GPU ops** at `/gpu`. Settings live under `gpu` in `configs/config.
 
 We appreciate your interest in KoreCube. If you find this project valuable for your Kubernetes management needs, please consider starring the repository ⭐. Community support drives continuous development and improvement.
 
-## 🤝 Contributors
-
-<a href="https://github.com/korecube/korecube/graphs/contributors">
-  <img src="https://contrib.rocks/image?repo=korecube/korecube" />
-</a>
-
-We extend our gratitude to all contributors who have helped improve KoreCube through code contributions, bug reports, and feature suggestions.
-
 ## 🏢 Sponsorship
 
 This project's CDN acceleration and security protection services are generously sponsored by Tencent EdgeOne.

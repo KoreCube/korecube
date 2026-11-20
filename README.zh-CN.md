@@ -37,14 +37,6 @@ KoreCube 是 CiliKube（`4b3a1ee`）的分支，采用 AGPL-3.0-only 许可证�
 
 感谢您对 KoreCube 的关注。如果您认为本项目对您的 Kubernetes 管理工作具有价值，请考虑为仓库点亮星标 ⭐。社区支持是推动项目持续发展和改进的重要动力。
 
-## 🤝 贡献者
-
-<a href="https://github.com/korecube/korecube/graphs/contributors">
-  <img src="https://contrib.rocks/image?repo=korecube/korecube" />
-</a>
-
-我们向所有通过代码贡献、问题报告和功能建议帮助改进 KoreCube 的贡献者表示诚挚的谢意。
-
 ## 🏢 赞助支持
 
 本项目的 CDN 加速和安全防护服务由腾讯 EdgeOne 慷慨赞助。
